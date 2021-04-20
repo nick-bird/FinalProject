@@ -2,6 +2,8 @@ package com.skilldistillery.projectemmy.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository {
+import com.skilldistillery.projectemmy.entities.User;
+
+public interface UserRepository extends JpaRepository<User, Integer> {
 
 }
