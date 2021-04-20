@@ -13,6 +13,7 @@
 <class>com.skilldistillery.projectemmy.entities.Category</class>
 <class>com.skilldistillery.projectemmy.entities.Expression</class>
 <class>com.skilldistillery.projectemmy.entities.Image</class>
+<class>com.skilldistillery.projectemmy.entities.Soundboard</class>
 
 
 
