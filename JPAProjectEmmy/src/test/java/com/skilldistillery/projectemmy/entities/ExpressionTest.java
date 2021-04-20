@@ -42,7 +42,7 @@ class ExpressionTest {
 	}
 
 	@Test
-	@DisplayName("Stub Category mapping test")
+	@DisplayName("Stub Expression mapping test")
 	void test() {
 		assertNotNull(expression);
 		assertEquals("More", expression.getName());

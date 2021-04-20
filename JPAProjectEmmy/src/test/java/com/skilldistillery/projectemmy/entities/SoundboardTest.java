@@ -13,11 +13,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class ImageTest {
+class SoundboardTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Image image;
+	private Soundboard soundboard;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,20 +32,20 @@ class ImageTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		image = em.find(Image.class, 1);
+		soundboard = em.find(Soundboard.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		image = null;
+		soundboard = null;
 	}
 
 	@Test
-	@DisplayName("Stub Image mapping test")
+	@DisplayName("Stub soundboard mapping test")
 	void test() {
-		assertNotNull(image);
-		assertEquals("https://i.pinimg.com/originals/5c/d1/c4/5cd1c48588d9a83f16cbddbbcb2bfaad.png", image.getImageUrl());
+		assertNotNull(soundboard);
+		assertEquals("ASL Signs", soundboard.getName());
 	}
 
 }
