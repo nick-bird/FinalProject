@@ -184,6 +184,13 @@ COMMIT;
 START TRANSACTION;
 USE `emmydb`;
 INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (1, 'https://i.pinimg.com/originals/5c/d1/c4/5cd1c48588d9a83f16cbddbbcb2bfaad.png', 1);
+INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (2, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4Y7NeszyTA4SFbiuXOtnLViL_wagbgNC6xcL2-WUee8Tj6Yr66BUwO1Z4nI_RpN0EJhw&usqp=CAU', 1);
+INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (3, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQERyImY05L3A-NvdLsYaJJ7aIIcXDEL1BoQXXRpmCOQ1Q3J4l74zhFuki9jEIu18ntXUk&usqp=CAU', 1);
+INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (4, 'https://www.netclipart.com/pp/m/22-227997_thank-you-clipart-transparent-clip-art-thank-you.png', 1);
+INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (5, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpR1q87EcJF92x1G9WcNBtfNMnDxasyuiiX0BsW3ul4OfeGzto27H5LI6ZOtTNBQ9aW6I&usqp=CAU', 1);
+INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (6, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuyEjV1WVqmiAjEOYVJ5eqHWUkVVs9HGFHX0JCxvTS2qftxOjloiAJCCJJiYXO0cAA-1A&usqp=CAU', 1);
+INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (7, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8VIvnJfTyuK7Yeho5D6mjiSu6ShMjSWXasPWbc_8DNp4IfgCSbneEv4b9ZOZER_sNIa8&usqp=CAU', 1);
+INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4gQo6tfPDjddJ_mwVMeZYagu6XqIkQP1yFxH-XYaU2VGDoYv2hbVVcppORPJlGimSCNo&usqp=CAU', 1);
 
 COMMIT;
 
@@ -194,6 +201,13 @@ COMMIT;
 START TRANSACTION;
 USE `emmydb`;
 INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (1, 'More', 'More', 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (2, 'Please', 'Please', 2);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (3, 'Want', 'Want', 3);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (4, 'Thank you', 'Thank you', 4);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (5, 'Goodbye', 'Goodbye', 5);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (6, 'Play', 'Play', 6);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (7, 'Water', 'Water', 7);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (8, 'Which', 'Which', 8);
 
 COMMIT;
 

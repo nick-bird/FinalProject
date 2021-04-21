@@ -1,9 +1,6 @@
 package com.skilldistillery.projectemmy.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,11 +13,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-	
+class SoundboardTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Soundboard soundboard;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -35,32 +32,27 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		soundboard = em.find(Soundboard.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		soundboard = null;
 	}
 
 	@Test
-	@DisplayName("Testing all fields User to DB")
+	@DisplayName("Stub soundboard mapping test")
 	void test() {
-		assertNotNull(user);
-		assertEquals("admin", user.getUsername());
-		assertEquals("testemail@test.test", user.getEmail());
-		assertFalse(user.isRestricted());
-		assertTrue(user.isActive());
-		assertEquals("admin", user.getFirstName());
-		assertEquals("admin", user.getLastName());
+		assertNotNull(soundboard);
+		assertEquals("ASL Signs", soundboard.getName());
 	}
 	
 	@Test
-	@DisplayName("Testing User to Soundboard Mappring")
-	void Test2() {
-		assertTrue(user.getSoundboards().size() > 0);
-		
+	@DisplayName("Testing Soundboard Mapped to User")
+	void test2() {
+		assertEquals(1, soundboard.getUser().getId());
+		assertEquals("admin", soundboard.getUser().getFirstName());
 	}
 
 }

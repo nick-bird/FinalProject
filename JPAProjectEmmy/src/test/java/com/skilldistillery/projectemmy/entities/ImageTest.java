@@ -1,9 +1,6 @@
 package com.skilldistillery.projectemmy.entities;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,11 +13,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-	
+class ImageTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Image image;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -35,32 +32,20 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		image = em.find(Image.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		image = null;
 	}
 
 	@Test
-	@DisplayName("Testing all fields User to DB")
+	@DisplayName("Stub Image mapping test")
 	void test() {
-		assertNotNull(user);
-		assertEquals("admin", user.getUsername());
-		assertEquals("testemail@test.test", user.getEmail());
-		assertFalse(user.isRestricted());
-		assertTrue(user.isActive());
-		assertEquals("admin", user.getFirstName());
-		assertEquals("admin", user.getLastName());
-	}
-	
-	@Test
-	@DisplayName("Testing User to Soundboard Mappring")
-	void Test2() {
-		assertTrue(user.getSoundboards().size() > 0);
-		
+		assertNotNull(image);
+		assertEquals("https://i.pinimg.com/originals/5c/d1/c4/5cd1c48588d9a83f16cbddbbcb2bfaad.png", image.getImageUrl());
 	}
 
 }
