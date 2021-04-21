@@ -21,7 +21,7 @@ public class AuthServiceImpl implements AuthService {
 
 		// set other fields to default values
 		user.setRole("standard");
-		user.setEnabled(true);
+		user.setActive(true);
 		
 
 		userRepo.saveAndFlush(user);
