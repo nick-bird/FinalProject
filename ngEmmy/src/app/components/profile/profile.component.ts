@@ -1,4 +1,8 @@
+import { Expression } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Soundboard } from 'src/app/models/soundboard';
+import { ExpressionService } from 'src/app/services/expression.service';
+import { SoundboardService } from 'src/app/services/soundboard.service';
 
 @Component({
   selector: 'app-profile',
@@ -58,6 +62,7 @@ addSoundboard(): void {
       console.log('Error creating todo: ' + err)
     }
   );
+}
 
   addExpression(): void {
     console.log(this.newExpression);
@@ -69,13 +74,69 @@ addSoundboard(): void {
         console.log('Error creating expression: ' + err)
       }
     );
+  }
 
     setEditExpression(): void {
-      this.editExpression = Object.assign({}, this.selected);
+      this.editExpression = Object.assign({}, this.selectedExpression);
     }
     setEditSoundboard(): void {
-      this.editSoundboard = Object.assign({}, this.selected);
+      this.editSoundboard = Object.assign({}, this.selectedSoundboard);
     }
+    updateSoundboard(editedSoundboard: SoundboardService, displaySoundboard = true): void {
+      this.soundboardService.update(editedSoundboard).subscribe(
+        data => {
+          this.reload();
+          if(displaySoundboard){
+            this.selectedSoundboard = editedSoundboard;
+          }
+           this.editSoundboard = null;
+        },
+        err => {
+          console.log('Error updating soundboard: ' + err);
+        }
+      );
+    }
+      updateExpression(editedExpresion: Expression, displayExpression = true): void {
+        this.expressionService.update(editedExpresion).subscribe(
+          data => {
+            this.reload();
+            if(displayExpression){
+              this.selectedExpression = editedExpression;
+            }
+             this.editExpression = null;
+          },
+          err => {
+            console.log('Error updating expression: ' + err);
+          }
+        )
+      };
+
+        deleteSoundboard(id: number): void {
+          // if (confirm('You sure about this?')) {
+            // this.todos = this.todoService.index();
+            // }
+            this.soundboardService.destroy(id).subscribe(
+              data =>{
+                this.reload();
+              },
+              err => {
+                console.log('Error deleting soundboard: ' + err);
+              }
+            );
+        }
+        deleteExpression(id: number): void {
+          // if (confirm('You sure about this?')) {
+            // this.todos = this.todoService.index();
+            // }
+            this.expressionService.destroy(id).subscribe(
+              data =>{
+                this.reload();
+              },
+              err => {
+                console.log('Error deleting expression: ' + err);
+              }
+            );
+        }
+      }
 
 
-}
