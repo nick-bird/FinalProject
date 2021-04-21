@@ -25,7 +25,7 @@ public class Expression {
 	private String phrase;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="expression")
+	@OneToMany(orphanRemoval=true, mappedBy="expression")
 	private List<SoundboardExpression> soundboardExpressions;
 	
 	@ManyToOne

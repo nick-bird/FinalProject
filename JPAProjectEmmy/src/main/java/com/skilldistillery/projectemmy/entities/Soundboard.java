@@ -42,7 +42,7 @@ public class Soundboard {
 	private Boolean isDefault;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="soundboard")
+	@OneToMany(orphanRemoval=true, mappedBy="soundboard")
 	private List<SoundboardExpression> soundboardExpressions;
 	
 	@JsonIgnore
