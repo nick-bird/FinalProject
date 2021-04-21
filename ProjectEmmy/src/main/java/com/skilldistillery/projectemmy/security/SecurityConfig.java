@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        String userQuery = "SELECT username, password, enabled FROM User WHERE username=?";
+        String userQuery = "SELECT username, password, is_active FROM User WHERE username=?";
         String authQuery = "SELECT username, role FROM User WHERE username=?";
         auth
         .jdbcAuthentication()

@@ -2,10 +2,12 @@ package com.skilldistillery.projectemmy.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.projectemmy.entities.User;
 import com.skilldistillery.projectemmy.repositories.UserRepository;
 
+@Service
 public class AuthServiceImpl implements AuthService {
 
 	@Autowired
