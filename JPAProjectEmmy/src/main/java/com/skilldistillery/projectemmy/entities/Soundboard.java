@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -41,6 +43,13 @@ public class Soundboard {
 	@OneToMany(mappedBy="soundboard")
 	private List<SoundboardExpression> soundboardExpressions;
 	
+	@JsonIgnore
+	@ManyToMany
+	@JoinTable(name="soundboard_category",
+	joinColumns=@JoinColumn(name="soundboard_id"),
+	inverseJoinColumns=@JoinColumn(name="category_id"))
+	private List<Category> categories;
+	
 	@ManyToOne()
 	@JoinColumn(name="user_id")
 	private User user;
@@ -48,7 +57,7 @@ public class Soundboard {
 	public Soundboard() {}
 	
 	public Soundboard(int id, String name, Boolean isPublic, String description, LocalDateTime createDate,
-			Boolean isDefault, List<SoundboardExpression> soundboardExpressions, User user) {
+			Boolean isDefault, List<SoundboardExpression> soundboardExpressions, List<Category> categories, User user) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -57,6 +66,7 @@ public class Soundboard {
 		this.createDate = createDate;
 		this.isDefault = isDefault;
 		this.soundboardExpressions = soundboardExpressions;
+		this.categories = categories;
 		this.user = user;
 	}
 
@@ -116,6 +126,14 @@ public class Soundboard {
 		this.soundboardExpressions = soundboardExpressions;
 	}
 
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -150,7 +168,7 @@ public class Soundboard {
 	public String toString() {
 		return "Soundboard [id=" + id + ", name=" + name + ", isPublic=" + isPublic + ", description=" + description
 				+ ", createDate=" + createDate + ", isDefault=" + isDefault + ", soundboardExpressions="
-				+ soundboardExpressions + ", user=" + user + "]";
+				+ soundboardExpressions + ", categories=" + categories + ", user=" + user + "]";
 	}
 
 }

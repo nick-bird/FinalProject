@@ -61,5 +61,12 @@ class SoundboardTest {
 		assertNotNull(soundboard);
 		assertEquals("admin", soundboard.getUser().getUsername());
 	}
+	
+	@Test
+	@DisplayName("Soundboard - category mapping")
+	void test4() {
+		assertNotNull(soundboard);
+		assertEquals("ASL", soundboard.getCategories().get(0).getName());
+	}
 
 }
