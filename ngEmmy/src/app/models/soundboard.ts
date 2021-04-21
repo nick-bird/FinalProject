@@ -9,7 +9,7 @@ export class Soundboard {
   isDefault: boolean;
   user: User;
 
-  constructor(id: number, name: string, description: string, createDate: string, isPublic: boolean, isDefault: boolean, user: User ){
+  constructor(id?: number, name?: string, description?: string, createDate?: string, isPublic?: boolean, isDefault?: boolean, user?: User ){
 
     this.id = id;
     this.name = name;
