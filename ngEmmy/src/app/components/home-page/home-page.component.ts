@@ -40,8 +40,8 @@ export class HomePageComponent implements OnInit {
         console.log('HomePage.register(): user registered.');
         this.auth.login(this.newUser.username, this.newUser.password).subscribe(
           next => {
-            console.log('HomePage.register(): user logged in, routing to /todo.');
-           this.router.navigateByUrl('/register');
+            console.log('HomePage.register(): user logged in, routing to /profile.');
+           this.router.navigateByUrl('/profile');
           },
           error => {
             console.error('HomePage.register(): error logging in.');

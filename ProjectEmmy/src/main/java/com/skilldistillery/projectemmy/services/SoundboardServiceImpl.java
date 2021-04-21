@@ -3,12 +3,14 @@ package com.skilldistillery.projectemmy.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.projectemmy.entities.Soundboard;
 import com.skilldistillery.projectemmy.entities.User;
 import com.skilldistillery.projectemmy.repositories.SoundboardRepository;
 import com.skilldistillery.projectemmy.repositories.UserRepository;
 
+@Service
 public class SoundboardServiceImpl implements SoundboardService {
 
 	@Autowired
@@ -43,7 +45,7 @@ public class SoundboardServiceImpl implements SoundboardService {
 			managedSoundboard.setName(soundboard.getName());
 			managedSoundboard.setIsPublic(soundboard.getIsPublic());
 			managedSoundboard.setDescription(soundboard.getDescription());
-			
+			soundRepo.saveAndFlush(managedSoundboard);
 			return managedSoundboard;
 		}
 
