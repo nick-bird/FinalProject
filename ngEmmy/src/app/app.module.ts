@@ -10,12 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { ExpressionService } from './services/expression.service';
 import { SoundboardService } from './services/soundboard.service';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
-    HomePageComponent
+    HomePageComponent,
+    NotFoundComponent
 
   ],
   imports: [
@@ -25,7 +27,7 @@ import { SoundboardService } from './services/soundboard.service';
     HttpClientModule
   ],
   providers: [
-    AuthService,
+   AuthService,
    ExpressionService,
    SoundboardService,
   AppRoutingModule],
