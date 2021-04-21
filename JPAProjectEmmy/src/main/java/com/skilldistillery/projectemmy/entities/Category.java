@@ -1,9 +1,14 @@
 package com.skilldistillery.projectemmy.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Category {
@@ -12,11 +17,23 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@JsonIgnore
+	@ManyToMany(mappedBy="categories")
+	private List<Soundboard> soundboards;
+	
 	private String name;
 	
 	private String description;
 	
 	public Category() {}
+	
+	public Category(int id, List<Soundboard> soundboards, String name, String description) {
+		super();
+		this.id = id;
+		this.soundboards = soundboards;
+		this.name = name;
+		this.description = description;
+	}
 
 	public int getId() {
 		return id;
@@ -24,6 +41,14 @@ public class Category {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<Soundboard> getSoundboards() {
+		return soundboards;
+	}
+
+	public void setSoundboards(List<Soundboard> soundboards) {
+		this.soundboards = soundboards;
 	}
 
 	public String getName() {
@@ -66,9 +91,8 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", description=" + description + "]";
+		return "Category [id=" + id + ", soundboards=" + soundboards + ", name=" + name + ", description=" + description
+				+ "]";
 	}
-	
-	
-	
+
 }

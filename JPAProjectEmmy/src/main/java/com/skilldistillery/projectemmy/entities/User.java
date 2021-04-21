@@ -9,38 +9,61 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "first_name")
 	private String firstName;
+
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	private String username;
+
 	private String password;
+
 	private String email;
+
 	private String role;
+
 	@Column(name = "is_restricted")
 	private boolean isRestricted;
+
 	@Column(name = "is_active")
 	private boolean isActive;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Soundboard> soundboards;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private List<Expression> expressions;
 
 	public User() {
 		super();
 	}
 
-	public User(int id, String username) {
+	public User(int id, String firstName, String lastName, String username, String password, String email, String role,
+			boolean isRestricted, boolean isActive, List<Soundboard> soundboards, List<Expression> expressions) {
 		super();
 		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.role = role;
+		this.isRestricted = isRestricted;
+		this.isActive = isActive;
+		this.soundboards = soundboards;
+		this.expressions = expressions;
 	}
 
 	public int getId() {
@@ -49,14 +72,6 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getFirstName() {
@@ -73,6 +88,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -123,6 +146,14 @@ public class User {
 		this.soundboards = soundboards;
 	}
 
+	public List<Expression> getExpressions() {
+		return expressions;
+	}
+
+	public void setExpressions(List<Expression> expressions) {
+		this.expressions = expressions;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -147,28 +178,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("User [id=");
-		builder.append(id);
-		builder.append(", firstName=");
-		builder.append(firstName);
-		builder.append(", lastName=");
-		builder.append(lastName);
-		builder.append(", username=");
-		builder.append(username);
-		builder.append(", password=");
-		builder.append(password);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append(", role=");
-		builder.append(role);
-		builder.append(", isRestricted=");
-		builder.append(isRestricted);
-		builder.append(", isActive=");
-		builder.append(isActive);
-		builder.append("]");
-		return builder.toString();
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", password=" + password + ", email=" + email + ", role=" + role + ", isRestricted=" + isRestricted
+				+ ", isActive=" + isActive + ", soundboards=" + soundboards + ", expressions=" + expressions + "]";
 	}
-	
-	
+
 }
