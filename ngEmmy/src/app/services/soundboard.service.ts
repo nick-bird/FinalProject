@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Soundboard } from '../models/soundboard';
 import { AuthService } from './auth.service';
@@ -31,40 +31,30 @@ export class SoundboardService {
     );
   }
   create(newSoundboard: Soundboard) {
-    newTodo.completed = false;
-    newTodo.description = '';
-    return this.http.post<Todo>(this.url, newTodo, this.getHttpOptions()).pipe(
+
+    return this.http.post<Soundboard>(this.url, newSoundboard, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error creating todo');
+        return throwError('Error creating soundboard');
       })
     );
   }
-  update(editedTodo: Todo) {
-    console.log(editedTodo);
+  update(editedSoundboard: Soundboard) {
+    console.log(editedSoundboard);
 
-    if (editedTodo.completed === true) {
-      editedTodo.completeDate = this.datePipe.transform(
-        Date.now(),
-        'shortDate'
-      );
-    } else {
-      editedTodo.completeDate = '';
-    }
-    console.log(editedTodo);
-    return this.http.put<Todo>(this.url + '/' + editedTodo.id, editedTodo, this.getHttpOptions()).pipe(
+    return this.http.put<Soundboard>(this.url + '/' + editedSoundboard.id, editedSoundboard, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error updating todo in service');
+        return throwError('Error updating soundboard in service');
       })
     );
   }
   destroy(id: number) {
 
-    return this.http.delete<Todo>(this.url + '/' + id, this.getHttpOptions()).pipe(
+    return this.http.delete<Soundboard>(this.url + '/' + id, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('Error deleting todo in service');
+        return throwError('Error deleting soundboard in service');
       })
     );
   }
@@ -85,4 +75,4 @@ export class SoundboardService {
 
 
 
-}
+
