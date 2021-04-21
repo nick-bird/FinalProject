@@ -4,5 +4,15 @@
     <input type="text" name ="username" placeholder="Username" [(ngModel)] ="user.username">
     <input type="password" name="password" placeholder="password"[(ngModel)] = "user.password">
     <button (click)="login()" type="button" class="btn btn-primary">Primary</button>
+    <button (click)="login()" type="button" class="btn btn-primary">Primary</button>
   </div>
+</div>
+<br>
+<div name="registerForm">
+  <input type="text" name="firstName" placeholder="First Name" [(ngModel)] = "newUser.firstName">
+  <input type="text" name="lastName" placeholder="Last Name" [(ngModel)] = "newUser.lastName">
+  <input type="text" name="email" placeholder="Email" [(ngModel)] = "newUser.email">
+  <input type="text" name="username" placeholder="Username" [(ngModel)] = "newUser.username">
+  <input type="password" name="password" placeholder="password" [(ngModel)] = "newUser.password">
+  <button (click)="register()" type="button" class="btn btn-primary">Register</button>
 </div>
