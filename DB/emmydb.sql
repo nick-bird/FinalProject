@@ -173,7 +173,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `emmydb`;
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `is_restricted`, `is_active`, `first_name`, `last_name`) VALUES (1, 'admin', 'admin', 'testemail@test.test', 'admin', 0, 1, 'admin', 'admin');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `is_restricted`, `is_active`, `first_name`, `last_name`) VALUES (1, 'admin', 'wombat1', 'testemail@test.test', 'admin', 0, 1, 'admin', 'admin');
 
 COMMIT;
 
