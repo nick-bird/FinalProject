@@ -42,6 +42,7 @@ public class ExpressionServiceImpl implements ExpressionService {
 			
 			managedExp.setName(exp.getName());
 			managedExp.setPhrase(exp.getPhrase());
+			managedExp.setImage(exp.getImage());
 			return managedExp;
 		}
 
