@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export class Soundboard {
   id: number;
   name: string;
@@ -5,8 +7,9 @@ export class Soundboard {
   createDate: string;
   isPublic: boolean;
   isDefault: boolean;
+  user: User;
 
-  constructor(id: number, name: string, description: string, createDate: string, isPublic: boolean, isDefault: boolean ){
+  constructor(id: number, name: string, description: string, createDate: string, isPublic: boolean, isDefault: boolean, user: User ){
 
     this.id = id;
     this.name = name;
@@ -14,6 +17,7 @@ export class Soundboard {
     this.createDate = createDate;
     this.isPublic = isPublic;
     this.isDefault = isDefault;
+    this.user = user;
   }
 
 }
