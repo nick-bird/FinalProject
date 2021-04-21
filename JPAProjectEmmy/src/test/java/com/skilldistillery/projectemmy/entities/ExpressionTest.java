@@ -47,5 +47,19 @@ class ExpressionTest {
 		assertNotNull(expression);
 		assertEquals("More", expression.getName());
 	}
+	
+	@Test
+	@DisplayName("Expression - Image relationship mapping test")
+	void test2() {
+		assertNotNull(expression);
+		assertEquals("https://i.pinimg.com/originals/5c/d1/c4/5cd1c48588d9a83f16cbddbbcb2bfaad.png", expression.getImage().getImageUrl());
+	}
+	
+	@Test
+	@DisplayName("Expression - User relationship mapping test")
+	void test3() {
+		assertNotNull(expression);
+		assertEquals("admin", expression.getUser().getFirstName());
+	}
 
 }

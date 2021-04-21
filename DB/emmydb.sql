@@ -42,14 +42,7 @@ DROP TABLE IF EXISTS `image` ;
 CREATE TABLE IF NOT EXISTS `image` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `image_url` TEXT NOT NULL,
-  `user_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_image_library_user_idx` (`user_id` ASC),
-  CONSTRAINT `fk_image_library_user`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -60,14 +53,21 @@ DROP TABLE IF EXISTS `expression` ;
 
 CREATE TABLE IF NOT EXISTS `expression` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
-  `phrase` TEXT NOT NULL,
-  `image_id` INT NOT NULL,
+  `name` VARCHAR(45) NULL,
+  `phrase` TEXT NULL,
+  `image_id` INT NULL,
+  `user_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_expression_image1_idx` (`image_id` ASC),
+  INDEX `fk_expression_user1_idx` (`user_id` ASC),
   CONSTRAINT `fk_expression_image1`
     FOREIGN KEY (`image_id`)
     REFERENCES `image` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_expression_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -183,14 +183,14 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `emmydb`;
-INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (1, 'https://i.pinimg.com/originals/5c/d1/c4/5cd1c48588d9a83f16cbddbbcb2bfaad.png', 1);
-INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (2, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4Y7NeszyTA4SFbiuXOtnLViL_wagbgNC6xcL2-WUee8Tj6Yr66BUwO1Z4nI_RpN0EJhw&usqp=CAU', 1);
-INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (3, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQERyImY05L3A-NvdLsYaJJ7aIIcXDEL1BoQXXRpmCOQ1Q3J4l74zhFuki9jEIu18ntXUk&usqp=CAU', 1);
-INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (4, 'https://www.netclipart.com/pp/m/22-227997_thank-you-clipart-transparent-clip-art-thank-you.png', 1);
-INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (5, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpR1q87EcJF92x1G9WcNBtfNMnDxasyuiiX0BsW3ul4OfeGzto27H5LI6ZOtTNBQ9aW6I&usqp=CAU', 1);
-INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (6, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuyEjV1WVqmiAjEOYVJ5eqHWUkVVs9HGFHX0JCxvTS2qftxOjloiAJCCJJiYXO0cAA-1A&usqp=CAU', 1);
-INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (7, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8VIvnJfTyuK7Yeho5D6mjiSu6ShMjSWXasPWbc_8DNp4IfgCSbneEv4b9ZOZER_sNIa8&usqp=CAU', 1);
-INSERT INTO `image` (`id`, `image_url`, `user_id`) VALUES (8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4gQo6tfPDjddJ_mwVMeZYagu6XqIkQP1yFxH-XYaU2VGDoYv2hbVVcppORPJlGimSCNo&usqp=CAU', 1);
+INSERT INTO `image` (`id`, `image_url`) VALUES (1, 'https://i.pinimg.com/originals/5c/d1/c4/5cd1c48588d9a83f16cbddbbcb2bfaad.png');
+INSERT INTO `image` (`id`, `image_url`) VALUES (2, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4Y7NeszyTA4SFbiuXOtnLViL_wagbgNC6xcL2-WUee8Tj6Yr66BUwO1Z4nI_RpN0EJhw&usqp=CAU');
+INSERT INTO `image` (`id`, `image_url`) VALUES (3, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQERyImY05L3A-NvdLsYaJJ7aIIcXDEL1BoQXXRpmCOQ1Q3J4l74zhFuki9jEIu18ntXUk&usqp=CAU');
+INSERT INTO `image` (`id`, `image_url`) VALUES (4, 'https://www.netclipart.com/pp/m/22-227997_thank-you-clipart-transparent-clip-art-thank-you.png');
+INSERT INTO `image` (`id`, `image_url`) VALUES (5, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpR1q87EcJF92x1G9WcNBtfNMnDxasyuiiX0BsW3ul4OfeGzto27H5LI6ZOtTNBQ9aW6I&usqp=CAU');
+INSERT INTO `image` (`id`, `image_url`) VALUES (6, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuyEjV1WVqmiAjEOYVJ5eqHWUkVVs9HGFHX0JCxvTS2qftxOjloiAJCCJJiYXO0cAA-1A&usqp=CAU');
+INSERT INTO `image` (`id`, `image_url`) VALUES (7, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8VIvnJfTyuK7Yeho5D6mjiSu6ShMjSWXasPWbc_8DNp4IfgCSbneEv4b9ZOZER_sNIa8&usqp=CAU');
+INSERT INTO `image` (`id`, `image_url`) VALUES (8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4gQo6tfPDjddJ_mwVMeZYagu6XqIkQP1yFxH-XYaU2VGDoYv2hbVVcppORPJlGimSCNo&usqp=CAU');
 
 COMMIT;
 
@@ -200,14 +200,15 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `emmydb`;
-INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (1, 'More', 'More', 1);
-INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (2, 'Please', 'Please', 2);
-INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (3, 'Want', 'Want', 3);
-INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (4, 'Thank you', 'Thank you', 4);
-INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (5, 'Goodbye', 'Goodbye', 5);
-INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (6, 'Play', 'Play', 6);
-INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (7, 'Water', 'Water', 7);
-INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`) VALUES (8, 'Which', 'Which', 8);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (1, 'More', 'More', 1, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (2, 'Please', 'Please', 2, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (3, 'Want', 'Want', 3, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (4, 'Thank you', 'Thank you', 4, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (5, 'Goodbye', 'Goodbye', 5, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (6, 'Play', 'Play', 6, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (7, 'Water', 'Water', 7, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (8, 'Which', 'Which', 8, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (DEFAULT, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
