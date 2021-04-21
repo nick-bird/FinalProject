@@ -11,8 +11,10 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 @NgModule({
   declarations: [
     AppComponent,
+
     ProfileComponent,
     HomePageComponent
+
   ],
   imports: [
     BrowserModule,
