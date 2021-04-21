@@ -1,5 +1,5 @@
-import { Expression } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { Expression } from 'src/app/models/expression';
 import { Soundboard } from 'src/app/models/soundboard';
 import { ExpressionService } from 'src/app/services/expression.service';
 import { SoundboardService } from 'src/app/services/soundboard.service';
@@ -17,15 +17,15 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-  // this.reload();
+   this.reload();
   }
 
 soundboards: Soundboard[] = [];
 expressions: Expression[] = [];
 selectedSoundboard: Soundboard = null;
 selectedExpression: Expression = null;
-newSoundboard: Soundboard = null;
-newExpression: Expression = null;
+newSoundboard: Soundboard = new Soundboard();
+newExpression: Expression = new Expression();
 editSoundboard: Soundboard = null;
 editExpression: Expression = null;
 
