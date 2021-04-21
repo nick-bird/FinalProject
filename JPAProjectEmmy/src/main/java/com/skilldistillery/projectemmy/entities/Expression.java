@@ -1,9 +1,17 @@
 package com.skilldistillery.projectemmy.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Expression {
@@ -16,7 +24,32 @@ public class Expression {
 	
 	private String phrase;
 	
-	public Expression() {}
+	@JsonIgnore
+	@OneToMany(mappedBy="expression")
+	private List<SoundboardExpression> soundboardExpressions;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@OneToOne
+	@JoinColumn(name="image_id")
+	private Image image;
+	
+	public Expression() {
+		
+	}
+	
+	public Expression(int id, String name, String phrase, List<SoundboardExpression> soundboardExpressions, User user,
+			Image image) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.phrase = phrase;
+		this.soundboardExpressions = soundboardExpressions;
+		this.user = user;
+		this.image = image;
+	}
 
 	public int getId() {
 		return id;
@@ -40,6 +73,30 @@ public class Expression {
 
 	public void setPhrase(String phrase) {
 		this.phrase = phrase;
+	}
+
+	public List<SoundboardExpression> getSoundboardExpressions() {
+		return soundboardExpressions;
+	}
+
+	public void setSoundboardExpressions(List<SoundboardExpression> soundboardExpressions) {
+		this.soundboardExpressions = soundboardExpressions;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 	@Override
@@ -66,9 +123,8 @@ public class Expression {
 
 	@Override
 	public String toString() {
-		return "Expression [id=" + id + ", name=" + name + ", phrase=" + phrase + "]";
+		return "Expression [id=" + id + ", name=" + name + ", phrase=" + phrase + ", soundboardExpressions="
+				+ soundboardExpressions + ", user=" + user + ", image=" + image + "]";
 	}
-	
-	
-	
+
 }
