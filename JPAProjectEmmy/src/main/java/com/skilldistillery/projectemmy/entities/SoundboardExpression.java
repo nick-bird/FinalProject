@@ -3,6 +3,9 @@ package com.skilldistillery.projectemmy.entities;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -14,15 +17,28 @@ public class SoundboardExpression {
 	
 	@Column(name="position_id")
 	private int positionId;
+	
+	@ManyToOne
+	@JoinColumn(name="soundboard_id")
+	@MapsId(value="soundboardId")
+	private Soundboard soundboard;
+	
+	@ManyToOne
+	@JoinColumn(name="expression_id")
+	@MapsId(value="expressionId")
+	private Expression expression;
 
 	public SoundboardExpression() {
 		super();
 	}
 
-	public SoundboardExpression(SoundboardExpressionId id, int positionId) {
+	public SoundboardExpression(SoundboardExpressionId id, int positionId, Soundboard soundboard,
+			Expression expression) {
 		super();
 		this.id = id;
 		this.positionId = positionId;
+		this.soundboard = soundboard;
+		this.expression = expression;
 	}
 
 	public SoundboardExpressionId getId() {
@@ -39,6 +55,22 @@ public class SoundboardExpression {
 
 	public void setPositionId(int positionId) {
 		this.positionId = positionId;
+	}
+
+	public Soundboard getSoundboard() {
+		return soundboard;
+	}
+
+	public void setSoundboard(Soundboard soundboard) {
+		this.soundboard = soundboard;
+	}
+
+	public Expression getExpression() {
+		return expression;
+	}
+
+	public void setExpression(Expression expression) {
+		this.expression = expression;
 	}
 
 	@Override
@@ -68,7 +100,8 @@ public class SoundboardExpression {
 
 	@Override
 	public String toString() {
-		return "SoundboardExpression [id=" + id + ", positionId=" + positionId + "]";
+		return "SoundboardExpression [id=" + id + ", positionId=" + positionId + ", soundboard=" + soundboard
+				+ ", expression=" + expression + "]";
 	}
-	
+
 }
