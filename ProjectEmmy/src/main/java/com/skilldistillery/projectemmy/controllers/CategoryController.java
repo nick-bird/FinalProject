@@ -20,7 +20,7 @@ public class CategoryController {
 	private CategoryService catSvc;
 	
 	
-	@GetMapping("expressions")
+	@GetMapping("categories")
 	public List<Category> index() { 
 		return catSvc.index();
 	}
