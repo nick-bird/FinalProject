@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.xml.ws.soap.MTOM;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -30,6 +32,9 @@ public class Soundboard {
 	
 	@Column(name = "is_default")
 	private Boolean isDefault;
+	
+	@ManyToOne
+	private User user;
 	
 	public Soundboard() {}
 
@@ -79,6 +84,14 @@ public class Soundboard {
 
 	public void setIsDefault(Boolean isDefault) {
 		this.isDefault = isDefault;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

@@ -55,5 +55,12 @@ class UserTest {
 		assertEquals("admin", user.getFirstName());
 		assertEquals("admin", user.getLastName());
 	}
+	
+	@Test
+	@DisplayName("Testing User to Soundboard Mappring")
+	void Test2() {
+		assertTrue(user.getSoundboards().size() > 0);
+		
+	}
 
 }
