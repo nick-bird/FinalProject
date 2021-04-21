@@ -13,37 +13,37 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "first_name")
 	private String firstName;
-	
+
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	private String username;
-	
+
 	private String password;
-	
+
 	private String email;
-	
+
 	private String role;
-	
+
 	@Column(name = "is_restricted")
 	private boolean isRestricted;
-	
+
 	@Column(name = "is_active")
 	private boolean isActive;
-	
+
 	@JsonIgnore
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy = "user")
 	private List<Soundboard> soundboards;
-	
+
 	@JsonIgnore
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy = "user")
 	private List<Expression> expressions;
 
 	public User() {

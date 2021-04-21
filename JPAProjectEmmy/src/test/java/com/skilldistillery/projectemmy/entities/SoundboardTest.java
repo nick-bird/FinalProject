@@ -18,7 +18,7 @@ class SoundboardTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 	private Soundboard soundboard;
-	
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("ProjectEmmyPU");
@@ -47,26 +47,26 @@ class SoundboardTest {
 		assertNotNull(soundboard);
 		assertEquals("ASL Signs", soundboard.getName());
 	}
-	
+
 	@Test
 	@DisplayName("Soundboard - soundboard_expression mapping")
 	void test2() {
 		assertNotNull(soundboard);
 		assertEquals("More", soundboard.getSoundboardExpressions().get(0).getExpression().getName());
 	}
-	
+
 	@Test
 	@DisplayName("Soundboard - user mapping")
 	void test3() {
 		assertNotNull(soundboard);
 		assertEquals("admin", soundboard.getUser().getUsername());
 	}
-	
+
 	@Test
 	@DisplayName("Soundboard - category mapping")
 	void test4() {
 		assertNotNull(soundboard);
 		assertEquals("ASL", soundboard.getCategories().get(0).getName());
-	}
 
+	}
 }
