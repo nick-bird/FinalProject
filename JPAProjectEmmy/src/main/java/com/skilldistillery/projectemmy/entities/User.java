@@ -1,10 +1,13 @@
 package com.skilldistillery.projectemmy.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -26,6 +29,9 @@ public class User {
 	private boolean isRestricted;
 	@Column(name = "is_active")
 	private boolean isActive;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Soundboard> soundboards;
 
 	public User() {
 		super();
@@ -107,6 +113,14 @@ public class User {
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public List<Soundboard> getSoundboards() {
+		return soundboards;
+	}
+
+	public void setSoundboards(List<Soundboard> soundboards) {
+		this.soundboards = soundboards;
 	}
 
 	@Override

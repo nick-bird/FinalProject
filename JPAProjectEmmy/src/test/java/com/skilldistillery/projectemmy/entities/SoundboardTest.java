@@ -47,5 +47,12 @@ class SoundboardTest {
 		assertNotNull(soundboard);
 		assertEquals("ASL Signs", soundboard.getName());
 	}
+	
+	@Test
+	@DisplayName("Testing Soundboard Mapped to User")
+	void test2() {
+		assertEquals(1, soundboard.getUser().getId());
+		assertEquals("admin", soundboard.getUser().getFirstName());
+	}
 
 }
