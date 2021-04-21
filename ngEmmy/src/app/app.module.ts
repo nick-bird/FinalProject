@@ -11,6 +11,8 @@ import { AuthService } from './services/auth.service';
 import { ExpressionService } from './services/expression.service';
 import { SoundboardService } from './services/soundboard.service';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CategoryService } from './services/category.service';
+import { ImageService } from './services/image.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
    AuthService,
    ExpressionService,
    SoundboardService,
+   CategoryService,
+   ImageService,
   AppRoutingModule],
   bootstrap: [AppComponent]
 })
