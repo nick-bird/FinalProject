@@ -24,7 +24,7 @@ export class HomePageComponent implements OnInit {
     this.auth.login(this.user.username,this.user.password).subscribe(
       loggedIn => {
         console.log('Logged in');
-       this.router.navigateByUrl('/authenticate');
+       this.router.navigateByUrl('/profile');
 
       },
       denied =>{
