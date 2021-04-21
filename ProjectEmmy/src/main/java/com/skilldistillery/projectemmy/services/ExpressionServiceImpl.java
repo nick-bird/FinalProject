@@ -3,12 +3,14 @@ package com.skilldistillery.projectemmy.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.skilldistillery.projectemmy.entities.Expression;
 import com.skilldistillery.projectemmy.entities.User;
 import com.skilldistillery.projectemmy.repositories.ExpressionRepository;
 import com.skilldistillery.projectemmy.repositories.UserRepository;
 
+@Service
 public class ExpressionServiceImpl implements ExpressionService {
 
 	@Autowired
