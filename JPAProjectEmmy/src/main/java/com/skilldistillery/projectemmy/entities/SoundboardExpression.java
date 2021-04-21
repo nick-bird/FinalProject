@@ -1,16 +1,16 @@
 package com.skilldistillery.projectemmy.entities;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Embeddable
+@Entity
 @Table(name="soundboard_expression")
-public class SoundboardExpression implements Serializable{
+public class SoundboardExpression {
 	
-	private static final long serialVersionUID = 1L;
+	@EmbeddedId
+	private SoundboardExpressionId id;
 	
 	@Column(name="position_id")
 	private int positionId;
@@ -19,9 +19,18 @@ public class SoundboardExpression implements Serializable{
 		super();
 	}
 
-	public SoundboardExpression(int positionId) {
+	public SoundboardExpression(SoundboardExpressionId id, int positionId) {
 		super();
+		this.id = id;
 		this.positionId = positionId;
+	}
+
+	public SoundboardExpressionId getId() {
+		return id;
+	}
+
+	public void setId(SoundboardExpressionId id) {
+		this.id = id;
 	}
 
 	public int getPositionId() {
@@ -36,7 +45,7 @@ public class SoundboardExpression implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + positionId;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -49,14 +58,17 @@ public class SoundboardExpression implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		SoundboardExpression other = (SoundboardExpression) obj;
-		if (positionId != other.positionId)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "SoundboardExpression [positionId=" + positionId + "]";
+		return "SoundboardExpression [id=" + id + ", positionId=" + positionId + "]";
 	}
 	
 }
