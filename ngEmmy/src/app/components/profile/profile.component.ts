@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-  this.reload();
+  // this.reload();
   }
 
 soundboards: Soundboard[] = [];
@@ -76,6 +76,7 @@ addSoundboard(): void {
     );
   }
 
+
     setEditExpression(): void {
       this.editExpression = Object.assign({}, this.selectedExpression);
     }
@@ -96,8 +97,8 @@ addSoundboard(): void {
         }
       );
     }
-      updateExpression(editedExpresion: Expression, displayExpression = true): void {
-        this.expressionService.update(editedExpresion).subscribe(
+      updateExpression(editedExpression: Expression, displayExpression = true): void {
+        this.expressionService.update(editedExpression).subscribe(
           data => {
             this.reload();
             if(displayExpression){
@@ -110,6 +111,7 @@ addSoundboard(): void {
           }
         )
       };
+
 
         deleteSoundboard(id: number): void {
           // if (confirm('You sure about this?')) {
