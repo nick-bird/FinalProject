@@ -82,7 +82,7 @@ addSoundboard(): void {
     setEditSoundboard(): void {
       this.editSoundboard = Object.assign({}, this.selectedSoundboard);
     }
-    updateSoundboard(editedSoundboard: SoundboardService, displaySoundboard = true): void {
+    updateSoundboard(editedSoundboard: Soundboard, displaySoundboard = true): void {
       this.soundboardService.update(editedSoundboard).subscribe(
         data => {
           this.reload();
