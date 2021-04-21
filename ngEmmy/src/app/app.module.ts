@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './components/profile/profile.component';
-=======
 import { HomePageComponent } from './components/home-page/home-page.component';
 
 
