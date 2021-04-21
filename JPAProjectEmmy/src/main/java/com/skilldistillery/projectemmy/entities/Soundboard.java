@@ -1,14 +1,20 @@
 package com.skilldistillery.projectemmy.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Soundboard {
@@ -31,7 +37,28 @@ public class Soundboard {
 	@Column(name = "is_default")
 	private Boolean isDefault;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy="soundboard")
+	private List<SoundboardExpression> soundboardExpressions;
+	
+	@ManyToOne()
+	@JoinColumn(name="user_id")
+	private User user;
+	
 	public Soundboard() {}
+	
+	public Soundboard(int id, String name, Boolean isPublic, String description, LocalDateTime createDate,
+			Boolean isDefault, List<SoundboardExpression> soundboardExpressions, User user) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.isPublic = isPublic;
+		this.description = description;
+		this.createDate = createDate;
+		this.isDefault = isDefault;
+		this.soundboardExpressions = soundboardExpressions;
+		this.user = user;
+	}
 
 	public int getId() {
 		return id;
@@ -81,6 +108,22 @@ public class Soundboard {
 		this.isDefault = isDefault;
 	}
 
+	public List<SoundboardExpression> getSoundboardExpressions() {
+		return soundboardExpressions;
+	}
+
+	public void setSoundboardExpressions(List<SoundboardExpression> soundboardExpressions) {
+		this.soundboardExpressions = soundboardExpressions;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -106,9 +149,8 @@ public class Soundboard {
 	@Override
 	public String toString() {
 		return "Soundboard [id=" + id + ", name=" + name + ", isPublic=" + isPublic + ", description=" + description
-				+ ", createDate=" + createDate + ", isDefault=" + isDefault + "]";
+				+ ", createDate=" + createDate + ", isDefault=" + isDefault + ", soundboardExpressions="
+				+ soundboardExpressions + ", user=" + user + "]";
 	}
-	
-	
-	
+
 }
