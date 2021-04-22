@@ -16,6 +16,7 @@ import { ImageService } from './services/image.service';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule
 
   ],
   providers: [
