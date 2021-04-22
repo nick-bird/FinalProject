@@ -1,3 +1,4 @@
+import { Category } from "./category";
 import { User } from "./user";
 
 export class Soundboard {
@@ -8,7 +9,7 @@ export class Soundboard {
   isPublic: boolean;
   isDefault: boolean;
   user: User;
-  categories: Category[]
+  categories: Category[];
 
   constructor(id?: number, name?: string, description?: string, createDate?: string, isPublic?: boolean, isDefault?: boolean, user?: User, categories?: Category[] ){
 
