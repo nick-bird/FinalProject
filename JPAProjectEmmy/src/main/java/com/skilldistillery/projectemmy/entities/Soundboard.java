@@ -41,11 +41,10 @@ public class Soundboard {
 	@Column(name = "is_default")
 	private Boolean isDefault;
 	
-	@JsonIgnore
+	
 	@OneToMany(orphanRemoval=true, mappedBy="soundboard")
 	private List<SoundboardExpression> soundboardExpressions;
 	
-	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name="soundboard_category",
 	joinColumns=@JoinColumn(name="soundboard_id"),

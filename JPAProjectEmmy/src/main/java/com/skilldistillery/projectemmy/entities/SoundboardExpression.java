@@ -8,16 +8,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="soundboard_expression")
 public class SoundboardExpression {
 	
+	@JsonIgnore
 	@EmbeddedId
 	private SoundboardExpressionId id;
 	
+	@JsonIgnore
 	@Column(name="position_id")
 	private int positionId;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="soundboard_id")
 	@MapsId(value="soundboardId")

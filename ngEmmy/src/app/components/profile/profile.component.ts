@@ -46,6 +46,8 @@ reload() {
 }
 displaySoundboard(soundboard: Soundboard): void {
   this.selectedSoundboard = soundboard;
+  console.log("test" + this.selectedSoundboard);
+
 }
 
 displayExpression(expression: Expression): void {
