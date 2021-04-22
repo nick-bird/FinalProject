@@ -4,11 +4,13 @@ import { Soundboard } from 'src/app/models/soundboard';
 import { ExpressionService } from 'src/app/services/expression.service';
 import { SoundboardService } from 'src/app/services/soundboard.service';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
+
 export class ProfileComponent implements OnInit {
 
   constructor(
@@ -157,5 +159,6 @@ addSoundboard(): void {
             );
         }
       }
+
 
 
