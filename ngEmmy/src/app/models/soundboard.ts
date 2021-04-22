@@ -11,10 +11,10 @@ export class Soundboard {
   isDefault: boolean;
   user: User;
   categories: Category[];
-  expressions: Expression[];
+  soundboardExpressions: Expression[];
 
 
-  constructor(id?: number, name?: string, description?: string, createDate?: string, isPublic?: boolean, isDefault?: boolean, user?: User, categories?: Category[], expressions?: Expression[] ){
+  constructor(id?: number, name?: string, description?: string, createDate?: string, isPublic?: boolean, isDefault?: boolean, user?: User, categories?: Category[], soundboardExpressions?: Expression[] ){
     this.id = id;
     this.name = name;
     this.description = description;
@@ -23,7 +23,7 @@ export class Soundboard {
     this.isDefault = isDefault;
     this.user = user;
     this.categories = categories;
-    this.expressions = expressions;
+    this.soundboardExpressions = soundboardExpressions;
   }
 
 }

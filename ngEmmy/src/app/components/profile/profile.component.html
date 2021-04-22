@@ -5,27 +5,33 @@
 
 
 <!-- Show user soundboards -->
-  <div class="UserSoundboards" *ngFor="let sb of userSoundboards">
+<div class="UserSoundboards" *ngIf=!selectedSoundboard >
+  <div (click)="displaySoundboard(sb)" *ngFor="let sb of userSoundboards">
     <div class="col-sm">
-      <h2>SoundBoards</h2>
-
-    <ul>
-      <!-- <li>{{sb.name}} <br> <button class="btn btn-danger" (click)="delete(todo.id)">X</button>  </li> -->
-    </ul>
-
+      {{sb.name}} <br> <button class="btn btn-danger" (click)="deleteSoundboard(sb.id)">X</button>
     </div>
   </div>
+</div>
 
-
-
-
-
-
-
-
-
-
-
-
+<div *ngIf="selectedSoundboard && !editSoundboard" >
+  <h2>{{selectedSoundboard.name}}</h2>
+  <blockquote>{{selectedSoundboard.description}}</blockquote>
+  <h4>Categories: </h4>
+  <ul>
+    <li *ngFor="let cat of selectedSoundboard.categories" >{{cat.name}}</li>
+  </ul>
+  <h4>Expressions: </h4>
+  <div *ngFor="let exp of selectedSoundboard.soundboardExpressions" >
+   <h1>{{exp}}</h1>
+   <div *ngFor="let item of exp | keyvalue">
+    {{item.key}}:{{item.value}}
+  </div>
+  </div>
+  <br>
+  <button class="btn btn-success" (click)="setEditSoundboard()">Edit</button>
+  <button class="btn btn-danger" (click)="displaySoundboard()">Back</button>
+ </div>
 
 </div>
+
+<!--  end of Show user soundboards -->

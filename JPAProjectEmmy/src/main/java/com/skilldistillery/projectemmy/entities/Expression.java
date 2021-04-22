@@ -28,6 +28,7 @@ public class Expression {
 	@OneToMany(orphanRemoval=true, mappedBy="expression")
 	private List<SoundboardExpression> soundboardExpressions;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
