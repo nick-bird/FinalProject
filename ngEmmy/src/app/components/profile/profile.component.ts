@@ -115,7 +115,6 @@ addSoundboard(): void {
 
         deleteSoundboard(id: number): void {
           // if (confirm('You sure about this?')) {
-            // this.todos = this.todoService.index();
             // }
             this.soundboardService.destroy(id).subscribe(
               data =>{
@@ -128,7 +127,6 @@ addSoundboard(): void {
         }
         deleteExpression(id: number): void {
           // if (confirm('You sure about this?')) {
-            // this.todos = this.todoService.index();
             // }
             this.expressionService.destroy(id).subscribe(
               data =>{
