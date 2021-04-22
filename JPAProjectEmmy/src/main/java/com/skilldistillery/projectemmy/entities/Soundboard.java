@@ -42,7 +42,7 @@ public class Soundboard {
 	private Boolean isDefault;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="soundboard")
+	@OneToMany(orphanRemoval=true, mappedBy="soundboard")
 	private List<SoundboardExpression> soundboardExpressions;
 	
 	@JsonIgnore
@@ -52,6 +52,7 @@ public class Soundboard {
 	inverseJoinColumns=@JoinColumn(name="category_id"))
 	private List<Category> categories;
 	
+	@JsonIgnore
 	@ManyToOne()
 	@JoinColumn(name="user_id")
 	private User user;

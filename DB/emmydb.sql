@@ -208,7 +208,6 @@ INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES 
 INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (6, 'Play', 'Play', 6, 1);
 INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (7, 'Water', 'Water', 7, 1);
 INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (8, 'Which', 'Which', 8, 1);
-INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (DEFAULT, NULL, NULL, NULL, NULL);
 
 COMMIT;
 
