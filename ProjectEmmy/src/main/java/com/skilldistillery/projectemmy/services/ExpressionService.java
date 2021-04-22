@@ -15,5 +15,7 @@ public interface ExpressionService {
     public Expression update(String username, int eid, Expression exp);
 
     public boolean destroy(String username, int eid);
+    
+    public List<Expression> indexPublic();
 	
 }
