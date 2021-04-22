@@ -36,6 +36,7 @@ reload() {
   this.soundboardService.index().subscribe(
     data => {
       this.userSoundboards = data;
+      this.loadUserExpressions();
     },
     err => {
       console.log('Error loading soundboards: ' + err);
@@ -44,9 +45,20 @@ reload() {
 
 
 }
+
+loadUserExpressions(){
+  this.expressionService.index().subscribe(
+    data => {
+      this.userExpressions = data;
+    },
+    err => {
+      console.log('Error loading expressions: ' + err);
+    }
+  );
+}
+
 displaySoundboard(soundboard: Soundboard): void {
   this.selectedSoundboard = soundboard;
-  console.log("test" + this.selectedSoundboard);
 
 }
 

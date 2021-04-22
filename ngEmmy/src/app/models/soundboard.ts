@@ -1,5 +1,5 @@
-import { Expression } from "@angular/compiler";
 import { Category } from "./category";
+import { Expression } from "./expression";
 import { User } from "./user";
 
 export class Soundboard {
