@@ -33,6 +33,10 @@ public class ExpressionController {
 	public List<Expression> index(HttpServletRequest req, HttpServletResponse res, Principal principal) { 
 		return expSvc.index(principal.getName());
 	}
+	@GetMapping("public/expressions")
+	public List<Expression> indexPublic(HttpServletRequest req, HttpServletResponse res, Principal principal) { 
+		return expSvc.indexPublic();
+	}
 
 	@GetMapping("expressions/{eid}")
 	public Expression show(HttpServletRequest req, HttpServletResponse res, @PathVariable int eid, Principal principal) {
