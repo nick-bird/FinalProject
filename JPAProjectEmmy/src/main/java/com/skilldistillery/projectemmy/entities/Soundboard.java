@@ -52,6 +52,7 @@ public class Soundboard {
 	inverseJoinColumns=@JoinColumn(name="category_id"))
 	private List<Category> categories;
 	
+	@JsonIgnore
 	@ManyToOne()
 	@JoinColumn(name="user_id")
 	private User user;
