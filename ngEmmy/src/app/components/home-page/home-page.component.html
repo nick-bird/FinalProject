@@ -1,49 +1,26 @@
-<h1>Project Emmy</h1>
-
-<!-- Carousel -->
-
-  <div class="row justify-content-md-center">
-    <div id="carousel" class="carousel slide" data-bs-ride="carousel">
-
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="https://hhp-blog.s3.amazonaws.com/2019/12/heart-and-puzzle-pieces-autism.jpg" class="d-block w-100">
-        </div>
-
-        <div class="carousel-item">
-          <img src="https://spectrumnews-web-assets.s3.amazonaws.com/wp-content/uploads/2020/12/07101625/AMiKlin1120-1120x550.jpg" class="d-block w-100">
-        </div>
-
-        <div class="carousel-item">
-          <img src="..." class="d-block w-100" alt="...">
-        </div>
-
-        <!-- nav buttons for carousel -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-
-
-
+<!-- Row 1 Carousel -->
+<div class="container-fluid" name= "row2" class="row" >
+  <mdb-carousel [animation]="'slide'">
+    <mdb-carousel-item>
+      <img class="d-block w-100" src="https://hhp-blog.s3.amazonaws.com/2019/12/heart-and-puzzle-pieces-autism.jpg" alt="First slide">
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <img class="d-block w-100" src="https://spectrumnews-web-assets.s3.amazonaws.com/wp-content/uploads/2020/12/07101625/AMiKlin1120-1120x550.jpg" alt="Second slide">
+    </mdb-carousel-item>
+    <mdb-carousel-item>
+      <img class="d-block w-100" src="https://store-images.s-microsoft.com/image/apps.17599.14222458110220046.63cf67f1-c306-44d3-8890-1cc6b204e75a.c80ed14f-26ee-41fa-bd94-fa317b47228c?mode=scale&q=90&h=1080&w=1920" alt="Third slide">
+    </mdb-carousel-item>
+  </mdb-carousel>
+</div>
+  <!-- row 2. Login and Registration forms -->
 <div class="container-fluid" name= "row2" class="row" >
   <!-- About the site -->
-  <div class="row justify-content-md-center">
-    <div class="col col-lg-6">
-      <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora unde quod autem dolores laborum veniam sit voluptatibus, eaque ut officiis laudantium eos quo culpa dolor expedita et veritatis quaerat quasi!</p>
+  <!-- <div class="row justify-content-md-center"> -->
+    <div class="col">
+      <p> Project Emmy is a platform for non-verbal individuals to have a free and easy way to comunicate</p>
     </div>
+  <!-- </div> -->
 
-  <div class="col-md-auto">
-    FILLER DELETE COL 2
-  </div>
   <!-- Login Form -->
   <div class="col col-md-auto" name="loginForm" *ngIf="!registerBool">
       <div class="card">
@@ -57,7 +34,6 @@
           <br>
           <p>Don't have an accout?<a class="link-primary" (click)="openRegisterForm()">  Sign up</a></p>
         </div>
-
       </div>
   </div>
     <!-- Register Form -->
@@ -86,7 +62,7 @@
           <button (click)="register()" type="button" class="btn btn-primary float-right">Submit</button>
         </div>
     </div>
-
+  </div>
 </div>
 
 
