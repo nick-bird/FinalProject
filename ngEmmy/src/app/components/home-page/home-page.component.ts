@@ -17,6 +17,7 @@ export class HomePageComponent implements OnInit {
   ) { }
   user: User = new User();
   newUser: User = new User();
+  registerBool: boolean = false;
   ngOnInit(): void {
   }
 
@@ -33,8 +34,19 @@ export class HomePageComponent implements OnInit {
       }
     )
   }
+  openRegisterForm(){
+    console.log(this.registerBool);
+
+    if (this.registerBool){
+     return this.registerBool = false;
+    }
+    if (!this.registerBool){
+     return this.registerBool = true;
+    }
+  }
 
   register() {
+    this.registerBool = false
     this.auth.register(this.newUser).subscribe(
       data => {
         console.log('HomePage.register(): user registered.');
