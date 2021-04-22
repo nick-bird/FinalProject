@@ -1,5 +1,5 @@
 import { Category } from "./category";
-import { Expression } from "./expression";
+import { SoundboardExpression } from "./soundboard-expression";
 import { User } from "./user";
 
 export class Soundboard {
@@ -11,10 +11,10 @@ export class Soundboard {
   isDefault: boolean;
   user: User;
   categories: Category[];
-  soundboardExpressions: Expression[];
+  soundboardExpressions: SoundboardExpression[];
 
 
-  constructor(id?: number, name?: string, description?: string, createDate?: string, isPublic?: boolean, isDefault?: boolean, user?: User, categories?: Category[], soundboardExpressions?: Expression[] ){
+  constructor(id?: number, name?: string, description?: string, createDate?: string, isPublic?: boolean, isDefault?: boolean, user?: User, categories?: Category[], soundboardExpressions?: SoundboardExpression[] ){
     this.id = id;
     this.name = name;
     this.description = description;
