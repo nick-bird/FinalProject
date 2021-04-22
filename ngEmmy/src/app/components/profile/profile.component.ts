@@ -24,6 +24,9 @@ soundboards: Soundboard[] = [];
 expressions: Expression[] = [];
 selectedSoundboard: Soundboard = null;
 selectedExpression: Expression = null;
+
+userExpressions: Expression[] = [];
+userSoundboards: Soundboard[] = [];
 newSoundboard: Soundboard = new Soundboard();
 newExpression: Expression = new Expression();
 editSoundboard: Soundboard = null;
@@ -38,6 +41,8 @@ reload() {
       console.log('Error loading soundboards: ' + err);
     }
   );
+
+
 }
 displaySoundboard(soundboard: Soundboard): void {
   this.selectedSoundboard = soundboard;
@@ -115,7 +120,6 @@ addSoundboard(): void {
 
         deleteSoundboard(id: number): void {
           // if (confirm('You sure about this?')) {
-            // this.todos = this.todoService.index();
             // }
             this.soundboardService.destroy(id).subscribe(
               data =>{
@@ -128,7 +132,6 @@ addSoundboard(): void {
         }
         deleteExpression(id: number): void {
           // if (confirm('You sure about this?')) {
-            // this.todos = this.todoService.index();
             // }
             this.expressionService.destroy(id).subscribe(
               data =>{

@@ -13,8 +13,8 @@ export class Soundboard {
   categories: Category[];
   expressions: Expression[];
 
-  constructor(id?: number, name?: string, description?: string, createDate?: string, isPublic?: boolean, isDefault?: boolean, user?: User, categories?: Category[], expressions?: Expression[] ){
 
+  constructor(id?: number, name?: string, description?: string, createDate?: string, isPublic?: boolean, isDefault?: boolean, user?: User, categories?: Category[], expressions?: Expression[] ){
     this.id = id;
     this.name = name;
     this.description = description;
