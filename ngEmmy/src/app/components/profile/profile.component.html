@@ -1,10 +1,31 @@
-<p>profile works!</p>
 
-<button class="btn btn-danger"></button>
+
+
 <div class="container">
-  <div class="row" *ngFor="let expression of soundboards">
+
+
+<!-- Show user soundboards -->
+  <div class="UserSoundboards" *ngFor="let sb of userSoundboards">
     <div class="col-sm">
-      SoundBoard
+      <h2>SoundBoards</h2>
+
+    <ul>
+      <li>{{sb.name}}</li>
+    </ul>
+
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>

@@ -35,7 +35,7 @@ editExpression: Expression = null;
 reload() {
   this.soundboardService.index().subscribe(
     data => {
-      this.soundboards = data;
+      this.userSoundboards = data;
     },
     err => {
       console.log('Error loading soundboards: ' + err);
