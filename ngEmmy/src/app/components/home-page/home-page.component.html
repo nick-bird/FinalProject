@@ -1,17 +1,64 @@
 <h1>Project Emmy</h1>
-<div name= "loginForm" class="row">
-  <div class="col">
-    <input type="text" name ="username" placeholder="Username" [(ngModel)] ="user.username">
-    <input type="password" name="password" placeholder="password"[(ngModel)] = "user.password">
-    <button (click)="login()" type="button" class="btn btn-primary">Primary</button>
+
+
+
+
+
+<div class="container-fluid" name= "row2" class="row" >
+  <!-- About the site -->
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-6">
+      <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora unde quod autem dolores laborum veniam sit voluptatibus, eaque ut officiis laudantium eos quo culpa dolor expedita et veritatis quaerat quasi!</p>
+    </div>
+
+  <div class="col-md-auto">
+    FILLER DELETE COL 2
   </div>
+  <!-- Login Form -->
+  <div class="col col-md-auto" name="loginForm" *ngIf="!registerBool">
+      <div class="card">
+        <div class="card-header text-center" style="margin: center;">
+            <h4>Login</h4>
+        </div>
+        <div class="card-body">
+          <input type="text" name ="username" placeholder="Username" [(ngModel)] ="user.username"><br>
+          <input type="password" name="password" placeholder="password"[(ngModel)] = "user.password"><br>
+          <button (click)="login()" type="button" class="btn btn-primary">Login</button> <br>
+          <br>
+          <p>Don't have an accout?<a class="link-primary" (click)="openRegisterForm()">  Sign up</a></p>
+        </div>
+
+      </div>
+  </div>
+    <!-- Register Form -->
+    <div class="col col-md-auto" name="registerForm" *ngIf="registerBool">
+      <div class="card">
+        <div class="card-header text-center" style="margin: center;">
+          <h4>Register</h4>
+        </div>
+        <div class="card-body">
+          <label for="firstName"><strong>Fist Name</strong> </label><br>
+          <input type="text" name="firstName" placeholder="Jane" [(ngModel)] = "newUser.firstName"><br>
+
+          <label for="lastName"><strong>Last Name</strong></label><br>
+          <input type="text" name="lastName" placeholder="Doe" [(ngModel)] = "newUser.lastName"><br>
+
+          <label for="email"><strong>Email</strong></label><br>
+          <input type="text" name="email" placeholder="janeDoe@fakeemail.com" [(ngModel)] = "newUser.email"><br>
+
+          <label for="username"><strong>Username</strong></label><br>
+          <input type="text" name="username" placeholder="5-15 Characters" [(ngModel)] = "newUser.username"><br>
+
+          <label for="password"><strong>Password</strong></label><br>
+          <input type="password" name="password" placeholder="8-20 Characters" [(ngModel)] = "newUser.password"><br>
+          <br>
+          <button (click)="openRegisterForm()" type="button" class="btn btn-danger">Cancel</button>
+          <button (click)="register()" type="button" class="btn btn-primary float-right">Submit</button>
+        </div>
+    </div>
+
 </div>
-<br>
-<div name="registerForm">
-  <input type="text" name="firstName" placeholder="First Name" [(ngModel)] = "newUser.firstName">
-  <input type="text" name="lastName" placeholder="Last Name" [(ngModel)] = "newUser.lastName">
-  <input type="text" name="email" placeholder="Email" [(ngModel)] = "newUser.email">
-  <input type="text" name="username" placeholder="Username" [(ngModel)] = "newUser.username">
-  <input type="password" name="password" placeholder="password" [(ngModel)] = "newUser.password">
-  <button (click)="register()" type="button" class="btn btn-primary">Register</button>
-</div>
+
+
+
+
