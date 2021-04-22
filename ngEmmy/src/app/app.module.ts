@@ -13,13 +13,17 @@ import { SoundboardService } from './services/soundboard.service';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CategoryService } from './services/category.service';
 import { ImageService } from './services/image.service';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
     HomePageComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NavigationComponent,
+    LogoutComponent
 
   ],
   imports: [
