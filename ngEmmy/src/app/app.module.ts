@@ -15,6 +15,7 @@ import { CategoryService } from './services/category.service';
 import { ImageService } from './services/image.service';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { LogoutComponent } from './components/logout/logout.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MDBBootstrapModule.forRoot()
+
   ],
   providers: [
    AuthService,
