@@ -17,6 +17,9 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { LogoutComponent } from './components/logout/logout.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { GridTestComponent } from './components/grid-test/grid-test.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HomePageComponent,
     NotFoundComponent,
     NavigationComponent,
-    LogoutComponent
+    LogoutComponent,
+    GridTestComponent,
 
   ],
   imports: [
@@ -34,7 +38,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatGridListModule
 
   ],
   providers: [
