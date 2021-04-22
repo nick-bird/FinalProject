@@ -70,4 +70,9 @@ public class ExpressionServiceImpl implements ExpressionService {
 		return expRepo.findByIdAndUser_Username(eid, username);
 	}
 
+	@Override
+	public List<Expression> indexPublic() {
+		return expRepo.findAll();
+	}
+
 }

@@ -4,8 +4,35 @@
 <div class="container">
 
 
+
+  <!-- Show user expressions -->
+<div class="UserExpressions" *ngIf=!selectedExpression&&!selectedSoundboard >
+  <h1>Expressions</h1>
+  <div (click)="displayExpression(exp)" *ngFor="let exp of userExpressions">
+    <div class="col-sm">
+      <img [src]="exp.image.imageUrl"/> <br> <button class="btn btn-danger" (click)="deleteExpression(exp.id)">X</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedExpression && !editExpression" >
+  <h2>{{selectedExpression.name}}</h2>
+  <blockquote>{{selectedExpression.phrase}}</blockquote>
+  <h4>Image: </h4>
+  <img [src]="selectedExpression.image.imageUrl"/>
+  <br>
+  <button class="btn btn-success" (click)="setEditExpression()">Edit</button>
+  <button class="btn btn-danger" (click)="displayExpression()">Back</button>
+ </div>
+<!--  end of Show user expressions -->
+
+
+<hr>
+
+
 <!-- Show user soundboards -->
-<div class="UserSoundboards" *ngIf=!selectedSoundboard >
+<div class="UserSoundboards" *ngIf=!selectedSoundboard&&!selectedExpression >
+  <h1>Soundboards</h1>
   <div (click)="displaySoundboard(sb)" *ngFor="let sb of userSoundboards">
     <div class="col-sm">
       {{sb.name}} <br> <button class="btn btn-danger" (click)="deleteSoundboard(sb.id)">X</button>
@@ -22,17 +49,16 @@
   </ul>
   <h4>Expressions: </h4>
   <div *ngFor="let exp of selectedSoundboard.soundboardExpressions" >
-   <h1>{{exp}}</h1>
-   <div *ngFor="let item of exp | keyvalue">
-    {{item.key}}:{{item.value}}
-  </div>
+   <img [src]="exp.expression.image.imageUrl"/>
   </div>
   <br>
   <button class="btn btn-success" (click)="setEditSoundboard()">Edit</button>
   <button class="btn btn-danger" (click)="displaySoundboard()">Back</button>
  </div>
+<!--  end of Show user soundboards -->
 
 </div>
+<<<<<<< HEAD
 
 <!--  end of Show user soundboards -->
 <!-- SoundBoard Grid Placement -->
@@ -66,3 +92,5 @@
   </mat-grid-list>
 </div>
 
+=======
+>>>>>>> 2e32f676a7dd039d5fc103af7b21c88f4518eb94
