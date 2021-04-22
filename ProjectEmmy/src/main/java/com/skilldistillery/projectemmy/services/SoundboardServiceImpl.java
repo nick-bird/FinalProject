@@ -22,6 +22,7 @@ public class SoundboardServiceImpl implements SoundboardService {
 	@Override
 	public List<Soundboard> index(String username) {
 		return soundRepo.findByUser_Username(username);
+		
 	}
 
 	@Override

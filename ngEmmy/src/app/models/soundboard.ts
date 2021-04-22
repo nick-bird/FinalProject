@@ -11,6 +11,7 @@ export class Soundboard {
   user: User;
   categories: Category[];
 
+
   constructor(id?: number, name?: string, description?: string, createDate?: string, isPublic?: boolean, isDefault?: boolean, user?: User, categories?: Category[] ){
 
     this.id = id;
