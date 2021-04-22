@@ -74,4 +74,9 @@ public class SoundboardServiceImpl implements SoundboardService {
 		return soundRepo.findByIdAndUser_Username(sid, username);
 	}
 
+	@Override
+	public List<Soundboard> publicSoundboards() {
+		return soundRepo.findByIsPublicTrue();
+	}
+
 }

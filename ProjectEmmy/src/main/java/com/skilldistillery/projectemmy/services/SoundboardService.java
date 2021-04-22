@@ -15,6 +15,9 @@ public interface SoundboardService {
     public Soundboard update(String username, int sid, Soundboard soundboard);
 
     public boolean destroy(String username, int eid);
+    
+    public List<Soundboard> publicSoundboards();
+
 	
 	
 }

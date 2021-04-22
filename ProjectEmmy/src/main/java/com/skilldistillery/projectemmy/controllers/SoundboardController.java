@@ -33,6 +33,12 @@ public class SoundboardController {
 	public List<Soundboard> index(HttpServletRequest req, HttpServletResponse res, Principal principal) { 
 		return soundSvc.index(principal.getName());
 	}
+	
+	
+	@GetMapping("public/soundboards")
+	public List<Soundboard> pSoundboard() { 
+		return soundSvc.publicSoundboards();
+	}
 
 	@GetMapping("soundboards/{sid}")
 	public Soundboard show(HttpServletRequest req, HttpServletResponse res, @PathVariable int sid, Principal principal) {
