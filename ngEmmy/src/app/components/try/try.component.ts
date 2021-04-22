@@ -24,7 +24,7 @@ export class TryComponent implements OnInit {
         this.expressions = data;
       },
       err => {
-        console.log('Error loading soundboards: ' + err);
+        console.log('Error loading expressions: ' + err);
       }
     );
     }

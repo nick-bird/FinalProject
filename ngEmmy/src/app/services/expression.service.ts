@@ -33,7 +33,7 @@ export class ExpressionService {
   }
 
   indexPublic() {
-    return this.http.get<Expression[]>(this.url2, this.getHttpOptions()).pipe(
+    return this.http.get<Expression[]>(this.url2).pipe(
       catchError((err: any) => {
         return throwError('Error getting expressions');
       })

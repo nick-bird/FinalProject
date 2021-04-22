@@ -33,8 +33,9 @@ public class ExpressionController {
 	public List<Expression> index(HttpServletRequest req, HttpServletResponse res, Principal principal) { 
 		return expSvc.index(principal.getName());
 	}
+	
 	@GetMapping("public/expressions")
-	public List<Expression> indexPublic(HttpServletRequest req, HttpServletResponse res, Principal principal) { 
+	public List<Expression> indexPublic(HttpServletRequest req, HttpServletResponse res) { 
 		return expSvc.indexPublic();
 	}
 
