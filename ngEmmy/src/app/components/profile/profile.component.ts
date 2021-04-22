@@ -24,6 +24,9 @@ soundboards: Soundboard[] = [];
 expressions: Expression[] = [];
 selectedSoundboard: Soundboard = null;
 selectedExpression: Expression = null;
+
+userExpressions: Expression[] = [];
+userSoundboards: Soundboard[] = [];
 newSoundboard: Soundboard = new Soundboard();
 newExpression: Expression = new Expression();
 editSoundboard: Soundboard = null;
@@ -38,6 +41,8 @@ reload() {
       console.log('Error loading soundboards: ' + err);
     }
   );
+
+
 }
 displaySoundboard(soundboard: Soundboard): void {
   this.selectedSoundboard = soundboard;
