@@ -10,7 +10,7 @@
   <h1>Expressions</h1>
   <div (click)="displayExpression(exp)" *ngFor="let exp of userExpressions">
     <div class="col-sm">
-      <img [src]="exp.image.imageUrl"/> <br> <button class="btn btn-danger" (click)="deleteSoundboard(sb.id)">X</button>
+      <img [src]="exp.image.imageUrl"/> <br> <button class="btn btn-danger" (click)="deleteExpression(exp.id)">X</button>
     </div>
   </div>
 </div>
