@@ -1,1 +1,5 @@
-<p>try works!</p>
+<div *ngFor=" let expression of expressions;  let i=index">
+  <div *ngIf="i<8">
+      {{expression.name}}
+  </div>
+</div>

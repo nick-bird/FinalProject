@@ -18,6 +18,7 @@ export class ExpressionService {
 
   private baseUrl = 'http://localhost:8090/';
   private url = this.baseUrl + 'api/expressions';
+  private url2 = this.baseUrl + 'api/public/expressions';
  //private url = environment.baseUrl + 'api/expressions';
 
 
@@ -30,6 +31,15 @@ export class ExpressionService {
       })
     );
   }
+
+  indexPublic() {
+    return this.http.get<Expression[]>(this.url2, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        return throwError('Error getting expressions');
+      })
+    );
+  }
+
   create(newExpression: Expression) {
 
     return this.http.post<Expression>(this.url, newExpression, this.getHttpOptions()).pipe(
