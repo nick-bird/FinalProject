@@ -16,6 +16,7 @@ import { ImageService } from './services/image.service';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { TryComponent } from './components/try/try.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     HomePageComponent,
     NotFoundComponent,
     NavigationComponent,
-    LogoutComponent
+    LogoutComponent,
+    TryComponent
 
   ],
   imports: [
