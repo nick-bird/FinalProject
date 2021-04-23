@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'src/app/models/category';
 import { Expression } from 'src/app/models/expression';
+import { Image } from 'src/app/models/image';
 import { Soundboard } from 'src/app/models/soundboard';
+import { SoundboardExpression } from 'src/app/models/soundboard-expression';
+import { CategoryService } from 'src/app/services/category.service';
 import { ExpressionService } from 'src/app/services/expression.service';
 import { SoundboardService } from 'src/app/services/soundboard.service';
 
@@ -12,7 +16,8 @@ import { SoundboardService } from 'src/app/services/soundboard.service';
 export class ProfileComponent implements OnInit {
   constructor(
     private soundboardService: SoundboardService,
-    private expressionService: ExpressionService
+    private expressionService: ExpressionService,
+    private catService: CategoryService
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +36,17 @@ export class ProfileComponent implements OnInit {
   editSoundboard: Soundboard = null;
   editExpression: Expression = null;
 
+  categories: Category[] = [];
+
+  newImage : Image = new Image();
+
+  newSoundboardExpression : SoundboardExpression = new SoundboardExpression();
+
   soundboardBool: boolean = true;
+  tabIsActive1 = false;
+  tabIsActive2 = false;
+  tabIsActive3 = false;
+  tabIsActive4 = false;
 
   reload() {
     this.soundboardService.index().subscribe(
@@ -43,6 +58,15 @@ export class ProfileComponent implements OnInit {
         console.log('Error loading soundboards: ' + err);
       }
     );
+    this.catService.getCategories().subscribe(
+      (categories) => {
+        this.categories = categories;
+
+      },
+      (err) => {
+        console.log('Error loading categories: ' + err);
+      }
+    )
   }
 
   loadUserExpressions() {
@@ -83,6 +107,9 @@ export class ProfileComponent implements OnInit {
 
   addExpression(): void {
     console.log(this.newExpression);
+
+    // this.newExpression.image.imageUrl = this.newImage.imageUrl;
+
     this.expressionService.create(this.newExpression).subscribe(
       (data) => {
         this.displayExpression(this.newExpression);
@@ -160,6 +187,8 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleSoundBoard(){
+    this.tabIsActive1 = false;
+    this.tabIsActive2 = false;
     if (this.soundboardBool){
       return this.soundboardBool = false;
      }
@@ -167,4 +196,61 @@ export class ProfileComponent implements OnInit {
       return this.soundboardBool = true;
      }
   }
+
+
+  containsCategory = function(cat: Category){
+    for (let c of this.editSoundboard.categories){
+    if (c.name === cat.name){
+    return true;
+    }
+    }
+    return false;
+    }
+
+    updateCategories(cat: Category){
+    if(this.containsCategory(cat)){
+    for (let i = 0; i < this.editSoundboard.categories.length; i++){
+    if (this.editSoundboard.categories[i].name === cat.name){
+    this.editSoundboard.categories.splice(i, 1);
+    }
+    }
+    }
+    else {
+    this.editSoundboard.categories.push(cat);
+    }
+    }
+
+
+// update soundboards expressions
+
+    containsExpression = function(exp: Expression){
+      for (let e of this.editSoundboard.soundboardExpressions){
+      if (e.expression.name === exp.name){
+      return true;
+      }
+      }
+      return false;
+      }
+
+      updateExpressions(exp: Expression){
+      if(this.containsExpression(exp)){
+      for (let i = 0; i < this.editSoundboard.soundboardExpressions.length; i++){
+      if (this.editSoundboard.soundboardExpressions[i].expression.name=== exp.name){
+      this.editSoundboard.soundboardExpressions.splice(i, 1);
+      }
+      }
+      }
+      else {
+      this.editSoundboard.soundboardExpressions.push();
+      }
+      }
+
+
+
+
+  toggleTab(){
+    return "active";
+    }
+
+
 }

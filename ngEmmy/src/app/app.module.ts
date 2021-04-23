@@ -18,6 +18,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
+import {MatButtonModule} from '@angular/material/button';
 import { GridTestComponent } from './components/grid-test/grid-test.component';
 import { TryComponent } from './components/try/try.component';
 
@@ -39,7 +40,8 @@ import { TryComponent } from './components/try/try.component';
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
-    MatGridListModule
+    MatGridListModule,
+    MatButtonModule
 
   ],
   providers: [
