@@ -1,93 +1,80 @@
+    <!-- SoundBoard Grid -->
 
 
+      <div
+        class="container"
+        name="expressionGrid"
+        *ngIf="!selectedSoundboard && !selectedExpression && soundboardBool">
+        <h3>SoundBoard Grid</h3>
+        <mat-grid-list cols="2" rowHeight="1:1">
+          <mat-grid-tile (click)="displaySoundboard(sb)"*ngFor="let sb of userSoundboards">
+            <div class="card" style="width: 18rem">
+              <img
+                src="https://sourcekids.com.au/wp-content/uploads/2018/04/Screen-Shot-2019-04-02-at-12-600x400.jpg"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">{{ sb.name }}</h5>
+                <p class="card-text">{{ sb.description }}</p>
+                <button class="btn btn-danger" (click)="deleteSoundboard(sb.id)" > X
+                </button>
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
 
-<div class="container">
+          <!-- Expression Grid -->
+                                <!-- CHANGE FLAG TO !soundboardBool -->
+    <div
+    class="container" name="userExpressions"
+    *ngIf="!selectedExpression && !selectedSoundboard && soundboardBool">
+    <h1>Expressions</h1>
+    <mat-grid-list cols="2" rowHeight="1:1">
+      <mat-grid-tile (click)="displayExpression(exp)"*ngFor="let exp of userExpressions">
+      <div class="card" style="width: 18rem">
+        <img class="card-img-top" [src]="exp.image.imageUrl"/>
+        <div class="card-body">
+          <h5 class="card-title">{{exp.name}}</h5>
+          <!-- <p class="card-text">{{exp.phrase }}</p> -->
+          <button class="btn btn-danger" (click)="deleteExpression(exp.id)">
+            X
+          </button>
+        </div>
+      </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 
-
-
-  <!-- Show user expressions -->
-<div class="UserExpressions" *ngIf=!selectedExpression&&!selectedSoundboard >
-  <h1>Expressions</h1>
-  <div (click)="displayExpression(exp)" *ngFor="let exp of userExpressions">
-    <div class="col-sm">
-      <img [src]="exp.image.imageUrl"/> <br> <button class="btn btn-danger" (click)="deleteExpression(exp.id)">X</button>
+  <!-- SoundBoard Details -->
+  <div *ngIf="selectedSoundboard && !editSoundboard">
+    <h2>{{ selectedSoundboard.name }}</h2>
+    <blockquote>{{ selectedSoundboard.description }}</blockquote>
+    <h4>Categories:</h4>
+    <ul>
+      <li *ngFor="let cat of selectedSoundboard.categories">{{ cat.name }}</li>
+    </ul>
+    <h4>Expressions:</h4>
+    <div *ngFor="let exp of selectedSoundboard.soundboardExpressions">
+      <img [src]="exp.expression.image.imageUrl" />
     </div>
+    <br />
+    <button class="btn btn-success" (click)="setEditSoundboard()">Edit</button>
+    <button class="btn btn-danger" (click)="displaySoundboard()">Back</button>
   </div>
-</div>
-
-<div *ngIf="selectedExpression && !editExpression" >
-  <h2>{{selectedExpression.name}}</h2>
-  <blockquote>{{selectedExpression.phrase}}</blockquote>
-  <h4>Image: </h4>
-  <img [src]="selectedExpression.image.imageUrl"/>
-  <br>
-  <button class="btn btn-success" (click)="setEditExpression()">Edit</button>
-  <button class="btn btn-danger" (click)="displayExpression()">Back</button>
- </div>
-<!--  end of Show user expressions -->
 
 
-<hr>
 
-
-<!-- Show user soundboards -->
-<div class="UserSoundboards" *ngIf=!selectedSoundboard&&!selectedExpression >
-  <h1>Soundboards</h1>
-  <div (click)="displaySoundboard(sb)" *ngFor="let sb of userSoundboards">
-    <div class="col-sm">
-      {{sb.name}} <br> <button class="btn btn-danger" (click)="deleteSoundboard(sb.id)">X</button>
-    </div>
+  <!-- Expression Information -->
+  <div *ngIf="selectedExpression && !editExpression">
+    <h2>{{ selectedExpression.name }}</h2>
+    <blockquote>{{ selectedExpression.phrase }}</blockquote>
+    <h4>Image:</h4>
+    <img [src]="selectedExpression.image.imageUrl" />
+    <br />
+    <button class="btn btn-success" (click)="setEditExpression()">Edit</button>
+    <button class="btn btn-danger" (click)="displayExpression()">Back</button>
   </div>
-</div>
-
-<div *ngIf="selectedSoundboard && !editSoundboard" >
-  <h2>{{selectedSoundboard.name}}</h2>
-  <blockquote>{{selectedSoundboard.description}}</blockquote>
-  <h4>Categories: </h4>
-  <ul>
-    <li *ngFor="let cat of selectedSoundboard.categories" >{{cat.name}}</li>
-  </ul>
-  <h4>Expressions: </h4>
-  <div *ngFor="let exp of selectedSoundboard.soundboardExpressions" >
-   <img [src]="exp.expression.image.imageUrl"/>
-  </div>
-  <br>
-  <button class="btn btn-success" (click)="setEditSoundboard()">Edit</button>
-  <button class="btn btn-danger" (click)="displaySoundboard()">Back</button>
- </div>
-<!--  end of Show user soundboards -->
-
-</div>
 
 
-<!--  end of Show user soundboards -->
-<!-- SoundBoard Grid Placement -->
-<div class="container" name="soundboardGrid">
-  <div class="row" name="row1">
-    <div class="col-4">Board1</div>
-    <div class="col-4">Board2</div>
-    <div class="col-4">Board3</div>
-  </div>
-  <div class="row" name="row2">
-    <div class="col-4">Board4</div>
-    <div class="col-4">Board5</div>
-    <div class="col-4">Board6</div>
-  </div>
-  <div class="row" name="row3">
-    <div class="col-4">Board7</div>
-    <div class="col-4">Board8</div>
-    <div class="col-4">Board9</div>
-  </div>
-</div>
-<!-- DELETE H3 and BR -->
-<br>
-<h3>Expressions</h3>
-<!-- Expression Grid -->
-<div class="container" name="expressionGrid">
-  <mat-grid-list cols="2" rowHeight="2:1">
-    <mat-grid-tile>1</mat-grid-tile>
-    <mat-grid-tile>2</mat-grid-tile>
-    <mat-grid-tile>3</mat-grid-tile>
-    <mat-grid-tile>4</mat-grid-tile>
-  </mat-grid-list>
-</div>
