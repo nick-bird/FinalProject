@@ -30,7 +30,10 @@ export class ProfileComponent implements OnInit {
   newExpression: Expression = new Expression();
   editSoundboard: Soundboard = null;
   editExpression: Expression = null;
-
+  tabIsActive1 = false;
+  tabIsActive2 = false;
+  tabIsActive3 = false;
+  tabIsActive4 = false;
   soundboardBool: boolean = true;
 
   reload() {
@@ -160,6 +163,8 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleSoundBoard(){
+    this.tabIsActive1 = false;
+    this.tabIsActive2 = false;
     if (this.soundboardBool){
       return this.soundboardBool = false;
      }

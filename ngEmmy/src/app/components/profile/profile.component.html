@@ -1,4 +1,24 @@
-    <!-- SoundBoard Grid -->
+  <!-- Side Menu -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a (click)="toggleSoundBoard(); tabIsActive1 = !tabIsActive1" [ngClass]="tabIsActive1 ? 'nav-link active' : 'nav-link'" aria-current="page">My Soundboards</a>
+    </li>
+    <li class="nav-item">
+      <a (click)="toggleSoundBoard(); tabIsActive2 = !tabIsActive2" [ngClass]="tabIsActive2 ? 'nav-link active' : 'nav-link'">My Expressions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">All Expressions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Community Soundboards</a>
+    </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="false">Community Soundboards</a>
+    </li> -->
+  </ul>
+
+
+   <!-- SoundBoard Grid -->
 
 
       <div
