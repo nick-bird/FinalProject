@@ -1,4 +1,60 @@
-<div class="container-fluid" id="navDiv">
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Project Emmy</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active" *ngIf = '!loggedIn()'>
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" *ngIf = 'loggedIn()'>
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/profile']">My profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">About us</a>
+      </li>
+      <li class="nav-item" *ngIf = '!loggedIn()'>
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/try']">Try it out!</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">FAQ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">Contact us</a>
+      </li>
+      <li class="nav-item" *ngIf = 'loggedIn()'>
+        <a class="nav-link waves-light" mdbWavesEffect><app-logout></app-logout></a>
+      </li>
+
+      <!-- Dropdown -->
+
+      <li class="nav-item dropdown" dropdown>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" *ngIf = '!loggedIn()' mdbWavesEffect [routerLink]="['/home']">Home</a>
+          <a class="dropdown-item waves-light" *ngIf = 'loggedIn()' mdbWavesEffect [routerLink]="['/profile']">My profile</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/home']">About us</a>
+          <a class="dropdown-item waves-light" *ngIf = '!loggedIn()' mdbWavesEffect [routerLink]="['/try']">Try it out!</a>
+          <a class="dropdown-item waves-light" *ngIf = '!loggedIn()' mdbWavesEffect [routerLink]="['/home']">FAQ</a>
+          <a class="dropdown-item waves-light" *ngIf = '!loggedIn()' mdbWavesEffect [routerLink]="['/home']">Contact us</a>
+          <div class="divider dropdown-divider"></div>
+          <hr>
+          <a class="dropdown-item waves-light" *ngIf = 'loggedIn()' mdbWavesEffect><app-logout></app-logout></a>
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+<!-- <div class="container-fluid" id="navDiv">
   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
@@ -27,4 +83,4 @@
       </div>
   </nav>
 </div>
-
+ -->
