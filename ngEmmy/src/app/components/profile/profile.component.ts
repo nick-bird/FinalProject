@@ -43,6 +43,10 @@ export class ProfileComponent implements OnInit {
   newSoundboardExpression : SoundboardExpression = new SoundboardExpression();
 
   soundboardBool: boolean = true;
+  tabIsActive1 = false;
+  tabIsActive2 = false;
+  tabIsActive3 = false;
+  tabIsActive4 = false;
 
   reload() {
     this.soundboardService.index().subscribe(
@@ -183,6 +187,8 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleSoundBoard(){
+    this.tabIsActive1 = false;
+    this.tabIsActive2 = false;
     if (this.soundboardBool){
       return this.soundboardBool = false;
      }
@@ -190,6 +196,7 @@ export class ProfileComponent implements OnInit {
       return this.soundboardBool = true;
      }
   }
+
 
   containsCategory = function(cat: Category){
     for (let c of this.editSoundboard.categories){
@@ -237,6 +244,13 @@ export class ProfileComponent implements OnInit {
       this.editSoundboard.soundboardExpressions.push();
       }
       }
+
+
+
+
+  toggleTab(){
+    return "active";
+    }
 
 
 }
