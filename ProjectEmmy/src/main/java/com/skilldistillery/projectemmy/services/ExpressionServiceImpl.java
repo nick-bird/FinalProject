@@ -38,11 +38,15 @@ public class ExpressionServiceImpl implements ExpressionService {
 	public Expression update(String username, int eid, Expression exp) {
 		Expression managedExp = show(username, eid);
 
+	
+		
 		if (managedExp != null) {
 			
 			managedExp.setName(exp.getName());
 			managedExp.setPhrase(exp.getPhrase());
-			managedExp.setImage(exp.getImage());
+			managedExp.getImage().setImageUrl(exp.getImage().getImageUrl());
+//			managedExp.setImage(exp.getImage());
+			expRepo.saveAndFlush(managedExp);
 			return managedExp;
 		}
 
