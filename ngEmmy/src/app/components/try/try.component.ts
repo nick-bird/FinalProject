@@ -17,6 +17,7 @@ export class TryComponent implements OnInit {
 
   expressions: Expression[] = [];
   selectedExpression: Expression = null;
+  selectedVoice = "Evie";
 
   reload() {
     this.expressionService.indexPublic().subscribe(
@@ -29,8 +30,10 @@ export class TryComponent implements OnInit {
     );
     }
 
-    displayExpression(expression: Expression): void {
+    textToSpeechExpression(expression: Expression): void {
     this.selectedExpression = expression;
+    this.expressionService.textToSpeech(this.selectedVoice, this.selectedExpression.phrase).subscribe;
+    this.expressionService.playAudio(this.selectedVoice, this.selectedExpression.phrase);
   }
 }
 
