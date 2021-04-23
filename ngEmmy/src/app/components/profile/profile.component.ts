@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
   tabIsActive4 = false;
   soundboardBool: boolean = true;
 
+
   reload() {
     this.soundboardService.index().subscribe(
       (data) => {
@@ -172,4 +173,11 @@ export class ProfileComponent implements OnInit {
       return this.soundboardBool = true;
      }
   }
+
+
+
+  toggleTab(){
+    return "active";
+    }
+
 }
