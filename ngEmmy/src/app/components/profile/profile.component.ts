@@ -244,7 +244,12 @@ export class ProfileComponent implements OnInit {
       }
       }
       else {
-      this.editSoundboard.soundboardExpressions.push();
+      this.newSoundboardExpression = new SoundboardExpression();
+      this.newSoundboardExpression.expression = exp;
+      this.newSoundboardExpression.soundboard = new Soundboard();
+      this.newSoundboardExpression.soundboard.id = this.editSoundboard.id;
+      this.editSoundboard.soundboardExpressions.push(this.newSoundboardExpression);
+      this.newSoundboardExpression = new SoundboardExpression();
       }
       }
 
