@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.projectemmy.entities.Image;
 import com.skilldistillery.projectemmy.repositories.ImageRepository;
-import com.skilldistillery.projectemmy.repositories.UserRepository;
 @Service
 public class ImageServiceImpl implements ImageService {
 	

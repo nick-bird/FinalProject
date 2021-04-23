@@ -46,6 +46,7 @@ public class SoundboardServiceImpl implements SoundboardService {
 			managedSoundboard.setName(soundboard.getName());
 			managedSoundboard.setIsPublic(soundboard.getIsPublic());
 			managedSoundboard.setDescription(soundboard.getDescription());
+			managedSoundboard.setCategories(soundboard.getCategories());
 			soundRepo.saveAndFlush(managedSoundboard);
 			return managedSoundboard;
 		}

@@ -1,4 +1,6 @@
     <!-- SoundBoard Grid -->
+
+
       <div
         class="container"
         name="expressionGrid"
@@ -96,8 +98,34 @@
     <input type="hidden" name="id" [(ngModel)]="editSoundboard.id"> <br>
     Name : <input type="text" name="name" placeholder="{{selectedSoundboard.name}}" [(ngModel)]="editSoundboard.name"> <br> <br>
     Description : <input type="text" name="phrase" placeholder="{{selectedSoundboard.description}}" [(ngModel)]="editSoundboard.description"> <br> <br>
-    Let others see this soundboard : <input type="checkbox"  name="isPublic" [(ngModel)]="editSoundboard.isPublic"/> <br>
+    Let others see this soundboard : <input type="checkbox"  name="isPublic" [(ngModel)]="editSoundboard.isPublic"/> <br> <br>
+    Categories:
+    <div *ngFor="let cat of categories">
+      <input  type="checkbox" (change)='updateCategories(cat)' [checked]="containsCategory(cat)" >
+      <label>{{cat.name}}</label>
+    </div>
+
+  <h2>Expressions: </h2>
+
+    <div *ngFor="let exp of userExpressions">
+      <input  type="checkbox" (change)='updateExpression(exp)' [checked]="containsExpression(exp)">
+      <label>{{exp.name}}</label>
+    </div>
+
     <br> <br>
     <input class="btn btn-outline-success" type="submit" value="Save" (click)="updateSoundboard(editSoundboard)"/>
     <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="editExpression = null"/>
+  </div>
+
+  <!-- create Expression -->
+
+  <div *ngIf="!selectedSoundboard&&!selectedExpression" >
+    <input type="text" name="name" placeholder="Name" [(ngModel)]="newExpression.name"/><br />
+    <input type="text" name="phrase" placeholder="Phrase" [(ngModel)]="newExpression.phrase"/><br />
+    <input type="text" name="imageUrl" placeholder="Image Url" [(ngModel)]="newExpression.image"/><br />
+
+    <br>
+    <input class="btn btn-primary" type="submit" value="Add Expression" (click)="addExpression(newExpression)"/>
+    <br>
+    <br>
   </div>
