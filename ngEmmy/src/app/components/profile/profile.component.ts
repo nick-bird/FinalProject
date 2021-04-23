@@ -36,17 +36,20 @@ export class ProfileComponent implements OnInit {
   editSoundboard: Soundboard = null;
   editExpression: Expression = null;
 
+
   categories: Category[] = [];
 
   newImage : Image = new Image();
 
   newSoundboardExpression : SoundboardExpression = new SoundboardExpression();
 
-  soundboardBool: boolean = true;
+
   tabIsActive1 = false;
   tabIsActive2 = false;
   tabIsActive3 = false;
   tabIsActive4 = false;
+  soundboardBool: boolean = true;
+
 
   reload() {
     this.soundboardService.index().subscribe(
@@ -241,7 +244,12 @@ export class ProfileComponent implements OnInit {
       }
       }
       else {
-      this.editSoundboard.soundboardExpressions.push();
+      this.newSoundboardExpression = new SoundboardExpression();
+      this.newSoundboardExpression.expression = exp;
+      this.newSoundboardExpression.soundboard = new Soundboard();
+      this.newSoundboardExpression.soundboard.id = this.editSoundboard.id;
+      this.editSoundboard.soundboardExpressions.push(this.newSoundboardExpression);
+      this.newSoundboardExpression = new SoundboardExpression();
       }
       }
 

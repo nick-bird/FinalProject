@@ -1,9 +1,12 @@
 
+
     <!-- SoundBoard Grid -->
 
 
 
+
 <main>
+
 
   <!-- Side Menu -->
   <ul class="nav nav-tabs">
@@ -23,8 +26,6 @@
       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="false">Community Soundboards</a>
     </li> -->
   </ul>
-
-
 
    <!-- SoundBoard Grid -->
 
@@ -135,7 +136,7 @@
   <h2>Expressions: </h2>
 
     <div *ngFor="let exp of userExpressions">
-      <input  type="checkbox" (change)='updateExpression(exp)' [checked]="containsExpression(exp)">
+      <input  type="checkbox" (change)='updateExpressions(exp)' [checked]="containsExpression(exp)">
       <label>{{exp.name}}</label>
     </div>
 

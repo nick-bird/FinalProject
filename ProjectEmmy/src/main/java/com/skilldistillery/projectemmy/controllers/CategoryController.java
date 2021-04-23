@@ -16,12 +16,14 @@ import com.skilldistillery.projectemmy.services.CategoryService;
 @RestController
 public class CategoryController {
 
+	
+	
 	@Autowired
 	private CategoryService catSvc;
 	
 	
 	@GetMapping("categories")
-	public List<Category> index() { 
+	public List<Category> index() { 	
 		return catSvc.index();
 	}
 
