@@ -1,3 +1,4 @@
+
   <!-- Side Menu -->
   <ul class="nav nav-tabs">
     <li class="nav-item">
@@ -19,6 +20,7 @@
 
 
    <!-- SoundBoard Grid -->
+
 
 
       <div
@@ -98,3 +100,28 @@
   </div>
 
 
+<!-- Expression update -->
+
+  <div *ngIf="editExpression">
+    <input type="hidden" name="id" [(ngModel)]="editExpression.id"> <br>
+    Name : <input type="text" name="name" placeholder="{{selectedExpression.name}}" [(ngModel)]="editExpression.name"> <br> <br>
+    Phrase : <input type="text" name="phrase" placeholder="{{selectedExpression.phrase}}" [(ngModel)]="editExpression.phrase"> <br> <br>
+    Image: <input type="text" name="amount" placeholder="{{selectedExpression.image.imageUrl}}" [(ngModel)]="editExpression.image.imageUrl"/><br /> <br>
+    <img [src]="selectedExpression.image.imageUrl"/>
+    <br> <br>
+    <input class="btn btn-outline-success" type="submit" value="Save" (click)="updateExpression(editExpression)"/>
+    <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="editExpression = null"/>
+  </div>
+
+
+  <!-- Soundboard update -->
+
+  <div *ngIf="editSoundboard">
+    <input type="hidden" name="id" [(ngModel)]="editSoundboard.id"> <br>
+    Name : <input type="text" name="name" placeholder="{{selectedSoundboard.name}}" [(ngModel)]="editSoundboard.name"> <br> <br>
+    Description : <input type="text" name="phrase" placeholder="{{selectedSoundboard.description}}" [(ngModel)]="editSoundboard.description"> <br> <br>
+    Let others see this soundboard : <input type="checkbox"  name="isPublic" [(ngModel)]="editSoundboard.isPublic"/> <br>
+    <br> <br>
+    <input class="btn btn-outline-success" type="submit" value="Save" (click)="updateSoundboard(editSoundboard)"/>
+    <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="editExpression = null"/>
+  </div>
