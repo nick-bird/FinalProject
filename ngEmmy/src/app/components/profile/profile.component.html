@@ -59,9 +59,9 @@
     *ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool">
     <h1>Expressions</h1>
     <mat-grid-list cols="2" rowHeight="1:1">
-      <mat-grid-tile (click)="displayExpression(exp)"*ngFor="let exp of userExpressions">
+      <mat-grid-tile *ngFor="let exp of userExpressions">
       <div class="card" style="width: 18rem">
-        <img class="card-img-top" [src]="exp.image.imageUrl"/>
+        <img (click)="displayExpression(exp)" class="card-img-top" [src]="exp.image.imageUrl"/>
         <div class="card-body">
           <h5 class="card-title">{{exp.name}}</h5>
           <!-- <p class="card-text">{{exp.phrase }}</p> -->
@@ -147,25 +147,15 @@
   <!-- create Expression -->
 
   <div *ngIf="!selectedSoundboard&&!selectedExpression" >
-    <input type="text" name="name" placeholder="Name" [(ngModel)]="newExpression.name"/><br />
+    <input type="text" placeholder="Name" [(ngModel)]="newExpression.name"/><br />
     <input type="text" name="phrase" placeholder="Phrase" [(ngModel)]="newExpression.phrase"/><br />
-    <input type="text" name="imageUrl" placeholder="Image Url" [(ngModel)]="newExpression.image"/><br />
+    <input type="text" name="imageUrl" (change)='createImage()' placeholder="Image Url" [(ngModel)]="newImage.imageUrl"/><br />
 
     <br>
     <input class="btn btn-primary" type="submit" value="Add Expression" (click)="addExpression(newExpression)"/>
     <br>
     <br>
   </div>
-
-<div *ngIf="editSoundboard">
-  <input type="hidden" name="id" [(ngModel)]="editSoundboard.id"> <br>
-  Name : <input type="text" name="name" placeholder="{{selectedSoundboard.name}}" [(ngModel)]="editSoundboard.name"> <br> <br>
-  Description : <input type="text" name="phrase" placeholder="{{selectedSoundboard.description}}" [(ngModel)]="editSoundboard.description"> <br> <br>
-  Let others see this soundboard : <input type="checkbox"  name="isPublic" [(ngModel)]="editSoundboard.isPublic"/> <br>
-  <br> <br>
-  <input class="btn btn-outline-success" type="submit" value="Save" (click)="updateSoundboard(editSoundboard)"/>
-  <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="editExpression = null"/>
-</div>
 
 </main>
 
