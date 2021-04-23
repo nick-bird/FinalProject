@@ -1,5 +1,5 @@
-<div class="container">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<div class="container-fluid" id="navDiv">
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <div class="col">
@@ -21,9 +21,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/home']">Contact Us</a>
-          </li>
-          <li class="nav-item" *ngIf = 'loggedIn()'>
-            <a class="nav-link" [routerLink]="['/profile']">My Expressions</a>
           </li>
         <li *ngIf = 'loggedIn()'><app-logout></app-logout></li>
         </ul>
