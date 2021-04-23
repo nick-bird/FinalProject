@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Expression } from '../models/expression';
@@ -19,6 +19,7 @@ export class ExpressionService {
   private baseUrl = 'http://localhost:8090/';
   private url = this.baseUrl + 'api/expressions';
   private url2 = this.baseUrl + 'api/public/expressions';
+  private url3 = "http://api.voicerss.org/?key=b9e22d7d94624968a529973b64ea5de4&hl=en-us";
  //private url = environment.baseUrl + 'api/expressions';
 
 
@@ -32,6 +33,11 @@ export class ExpressionService {
     );
   }
 
+  // --------------------API TEST----------------------
+
+  // this.http.delete<Expression>(this.url + '/' + id, this.getHttpOptions())
+  // API GET REQ: http://api.voicerss.org/?key=b9e22d7d94624968a529973b64ea5de4&hl=en-us&v=Evie&src=Hello
+
   indexPublic() {
     return this.http.get<Expression[]>(this.url2).pipe(
       catchError((err: any) => {
@@ -39,6 +45,23 @@ export class ExpressionService {
       })
     );
   }
+
+  textToSpeech(voice, source) {
+    return this.http.get<Output>(this.url3+"&v="+voice+"&src="+source).pipe(
+      catchError((err: any) => {
+        return throwError('Error getting expressions');
+      })
+    );
+  }
+
+  playAudio(voice, source) {
+    let audio = new Audio();
+    audio.src =(this.url3+"&v="+voice+"&src="+source);
+    audio.load();
+    audio.play();
+  }
+
+  // --------------------API TEST----------------------
 
   create(newExpression: Expression) {
 
