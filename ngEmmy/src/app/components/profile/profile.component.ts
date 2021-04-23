@@ -174,10 +174,4 @@ export class ProfileComponent implements OnInit {
      }
   }
 
-
-
-  toggleTab(){
-    return "active";
-    }
-
 }
