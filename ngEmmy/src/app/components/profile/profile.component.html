@@ -1,4 +1,27 @@
-    <!-- SoundBoard Grid -->
+<main>
+
+  <!-- Side Menu -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a (click)="toggleSoundBoard(); tabIsActive1 = !tabIsActive1" [ngClass]="tabIsActive1 ? 'nav-link active' : 'nav-link'" aria-current="page">My Soundboards</a>
+    </li>
+    <li class="nav-item">
+      <a (click)="toggleSoundBoard(); tabIsActive2 = !tabIsActive2" [ngClass]="tabIsActive2 ? 'nav-link active' : 'nav-link'">My Expressions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">All Expressions</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Community Soundboards</a>
+    </li>
+    <!-- <li class="nav-item">
+      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="false">Community Soundboards</a>
+    </li> -->
+  </ul>
+
+
+
+   <!-- SoundBoard Grid -->
       <div
         class="container"
         name="expressionGrid"
@@ -27,7 +50,7 @@
                                 <!-- CHANGE FLAG TO !soundboardBool -->
     <div
     class="container" name="userExpressions"
-    *ngIf="!selectedExpression && !selectedSoundboard && soundboardBool">
+    *ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool">
     <h1>Expressions</h1>
     <mat-grid-list cols="2" rowHeight="1:1">
       <mat-grid-tile (click)="displayExpression(exp)"*ngFor="let exp of userExpressions">
@@ -74,5 +97,9 @@
     <button class="btn btn-success" (click)="setEditExpression()">Edit</button>
     <button class="btn btn-danger" (click)="displayExpression()">Back</button>
   </div>
+
+
+
+</main>
 
 
