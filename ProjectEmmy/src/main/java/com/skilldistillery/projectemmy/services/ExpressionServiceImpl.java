@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.projectemmy.entities.Expression;
-import com.skilldistillery.projectemmy.entities.Image;
 import com.skilldistillery.projectemmy.entities.User;
 import com.skilldistillery.projectemmy.repositories.ExpressionRepository;
 import com.skilldistillery.projectemmy.repositories.UserRepository;
@@ -20,9 +19,6 @@ public class ExpressionServiceImpl implements ExpressionService {
 	@Autowired
 	private UserRepository userRepo;
 	
-	@Autowired
-	private ImageServiceImpl imageSrv;
-	
 	@Override
 	public List<Expression> index(String username) {
 		return expRepo.findByUser_Username(username);
@@ -31,9 +27,8 @@ public class ExpressionServiceImpl implements ExpressionService {
 	@Override
 	public Expression create(String username, Expression exp) {
 		User user = userRepo.findByUsername(username);
-		Image image = imageSrv.create(exp.getImage());
+		
 		if(user != null) {
-			exp.setImage(image);
 			exp.setUser(user);
 			expRepo.saveAndFlush(exp);
 		}

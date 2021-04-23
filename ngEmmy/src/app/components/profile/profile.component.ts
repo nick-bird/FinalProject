@@ -6,6 +6,7 @@ import { Soundboard } from 'src/app/models/soundboard';
 import { SoundboardExpression } from 'src/app/models/soundboard-expression';
 import { CategoryService } from 'src/app/services/category.service';
 import { ExpressionService } from 'src/app/services/expression.service';
+import { ImageService } from 'src/app/services/image.service';
 import { SoundboardService } from 'src/app/services/soundboard.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private soundboardService: SoundboardService,
     private expressionService: ExpressionService,
-    private catService: CategoryService
+    private catService: CategoryService,
+    private imageService : ImageService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +42,7 @@ export class ProfileComponent implements OnInit {
   categories: Category[] = [];
 
   newImage : Image = new Image();
+  createdImage : Image = new Image();
 
   newSoundboardExpression : SoundboardExpression = new SoundboardExpression();
 
@@ -83,6 +86,18 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  createImage(){
+    this.imageService.create(this.newImage).subscribe(
+      (data) => {
+        this.createdImage = data;
+
+      },
+      (err) => {
+        console.log('Error creating image: ' + err);
+      }
+    );
+  }
+
   displaySoundboard(soundboard: Soundboard): void {
     this.selectedSoundboard = soundboard;
   }
@@ -111,11 +126,15 @@ export class ProfileComponent implements OnInit {
   addExpression(): void {
     console.log(this.newExpression);
 
-    // this.newExpression.image.imageUrl = this.newImage.imageUrl;
+   this.newExpression.image = this.createdImage;
 
     this.expressionService.create(this.newExpression).subscribe(
       (data) => {
+        this.newExpression = data;
         this.displayExpression(this.newExpression);
+        this.reload()
+        this.newExpression = new Expression();
+        this.newImage = new Image();
       },
       (err) => {
         console.log('Error creating expression: ' + err);
