@@ -1,11 +1,13 @@
 package com.skilldistillery.projectemmy.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.projectemmy.entities.Soundboard;
+import com.skilldistillery.projectemmy.entities.SoundboardExpression;
 import com.skilldistillery.projectemmy.entities.User;
 import com.skilldistillery.projectemmy.repositories.SoundboardRepository;
 import com.skilldistillery.projectemmy.repositories.UserRepository;
@@ -47,6 +49,7 @@ public class SoundboardServiceImpl implements SoundboardService {
 			managedSoundboard.setIsPublic(soundboard.getIsPublic());
 			managedSoundboard.setDescription(soundboard.getDescription());
 			managedSoundboard.setCategories(soundboard.getCategories());
+			managedSoundboard.getSoundboardExpressions().addAll(soundboard.getSoundboardExpressions());
 			soundRepo.saveAndFlush(managedSoundboard);
 			return managedSoundboard;
 		}
