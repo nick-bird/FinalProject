@@ -62,8 +62,10 @@ export class ProfileComponent implements OnInit {
 
   createSoundboard: boolean = false;
   createExpression: boolean = false;
+  lockedbool: boolean = false;
 
   reload() {
+    this.tabIsActive1 = true;
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
@@ -390,5 +392,12 @@ export class ProfileComponent implements OnInit {
       console.log(this.addSoundboardExpressions);
       this.newSoundboardExpression = new SoundboardExpression();
     }
+  }
+
+  lock(){
+    this.lockedbool = true;
+  }
+  unlock(){
+
   }
 }
