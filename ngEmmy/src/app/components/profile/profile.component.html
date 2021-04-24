@@ -14,10 +14,10 @@
       <a (click)="toggleSoundBoard(); tabIsActive1 = !tabIsActive1" [ngClass]="tabIsActive1 ? 'nav-link active' : 'nav-link'" aria-current="page">My Soundboards</a>
     </li>
     <li class="nav-item">
-      <a (click)="toggleSoundBoard(); tabIsActive2 = !tabIsActive2" [ngClass]="tabIsActive2 ? 'nav-link active' : 'nav-link'">My Expressions</a>
+      <a (click)="loadUserExpressions(); tabIsActive2 = !tabIsActive2" [ngClass]="tabIsActive2 ? 'nav-link active' : 'nav-link'">My Expressions</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link">All Expressions</a>
+      <a (click)="loadDefaultExpressions(); tabIsActive3 = !tabIsActive3" [ngClass]="tabIsActive3 ? 'nav-link active' : 'nav-link'">All Expressions</a>
     </li>
     <li class="nav-item">
       <a class="nav-link">Community Soundboards</a>
@@ -90,10 +90,10 @@
       </div>
 
           <!-- Expression Grid -->
-                                <!-- CHANGE FLAG TO !soundboardBool -->
+
     <div
     class="container" name="userExpressions"
-    *ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool">
+    *ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool && userExpressionbool">
 
   <!-- create Expression -->
   <br>
@@ -207,7 +207,7 @@ class="container" name="allExpressions"
 *ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool && allExpressionsbool">
 <h1> All Expressions</h1>
 <mat-grid-list cols="2" rowHeight="1:1">
-  <mat-grid-tile (click)="loadDefaultExpressions()"*ngFor="let exp of userExpressions">
+  <mat-grid-tile *ngFor="let exp of userExpressions">
   <div class="card" style="width: 18rem">
     <img class="card-img-top" [src]="exp.image.imageUrl"/>
     <div class="card-body">

@@ -19,15 +19,15 @@ export class ProfileComponent implements OnInit {
     private soundboardService: SoundboardService,
     private expressionService: ExpressionService,
     private catService: CategoryService,
-    private imageService : ImageService
+    private imageService: ImageService
   ) {}
 
   ngOnInit(): void {
     this.reload();
   }
 
-  defaultExpressions : Expression[] = [];
-  publicSoundboards : Soundboard[] = [];
+  defaultExpressions: Expression[] = [];
+  publicSoundboards: Soundboard[] = [];
 
   soundboards: Soundboard[] = [];
   expressions: Expression[] = [];
@@ -41,17 +41,15 @@ export class ProfileComponent implements OnInit {
   editSoundboard: Soundboard = null;
   editExpression: Expression = null;
 
-
   categories: Category[] = [];
 
-  newImage : Image = new Image();
-  createdImage : Image = new Image();
+  newImage: Image = new Image();
+  createdImage: Image = new Image();
 
-  addCategories : Category[] = [];
-  addSoundboardExpressions : SoundboardExpression [] = [];
+  addCategories: Category[] = [];
+  addSoundboardExpressions: SoundboardExpression[] = [];
 
-  newSoundboardExpression : SoundboardExpression = new SoundboardExpression();
-
+  newSoundboardExpression: SoundboardExpression = new SoundboardExpression();
 
   tabIsActive1 = false;
   tabIsActive2 = false;
@@ -59,11 +57,10 @@ export class ProfileComponent implements OnInit {
   tabIsActive4 = false;
   soundboardBool: boolean = true;
   allExpressionsbool: boolean = false;
+  userExpressionbool: boolean = false;
 
-
-  createSoundboard : boolean = false;
-  createExpression : boolean = false;
-
+  createSoundboard: boolean = false;
+  createExpression: boolean = false;
 
   reload() {
     this.soundboardService.index().subscribe(
@@ -80,15 +77,20 @@ export class ProfileComponent implements OnInit {
     this.catService.getCategories().subscribe(
       (categories) => {
         this.categories = categories;
-
       },
       (err) => {
         console.log('Error loading categories: ' + err);
       }
-    )
+    );
   }
 
   loadUserExpressions() {
+    this.tabIsActive1 = false;
+    this.tabIsActive3 = false;
+    this.tabIsActive4 = false;
+    this.soundboardBool = false;
+    this.allExpressionsbool = false;
+    this.userExpressionbool = true;
     this.expressionService.index().subscribe(
       (data) => {
         this.userExpressions = data;
@@ -99,9 +101,13 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  loadDefaultExpressions(){
+  loadDefaultExpressions() {
     this.allExpressionsbool = true;
     this.soundboardBool = false;
+    this.tabIsActive1 = false;
+    this.tabIsActive2 = false;
+    this.tabIsActive4 = false;
+    this.userExpressionbool = false;
     this.expressionService.indexDefaultExpressions().subscribe(
       (data) => {
         this.defaultExpressions = data;
@@ -112,7 +118,7 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  loadPublicSoundboards(){
+  loadPublicSoundboards() {
     this.soundboardService.indexPublic().subscribe(
       (data) => {
         this.publicSoundboards = data;
@@ -123,11 +129,10 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  createImage(){
+  createImage() {
     this.imageService.create(this.newImage).subscribe(
       (data) => {
         this.createdImage = data;
-
       },
       (err) => {
         console.log('Error creating image: ' + err);
@@ -155,7 +160,7 @@ export class ProfileComponent implements OnInit {
       (data) => {
         this.newSoundboard = data;
         this.displaySoundboard(this.newSoundboard);
-        this.reload()
+        this.reload();
         this.newSoundboard = new Soundboard();
       },
       (err) => {
@@ -167,13 +172,13 @@ export class ProfileComponent implements OnInit {
   addExpression(): void {
     console.log(this.newExpression);
 
-   this.newExpression.image = this.createdImage;
+    this.newExpression.image = this.createdImage;
 
     this.expressionService.create(this.newExpression).subscribe(
       (data) => {
         this.newExpression = data;
         this.displayExpression(this.newExpression);
-        this.reload()
+        this.reload();
         this.newExpression = new Expression();
         this.newImage = new Image();
       },
@@ -249,136 +254,126 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  toggleSoundBoard(){
-    this.tabIsActive1 = false;
+  toggleSoundBoard() {
     this.tabIsActive2 = false;
-    if (this.soundboardBool){
-      return this.soundboardBool = false;
-     }
-     if (!this.soundboardBool){
-      return this.soundboardBool = true;
-     }
+    this.tabIsActive3 = false;
+    this.userExpressionbool = false;
+    if (!this.soundboardBool) {
+      return (this.soundboardBool = true);
+    }
   }
 
-
-  containsCategory = function(cat: Category){
-    for (let c of this.editSoundboard.categories){
-    if (c.name === cat.name){
-    return true;
-    }
+  containsCategory = function (cat: Category) {
+    for (let c of this.editSoundboard.categories) {
+      if (c.name === cat.name) {
+        return true;
+      }
     }
     return false;
-    }
+  };
 
-    updateCategories(cat: Category){
-    if(this.containsCategory(cat)){
-    for (let i = 0; i < this.editSoundboard.categories.length; i++){
-    if (this.editSoundboard.categories[i].name === cat.name){
-    this.editSoundboard.categories.splice(i, 1);
+  updateCategories(cat: Category) {
+    if (this.containsCategory(cat)) {
+      for (let i = 0; i < this.editSoundboard.categories.length; i++) {
+        if (this.editSoundboard.categories[i].name === cat.name) {
+          this.editSoundboard.categories.splice(i, 1);
+        }
+      }
+    } else {
+      this.editSoundboard.categories.push(cat);
     }
-    }
-    }
-    else {
-    this.editSoundboard.categories.push(cat);
-    }
-    }
+  }
 
+  // update soundboards expressions
 
-// update soundboards expressions
+  containsExpression = function (exp: Expression) {
+    for (let e of this.editSoundboard.soundboardExpressions) {
+      if (e.expression.name === exp.name) {
+        return true;
+      }
+    }
+    return false;
+  };
 
-    containsExpression = function(exp: Expression){
-      for (let e of this.editSoundboard.soundboardExpressions){
-      if (e.expression.name === exp.name){
-      return true;
+  updateExpressions(exp: Expression) {
+    if (this.containsExpression(exp)) {
+      for (
+        let i = 0;
+        i < this.editSoundboard.soundboardExpressions.length;
+        i++
+      ) {
+        if (
+          this.editSoundboard.soundboardExpressions[i].expression.name ===
+          exp.name
+        ) {
+          this.editSoundboard.soundboardExpressions.splice(i, 1);
+        }
       }
-      }
-      return false;
-      }
-
-      updateExpressions(exp: Expression){
-      if(this.containsExpression(exp)){
-      for (let i = 0; i < this.editSoundboard.soundboardExpressions.length; i++){
-      if (this.editSoundboard.soundboardExpressions[i].expression.name=== exp.name){
-      this.editSoundboard.soundboardExpressions.splice(i, 1);
-      }
-      }
-      }
-      else {
+    } else {
       this.newSoundboardExpression = new SoundboardExpression();
       this.newSoundboardExpression.expression = exp;
       this.newSoundboardExpression.soundboard = new Soundboard();
       this.newSoundboardExpression.soundboard.id = this.editSoundboard.id;
-      this.editSoundboard.soundboardExpressions.push(this.newSoundboardExpression);
+      this.editSoundboard.soundboardExpressions.push(
+        this.newSoundboardExpression
+      );
       this.newSoundboardExpression = new SoundboardExpression();
+    }
+  }
+
+  toggleTab() {
+    return 'active';
+  }
+
+  // add soundboards categories when creating soundboard
+
+  containsCategoryToAdd = function (cat: Category) {
+    for (let c of this.addCategories) {
+      if (c.name === cat.name) {
+        return true;
       }
+    }
+    return false;
+  };
+
+  addCategoriesToSoundboard(cat: Category) {
+    if (this.containsCategoryToAdd(cat)) {
+      for (let i = 0; i < this.addCategories.length; i++) {
+        if (this.addCategories[i].name === cat.name) {
+          this.addCategories.splice(i, 1);
+        }
       }
-
-
-  toggleTab(){
-    return "active";
-    }
-
-
-// add soundboards categories when creating soundboard
-
-containsCategoryToAdd = function(cat: Category){
-  for (let c of this.addCategories){
-  if (c.name === cat.name){
-  return true;
-  }
-  }
-  return false;
-  }
-
-addCategoriesToSoundboard(cat: Category){
-  if(this.containsCategoryToAdd(cat)){
-    for (let i = 0; i < this.addCategories.length; i++){
-    if (this.addCategories[i].name === cat.name){
-    this.addCategories.splice(i, 1);
-    }
-    }
-    }
-    else {
+    } else {
       this.addCategories.push(cat);
       console.log(this.addCategories);
-
     }
-
-
-
-}
-
-
-// add soundboard expressions when creating soundboard
-
-containsExpressionToAdd = function(exp: Expression){
-  for (let e of  this.addSoundboardExpressions){
-  if (e.expression.name === exp.name){
-  return true;
-  }
-  }
-  return false;
   }
 
-  addExpressions(exp: Expression){
+  // add soundboard expressions when creating soundboard
 
-    if(this.containsExpressionToAdd(exp)){
-      for (let i = 0; i < this.addSoundboardExpressions.length; i++){
-      if (this.addSoundboardExpressions[i].expression.name=== exp.name){
-        this.addSoundboardExpressions.splice(i, 1);
+  containsExpressionToAdd = function (exp: Expression) {
+    for (let e of this.addSoundboardExpressions) {
+      if (e.expression.name === exp.name) {
+        return true;
       }
-      }
-      }
-      else {
-        this.newSoundboardExpression = new SoundboardExpression();
-        this.newSoundboardExpression.expression = exp;
-        this.newSoundboardExpression.soundboard = new Soundboard();
-        this.addSoundboardExpressions.push(this.newSoundboardExpression);
-        console.log(this.addSoundboardExpressions);
-        this.newSoundboardExpression = new SoundboardExpression();
-      }
+    }
+    return false;
+  };
 
+  addExpressions(exp: Expression) {
+    if (this.containsExpressionToAdd(exp)) {
+      for (let i = 0; i < this.addSoundboardExpressions.length; i++) {
+        if (this.addSoundboardExpressions[i].expression.name === exp.name) {
+          this.addSoundboardExpressions.splice(i, 1);
+        }
+      }
+    } else {
+      this.newSoundboardExpression = new SoundboardExpression();
+      this.newSoundboardExpression.expression = exp;
+      this.newSoundboardExpression.soundboard = new Soundboard();
+      this.addSoundboardExpressions.push(this.newSoundboardExpression);
+      console.log(this.addSoundboardExpressions);
+      this.newSoundboardExpression = new SoundboardExpression();
+    }
   }
-
-
 }
