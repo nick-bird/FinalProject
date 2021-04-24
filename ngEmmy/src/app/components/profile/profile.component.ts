@@ -58,6 +58,7 @@ export class ProfileComponent implements OnInit {
   soundboardBool: boolean = true;
   allExpressionsbool: boolean = false;
   userExpressionbool: boolean = false;
+  publicSBBool: boolean = false;
 
   createSoundboard: boolean = false;
   createExpression: boolean = false;
@@ -91,6 +92,7 @@ export class ProfileComponent implements OnInit {
     this.soundboardBool = false;
     this.allExpressionsbool = false;
     this.userExpressionbool = true;
+    this.publicSBBool = false;
     this.expressionService.index().subscribe(
       (data) => {
         this.userExpressions = data;
@@ -108,6 +110,7 @@ export class ProfileComponent implements OnInit {
     this.tabIsActive2 = false;
     this.tabIsActive4 = false;
     this.userExpressionbool = false;
+    this.publicSBBool = false;
     this.expressionService.indexDefaultExpressions().subscribe(
       (data) => {
         this.defaultExpressions = data;
@@ -119,9 +122,19 @@ export class ProfileComponent implements OnInit {
   }
 
   loadPublicSoundboards() {
+    this.publicSBBool = true;
+    this.allExpressionsbool = false;
+    this.soundboardBool = false;
+    this.tabIsActive1 = false;
+    this.tabIsActive2 = false;
+    this.tabIsActive3 = false;
+    this.userExpressionbool = false;
+    console.log(this.publicSoundboards);
+
     this.soundboardService.indexPublic().subscribe(
       (data) => {
         this.publicSoundboards = data;
+        console.log(this.publicSoundboards);
       },
       (err) => {
         console.log('Error loading public soundboards: ' + err);
@@ -257,7 +270,9 @@ export class ProfileComponent implements OnInit {
   toggleSoundBoard() {
     this.tabIsActive2 = false;
     this.tabIsActive3 = false;
+    this.tabIsActive4 = false;
     this.userExpressionbool = false;
+    this.publicSBBool = false;
     if (!this.soundboardBool) {
       return (this.soundboardBool = true);
     }

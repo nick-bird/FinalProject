@@ -20,11 +20,8 @@
       <a (click)="loadDefaultExpressions(); tabIsActive3 = !tabIsActive3" [ngClass]="tabIsActive3 ? 'nav-link active' : 'nav-link'">All Expressions</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link">Community Soundboards</a>
+      <a (click)="loadPublicSoundboards(); tabIsActive4 = !tabIsActive4" [ngClass]="tabIsActive4 ? 'nav-link active' : 'nav-link'">Community Soundboards</a>
     </li>
-    <!-- <li class="nav-item">
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="false">Community Soundboards</a>
-    </li> -->
   </ul>
 
 
@@ -200,8 +197,7 @@
     <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="editSoundboard = null"/>
   </div>
 
-<!-- default expressions for all expressions tab -->
-
+<!-- All expressions tab -->
 <div
 class="container" name="allExpressions"
 *ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool && allExpressionsbool">
@@ -221,6 +217,26 @@ class="container" name="allExpressions"
   </mat-grid-tile>
 </mat-grid-list>
 </div>
+
+<!-- Community SoundBoard Tab -->
+  <div *ngIf="publicSBBool">
+  <h3>Community SoundBoards</h3>
+  <mat-grid-list cols="2" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let sb of publicSoundboards">
+      <div class="card" style="width: 18rem">
+        <img (click)="displaySoundboard(sb)"
+          src="https://sourcekids.com.au/wp-content/uploads/2018/04/Screen-Shot-2019-04-02-at-12-600x400.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ sb.name }}</h5>
+          <p class="card-text">{{ sb.description }}</p>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  </div>
 
 </main>
 
