@@ -167,5 +167,26 @@
   <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="editExpression = null"/>
 </div>
 
+
+<div
+class="container" name="allExpressions"
+*ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool">
+<h1> All Expressions</h1>
+<mat-grid-list cols="2" rowHeight="1:1">
+  <mat-grid-tile (click)="displayExpression(exp)"*ngFor="let exp of userExpressions">
+  <div class="card" style="width: 18rem">
+    <img class="card-img-top" [src]="exp.image.imageUrl"/>
+    <div class="card-body">
+      <h5 class="card-title">{{exp.name}}</h5>
+      <!-- <p class="card-text">{{exp.phrase }}</p> -->
+      <button class="btn btn-danger" (click)="deleteExpression(exp.id)">
+        X
+      </button>
+    </div>
+  </div>
+  </mat-grid-tile>
+</mat-grid-list>
+</div>
+
 </main>
 
