@@ -19,8 +19,10 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 import { GridTestComponent } from './components/grid-test/grid-test.component';
 import { TryComponent } from './components/try/try.component';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { TryComponent } from './components/try/try.component';
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     MatGridListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule,
 
   ],
   providers: [

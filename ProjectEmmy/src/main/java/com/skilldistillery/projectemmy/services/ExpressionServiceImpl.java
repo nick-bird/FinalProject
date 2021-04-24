@@ -80,4 +80,9 @@ public class ExpressionServiceImpl implements ExpressionService {
 		return expRepo.findAll();
 	}
 
+	@Override
+	public List<Expression> getDefaultExpressions(String username) {
+		return expRepo.findByUser_Username(username);
+	}
+
 }
