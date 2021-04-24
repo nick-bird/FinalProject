@@ -58,6 +58,8 @@ export class ProfileComponent implements OnInit {
   tabIsActive3 = false;
   tabIsActive4 = false;
   soundboardBool: boolean = true;
+  allExpressionsbool: boolean = false;
+
 
   createSoundboard : boolean = false;
   createExpression : boolean = false;
@@ -98,6 +100,8 @@ export class ProfileComponent implements OnInit {
   }
 
   loadDefaultExpressions(){
+    this.allExpressionsbool = true;
+    this.soundboardBool = false;
     this.expressionService.indexDefaultExpressions().subscribe(
       (data) => {
         this.defaultExpressions = data;
