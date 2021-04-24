@@ -26,6 +26,8 @@ export class ProfileComponent implements OnInit {
     this.reload();
   }
 
+  defaultExpressions : Expression[] = [];
+
   soundboards: Soundboard[] = [];
   expressions: Expression[] = [];
   selectedSoundboard: Soundboard = null;
@@ -56,12 +58,16 @@ export class ProfileComponent implements OnInit {
   tabIsActive4 = false;
   soundboardBool: boolean = true;
 
+  createSoundboard : boolean = false;
+  createExpression : boolean = false;
+
 
   reload() {
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
         this.loadUserExpressions();
+        this.loadDefaultExpressions()
       },
       (err) => {
         console.log('Error loading soundboards: ' + err);
@@ -85,6 +91,19 @@ export class ProfileComponent implements OnInit {
       },
       (err) => {
         console.log('Error loading expressions: ' + err);
+      }
+    );
+  }
+
+  loadDefaultExpressions(){
+    this.expressionService.indexDefaultExpressions().subscribe(
+      (data) => {
+        this.defaultExpressions = data;
+        console.log(this.defaultExpressions);
+
+      },
+      (err) => {
+        console.log('Error loading default expressions: ' + err);
       }
     );
   }
@@ -280,14 +299,12 @@ export class ProfileComponent implements OnInit {
       }
 
 
-
-
   toggleTab(){
     return "active";
     }
 
 
-// add soundboards categories
+// add soundboards categories when creating soundboard
 
 containsCategoryToAdd = function(cat: Category){
   for (let c of this.addCategories){
@@ -317,7 +334,7 @@ addCategoriesToSoundboard(cat: Category){
 }
 
 
-// add soundboards expressions
+// add soundboard expressions when creating soundboard
 
 containsExpressionToAdd = function(exp: Expression){
   for (let e of  this.addSoundboardExpressions){

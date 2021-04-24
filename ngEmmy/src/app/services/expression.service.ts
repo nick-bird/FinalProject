@@ -20,6 +20,7 @@ export class ExpressionService {
   private url = this.baseUrl + 'api/expressions';
   private url2 = this.baseUrl + 'api/public/expressions';
   private url3 = "http://api.voicerss.org/?key=b9e22d7d94624968a529973b64ea5de4&hl=en-us";
+  private url4 = this.baseUrl + 'api/default/expressions';
  //private url = environment.baseUrl + 'api/expressions';
 
 
@@ -42,6 +43,14 @@ export class ExpressionService {
     return this.http.get<Expression[]>(this.url2).pipe(
       catchError((err: any) => {
         return throwError('Error getting expressions');
+      })
+    );
+  }
+
+  indexDefaultExpressions() {
+    return this.http.get<Expression[]>(this.url4,this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        return throwError('Error getting default expressions');
       })
     );
   }

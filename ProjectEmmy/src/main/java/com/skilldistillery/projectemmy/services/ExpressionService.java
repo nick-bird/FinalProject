@@ -17,5 +17,7 @@ public interface ExpressionService {
     public boolean destroy(String username, int eid);
     
     public List<Expression> indexPublic();
+    
+    public List<Expression> getDefaultExpressions(String username);
 	
 }

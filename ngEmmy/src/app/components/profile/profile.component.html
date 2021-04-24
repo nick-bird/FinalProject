@@ -38,8 +38,12 @@
 
 
          <!-- create Soundboard -->
+          <br>
+         <button (click)="createSoundboard = true;" mat-fab color="blue" aria-label="Example icon button with a delete icon">
+          <mat-icon>add</mat-icon>
+        </button> <br><br>
 
-   <div *ngIf="!selectedSoundboard&&!selectedExpression" >
+   <div *ngIf="createSoundboard" >
      <h2>Create new soundboard</h2>
     <input type="text" placeholder="Name" [(ngModel)]="newSoundboard.name"/><br />
     <input type="text" name="description" placeholder="Description" [(ngModel)]="newSoundboard.description"/><br /> <br>
@@ -58,7 +62,8 @@
     </div>
 
     <br><br>
-    <input class="btn btn-primary" type="submit" value="Add SoundBoard" (click)="addSoundboard(newSoundboard)"/>
+    <input class="btn btn-primary" type="submit" value="Add SoundBoard" (click)="addSoundboard(newSoundboard); createSoundboard = false"/>
+    <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="createSoundboard = false"/>
     <br>
     <br>
   </div>
@@ -91,13 +96,19 @@
     *ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool">
 
   <!-- create Expression -->
-  <h2>Create new expression</h2>
-  <div *ngIf="!selectedSoundboard&&!selectedExpression" >
+  <br>
+  <button (click)="createExpression = true;" mat-fab color="blue" aria-label="Example icon button with a delete icon">
+   <mat-icon>add</mat-icon>
+ </button> <br><br>
+
+  <div *ngIf="createExpression" >
+    <h2>Create new expression</h2>
     <input type="text" placeholder="Name" [(ngModel)]="newExpression.name"/><br />
     <input type="text" name="phrase" placeholder="Phrase" [(ngModel)]="newExpression.phrase"/><br />
     <input type="text" name="imageUrl" (change)='createImage()' placeholder="Image Url" [(ngModel)]="newImage.imageUrl"/><br />
 
-    <input class="btn btn-primary" type="submit" value="Add Expression" (click)="addExpression(newExpression)"/>
+    <input class="btn btn-primary" type="submit" value="Add Expression" (click)="addExpression(newExpression); createExpression = false"/>
+    <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="createExpression = false"/>
     <br>
     <br>
   </div>
