@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
   }
 
   defaultExpressions : Expression[] = [];
+  publicSoundboards : Soundboard[] = [];
 
   soundboards: Soundboard[] = [];
   expressions: Expression[] = [];
@@ -67,7 +68,8 @@ export class ProfileComponent implements OnInit {
       (data) => {
         this.userSoundboards = data;
         this.loadUserExpressions();
-        this.loadDefaultExpressions()
+        this.loadDefaultExpressions();
+        this.loadPublicSoundboards();
       },
       (err) => {
         console.log('Error loading soundboards: ' + err);
@@ -99,11 +101,20 @@ export class ProfileComponent implements OnInit {
     this.expressionService.indexDefaultExpressions().subscribe(
       (data) => {
         this.defaultExpressions = data;
-        console.log(this.defaultExpressions);
-
       },
       (err) => {
         console.log('Error loading default expressions: ' + err);
+      }
+    );
+  }
+
+  loadPublicSoundboards(){
+    this.soundboardService.indexPublic().subscribe(
+      (data) => {
+        this.publicSoundboards = data;
+      },
+      (err) => {
+        console.log('Error loading public soundboards: ' + err);
       }
     );
   }

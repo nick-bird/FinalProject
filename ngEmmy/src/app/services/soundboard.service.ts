@@ -18,6 +18,9 @@ export class SoundboardService {
 
   private baseUrl = 'http://localhost:8090/';
   private url = this.baseUrl + 'api/soundboards';
+  private url1 = this.baseUrl + 'api/public/soundboards';
+
+
  //private url = environment.baseUrl + 'api/soundboards';
 
 
@@ -30,6 +33,16 @@ export class SoundboardService {
       })
     );
   }
+
+  indexPublic() {
+    return this.http.get<Soundboard[]>(this.url1).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error getting public soundboards');
+      })
+    );
+  }
+
   create(newSoundboard: Soundboard) {
 
     return this.http.post<Soundboard>(this.url, newSoundboard, this.getHttpOptions()).pipe(
