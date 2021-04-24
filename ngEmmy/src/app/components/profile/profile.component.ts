@@ -44,6 +44,9 @@ export class ProfileComponent implements OnInit {
   newImage : Image = new Image();
   createdImage : Image = new Image();
 
+  addCategories : Category[] = [];
+  addSoundboardExpressions : SoundboardExpression [] = [];
+
   newSoundboardExpression : SoundboardExpression = new SoundboardExpression();
 
 
@@ -112,13 +115,17 @@ export class ProfileComponent implements OnInit {
   }
 
   addSoundboard(): void {
-    console.log(this.newSoundboard);
+    this.newSoundboard.categories = this.addCategories;
+    this.newSoundboard.soundboardExpressions = this.addSoundboardExpressions;
     this.soundboardService.create(this.newSoundboard).subscribe(
       (data) => {
+        this.newSoundboard = data;
         this.displaySoundboard(this.newSoundboard);
+        this.reload()
+        this.newSoundboard = new Soundboard();
       },
       (err) => {
-        console.log('Error creating todo: ' + err);
+        console.log('Error creating soundboard: ' + err);
       }
     );
   }
@@ -278,6 +285,68 @@ export class ProfileComponent implements OnInit {
   toggleTab(){
     return "active";
     }
+
+
+// add soundboards categories
+
+containsCategoryToAdd = function(cat: Category){
+  for (let c of this.addCategories){
+  if (c.name === cat.name){
+  return true;
+  }
+  }
+  return false;
+  }
+
+addCategoriesToSoundboard(cat: Category){
+  if(this.containsCategoryToAdd(cat)){
+    for (let i = 0; i < this.addCategories.length; i++){
+    if (this.addCategories[i].name === cat.name){
+    this.addCategories.splice(i, 1);
+    }
+    }
+    }
+    else {
+      this.addCategories.push(cat);
+      console.log(this.addCategories);
+
+    }
+
+
+
+}
+
+
+// add soundboards expressions
+
+containsExpressionToAdd = function(exp: Expression){
+  for (let e of  this.addSoundboardExpressions){
+  if (e.expression.name === exp.name){
+  return true;
+  }
+  }
+  return false;
+  }
+
+  addExpressions(exp: Expression){
+
+    if(this.containsExpressionToAdd(exp)){
+      for (let i = 0; i < this.addSoundboardExpressions.length; i++){
+      if (this.addSoundboardExpressions[i].expression.name=== exp.name){
+        this.addSoundboardExpressions.splice(i, 1);
+      }
+      }
+      }
+      else {
+        this.newSoundboardExpression = new SoundboardExpression();
+        this.newSoundboardExpression.expression = exp;
+        this.newSoundboardExpression.soundboard = new Soundboard();
+        this.addSoundboardExpressions.push(this.newSoundboardExpression);
+        console.log(this.addSoundboardExpressions);
+        this.newSoundboardExpression = new SoundboardExpression();
+      }
+
+  }
 
 
 }
