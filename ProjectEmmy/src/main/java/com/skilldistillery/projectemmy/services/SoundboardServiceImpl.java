@@ -30,7 +30,6 @@ public class SoundboardServiceImpl implements SoundboardService {
 		User user = userRepo.findByUsername(username);
 		if(user != null) {
 			soundboard.setUser(user);
-			soundboard.setIsPublic(false);
 			soundboard.setIsDefault(false);
 			soundRepo.saveAndFlush(soundboard);
 		}
@@ -47,6 +46,7 @@ public class SoundboardServiceImpl implements SoundboardService {
 			managedSoundboard.setIsPublic(soundboard.getIsPublic());
 			managedSoundboard.setDescription(soundboard.getDescription());
 			managedSoundboard.setCategories(soundboard.getCategories());
+			managedSoundboard.getSoundboardExpressions().addAll(soundboard.getSoundboardExpressions());
 			soundRepo.saveAndFlush(managedSoundboard);
 			return managedSoundboard;
 		}

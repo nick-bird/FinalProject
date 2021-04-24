@@ -28,10 +28,17 @@ public class ExpressionController {
 	@Autowired
 	private ExpressionService expSvc;
 	
+	private String username = "admin";
+	
 	
 	@GetMapping("expressions")
 	public List<Expression> index(HttpServletRequest req, HttpServletResponse res, Principal principal) { 
 		return expSvc.index(principal.getName());
+	}
+	
+	@GetMapping("default/expressions")
+	public List<Expression> defaultExp() { 
+		return expSvc.getDefaultExpressions(username);
 	}
 	
 	@GetMapping("public/expressions")

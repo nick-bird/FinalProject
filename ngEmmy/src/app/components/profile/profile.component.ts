@@ -6,6 +6,7 @@ import { Soundboard } from 'src/app/models/soundboard';
 import { SoundboardExpression } from 'src/app/models/soundboard-expression';
 import { CategoryService } from 'src/app/services/category.service';
 import { ExpressionService } from 'src/app/services/expression.service';
+import { ImageService } from 'src/app/services/image.service';
 import { SoundboardService } from 'src/app/services/soundboard.service';
 
 @Component({
@@ -17,12 +18,16 @@ export class ProfileComponent implements OnInit {
   constructor(
     private soundboardService: SoundboardService,
     private expressionService: ExpressionService,
-    private catService: CategoryService
+    private catService: CategoryService,
+    private imageService : ImageService
   ) {}
 
   ngOnInit(): void {
     this.reload();
   }
+
+  defaultExpressions : Expression[] = [];
+  publicSoundboards : Soundboard[] = [];
 
   soundboards: Soundboard[] = [];
   expressions: Expression[] = [];
@@ -36,23 +41,35 @@ export class ProfileComponent implements OnInit {
   editSoundboard: Soundboard = null;
   editExpression: Expression = null;
 
+
   categories: Category[] = [];
 
   newImage : Image = new Image();
+  createdImage : Image = new Image();
+
+  addCategories : Category[] = [];
+  addSoundboardExpressions : SoundboardExpression [] = [];
 
   newSoundboardExpression : SoundboardExpression = new SoundboardExpression();
 
-  soundboardBool: boolean = true;
+
   tabIsActive1 = false;
   tabIsActive2 = false;
   tabIsActive3 = false;
   tabIsActive4 = false;
+  soundboardBool: boolean = true;
+
+  createSoundboard : boolean = false;
+  createExpression : boolean = false;
+
 
   reload() {
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
         this.loadUserExpressions();
+        this.loadDefaultExpressions();
+        this.loadPublicSoundboards();
       },
       (err) => {
         console.log('Error loading soundboards: ' + err);
@@ -80,6 +97,40 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  loadDefaultExpressions(){
+    this.expressionService.indexDefaultExpressions().subscribe(
+      (data) => {
+        this.defaultExpressions = data;
+      },
+      (err) => {
+        console.log('Error loading default expressions: ' + err);
+      }
+    );
+  }
+
+  loadPublicSoundboards(){
+    this.soundboardService.indexPublic().subscribe(
+      (data) => {
+        this.publicSoundboards = data;
+      },
+      (err) => {
+        console.log('Error loading public soundboards: ' + err);
+      }
+    );
+  }
+
+  createImage(){
+    this.imageService.create(this.newImage).subscribe(
+      (data) => {
+        this.createdImage = data;
+
+      },
+      (err) => {
+        console.log('Error creating image: ' + err);
+      }
+    );
+  }
+
   displaySoundboard(soundboard: Soundboard): void {
     this.selectedSoundboard = soundboard;
   }
@@ -94,13 +145,17 @@ export class ProfileComponent implements OnInit {
   }
 
   addSoundboard(): void {
-    console.log(this.newSoundboard);
+    this.newSoundboard.categories = this.addCategories;
+    this.newSoundboard.soundboardExpressions = this.addSoundboardExpressions;
     this.soundboardService.create(this.newSoundboard).subscribe(
       (data) => {
+        this.newSoundboard = data;
         this.displaySoundboard(this.newSoundboard);
+        this.reload()
+        this.newSoundboard = new Soundboard();
       },
       (err) => {
-        console.log('Error creating todo: ' + err);
+        console.log('Error creating soundboard: ' + err);
       }
     );
   }
@@ -108,11 +163,15 @@ export class ProfileComponent implements OnInit {
   addExpression(): void {
     console.log(this.newExpression);
 
-    // this.newExpression.image.imageUrl = this.newImage.imageUrl;
+   this.newExpression.image = this.createdImage;
 
     this.expressionService.create(this.newExpression).subscribe(
       (data) => {
+        this.newExpression = data;
         this.displayExpression(this.newExpression);
+        this.reload()
+        this.newExpression = new Expression();
+        this.newImage = new Image();
       },
       (err) => {
         console.log('Error creating expression: ' + err);
@@ -241,16 +300,81 @@ export class ProfileComponent implements OnInit {
       }
       }
       else {
-      this.editSoundboard.soundboardExpressions.push();
+      this.newSoundboardExpression = new SoundboardExpression();
+      this.newSoundboardExpression.expression = exp;
+      this.newSoundboardExpression.soundboard = new Soundboard();
+      this.newSoundboardExpression.soundboard.id = this.editSoundboard.id;
+      this.editSoundboard.soundboardExpressions.push(this.newSoundboardExpression);
+      this.newSoundboardExpression = new SoundboardExpression();
       }
       }
-
-
 
 
   toggleTab(){
     return "active";
     }
+
+
+// add soundboards categories when creating soundboard
+
+containsCategoryToAdd = function(cat: Category){
+  for (let c of this.addCategories){
+  if (c.name === cat.name){
+  return true;
+  }
+  }
+  return false;
+  }
+
+addCategoriesToSoundboard(cat: Category){
+  if(this.containsCategoryToAdd(cat)){
+    for (let i = 0; i < this.addCategories.length; i++){
+    if (this.addCategories[i].name === cat.name){
+    this.addCategories.splice(i, 1);
+    }
+    }
+    }
+    else {
+      this.addCategories.push(cat);
+      console.log(this.addCategories);
+
+    }
+
+
+
+}
+
+
+// add soundboard expressions when creating soundboard
+
+containsExpressionToAdd = function(exp: Expression){
+  for (let e of  this.addSoundboardExpressions){
+  if (e.expression.name === exp.name){
+  return true;
+  }
+  }
+  return false;
+  }
+
+  addExpressions(exp: Expression){
+
+    if(this.containsExpressionToAdd(exp)){
+      for (let i = 0; i < this.addSoundboardExpressions.length; i++){
+      if (this.addSoundboardExpressions[i].expression.name=== exp.name){
+        this.addSoundboardExpressions.splice(i, 1);
+      }
+      }
+      }
+      else {
+        this.newSoundboardExpression = new SoundboardExpression();
+        this.newSoundboardExpression.expression = exp;
+        this.newSoundboardExpression.soundboard = new Soundboard();
+        this.addSoundboardExpressions.push(this.newSoundboardExpression);
+        console.log(this.addSoundboardExpressions);
+        this.newSoundboardExpression = new SoundboardExpression();
+      }
+
+  }
 
 
 }
