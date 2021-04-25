@@ -11,4 +11,6 @@ public interface AuthService {
 	public User reactivate(User user);
 	
 	public User getUser(String username);
+	
+	public User findById(int id);
 }
