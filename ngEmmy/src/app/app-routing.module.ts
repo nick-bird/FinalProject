@@ -4,6 +4,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TryComponent } from './components/try/try.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'try', component: TryComponent },
+  { path: 'userprofile', component: UserProfileComponent},
   { path: '**', component: NotFoundComponent }
 
 ];
