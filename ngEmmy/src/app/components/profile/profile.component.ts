@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
     private expressionService: ExpressionService,
     private catService: CategoryService,
     private imageService: ImageService,
-    private userService: UserService
+
   ) {}
 
   ngOnInit(): void {
@@ -70,6 +70,7 @@ export class ProfileComponent implements OnInit {
 
   checkUser:User = new User();
   user:User;
+  selectedVoice = "Evie";
 
   reload() {
     this.tabIsActive1 = true;
@@ -410,10 +411,16 @@ export class ProfileComponent implements OnInit {
 
   lock(){
     this.lockedbool = true;
-    // this.navBar.lockedbool = true;
+    this.selectedSoundboard = null;
   }
   unlock(){
     this.lockedbool = false;
     this.selectedSoundboard = null;
+  }
+
+  playSound(expression: Expression){
+    this.selectedExpression = expression;
+    this.expressionService.textToSpeech(this.selectedVoice, this.selectedExpression.phrase).subscribe;
+    this.expressionService.playAudio(this.selectedVoice, this.selectedExpression.phrase);
   }
 }
