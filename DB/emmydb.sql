@@ -53,10 +53,10 @@ DROP TABLE IF EXISTS `expression` ;
 
 CREATE TABLE IF NOT EXISTS `expression` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NULL,
-  `phrase` TEXT NULL,
-  `image_id` INT NULL,
-  `user_id` INT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `phrase` TEXT NOT NULL,
+  `image_id` INT NOT NULL,
+  `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_expression_image1_idx` (`image_id` ASC),
   INDEX `fk_expression_user1_idx` (`user_id` ASC),
@@ -217,7 +217,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `emmydb`;
-INSERT INTO `soundboard` (`id`, `name`, `user_id`, `is_public`, `description`, `create_date`, `is_default`) VALUES (1, 'ASL Signs', 1, 0, 'American Sign Language', NULL, 1);
+INSERT INTO `soundboard` (`id`, `name`, `user_id`, `is_public`, `description`, `create_date`, `is_default`) VALUES (1, 'ASL Signs', 1, 1, 'American Sign Language', NULL, 1);
+INSERT INTO `soundboard` (`id`, `name`, `user_id`, `is_public`, `description`, `create_date`, `is_default`) VALUES (2, 'Not Public SB', 1, 0, 'Not Public SB', NULL, 1);
 
 COMMIT;
 

@@ -30,4 +30,35 @@ public class AuthServiceImpl implements AuthService {
 		return user;
 	}
 
+	@Override
+	public User deactivate(User user) {
+
+		user.setActive(false);
+		userRepo.saveAndFlush(user);
+		return user;
+	}
+
+	@Override
+	public User reactivate(User user) {
+		user.setActive(true);
+		userRepo.saveAndFlush(user);
+		return user;
+	}
+
+	@Override
+	public User getUser(String username) {
+
+	return	userRepo.findByUsername(username);
+		
+	}
+
+	@Override
+	public User findById(int id) {
+
+		return userRepo.getOne(id);
+	}
+	
+	
+	
+
 }
