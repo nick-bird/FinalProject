@@ -3,7 +3,6 @@ package com.skilldistillery.projectemmy.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.OneToMany;
-
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -45,7 +42,7 @@ public class Soundboard {
 	private Boolean isDefault;
 	
 	
-	@OneToMany(orphanRemoval=true, mappedBy="soundboard")
+	@OneToMany(orphanRemoval = true, mappedBy="soundboard")
 	private List<SoundboardExpression> soundboardExpressions;
 	
 	@ManyToMany

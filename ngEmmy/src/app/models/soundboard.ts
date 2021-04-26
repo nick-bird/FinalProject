@@ -7,14 +7,14 @@ export class Soundboard {
   name: string;
   description: string;
   createDate: string;
-  isPublic: boolean;
-  isDefault: boolean;
+  isPublic: boolean = false;
+  isDefault: boolean = false;
   user: User;
   categories: Category[];
   soundboardExpressions: SoundboardExpression[];
 
 
-  constructor(id?: number, name?: string, description?: string, createDate?: string, isPublic?: boolean, isDefault?: boolean, user?: User, categories?: Category[], soundboardExpressions?: SoundboardExpression[] ){
+  constructor(id?: number, name?: string, description?: string, createDate?: string, isPublic = false, isDefault = false, user?: User, categories?: Category[], soundboardExpressions?: SoundboardExpression[] ){
     this.id = id;
     this.name = name;
     this.description = description;
