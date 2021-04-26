@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.projectemmy.entities.Soundboard;
+import com.skilldistillery.projectemmy.entities.SoundboardExpression;
 import com.skilldistillery.projectemmy.entities.User;
 import com.skilldistillery.projectemmy.repositories.SoundboardRepository;
 import com.skilldistillery.projectemmy.repositories.UserRepository;
@@ -42,13 +43,19 @@ public class SoundboardServiceImpl implements SoundboardService {
 		Soundboard managedSoundboard = show(username, sid);
 
 		if (managedSoundboard != null) {
-			
+			List<SoundboardExpression> soundExp = managedSoundboard.getSoundboardExpressions();
+			soundExp.clear();
+			for (SoundboardExpression exp : soundboard.getSoundboardExpressions()) {
+				exp.setSoundboard(managedSoundboard);
+				soundExp.add(exp);
+			}
 			System.out.println(soundboard.getSoundboardExpressions());
 			managedSoundboard.setName(soundboard.getName());
 			managedSoundboard.setIsPublic(soundboard.getIsPublic());
 			managedSoundboard.setDescription(soundboard.getDescription());
 			managedSoundboard.setCategories(soundboard.getCategories());
-			managedSoundboard.getSoundboardExpressions().addAll(soundboard.getSoundboardExpressions());
+//			managedSoundboard.getSoundboardExpressions().addAll(soundboard.getSoundboardExpressions());
+//			managedSoundboard.setSoundboardExpressions(soundboard.getSoundboardExpressions());;
 			soundRepo.saveAndFlush(managedSoundboard);
 			return managedSoundboard;
 		}

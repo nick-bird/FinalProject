@@ -3,6 +3,7 @@ package com.skilldistillery.projectemmy.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -171,8 +172,7 @@ public class Soundboard {
 	@Override
 	public String toString() {
 		return "Soundboard [id=" + id + ", name=" + name + ", isPublic=" + isPublic + ", description=" + description
-				+ ", createDate=" + createDate + ", isDefault=" + isDefault + ", soundboardExpressions="
-				+ soundboardExpressions + ", categories=" + categories + ", user=" + user + "]";
+				+ ", createDate=" + createDate + ", isDefault=" + isDefault + ", user=" + user + "]";
 	}
 
 }
