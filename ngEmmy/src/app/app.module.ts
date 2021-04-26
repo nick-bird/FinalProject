@@ -24,6 +24,7 @@ import { GridTestComponent } from './components/grid-test/grid-test.component';
 import { TryComponent } from './components/try/try.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -48,7 +49,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatGridListModule,
     MatButtonModule,
     MatIconModule,
-    MatSidenavModule
+    MatSidenavModule,
+    DragDropModule
+
 
   ],
   providers: [
