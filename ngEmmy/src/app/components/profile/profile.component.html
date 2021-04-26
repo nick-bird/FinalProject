@@ -1,7 +1,14 @@
 <!-- Locked Mode -->
 <div *ngIf="lockedbool">
   <br>
+  <div *ngIf="lockedbool">
+    <br>
+    <input type="password" name="unlock" [(ngModel)]='checkUser.password'>
+    <button (click)="unlock()">Unlock</button>
+  </div>
+  <br>
   <h3>Locked</h3>
+
         <!-- User SoundBoards !!! Move to vertical Tab!! Pull out of Card? -->
     <div name="Display Users SoundBoards">
       <mat-grid-list cols="2" rowHeight="1:1">
@@ -15,8 +22,6 @@
             <div class="card-body">
               <h5 class="card-title">{{ sb.name }}</h5>
               <p class="card-text">{{ sb.description }}</p>
-              <button class="btn btn-danger" (click)="deleteSoundboard(sb.id)" > X
-              </button>
             </div>
           </div>
         </mat-grid-tile>
@@ -24,14 +29,15 @@
     </div>
 
     <!-- User Expressions needs to refreshed based on SB Selected -->
-  <div>
+  <div *ngIf="selectedSoundboard">
     <h1>Expressions</h1>
     <mat-grid-list cols="2" rowHeight="1:1">
-      <mat-grid-tile *ngFor="let exp of userExpressions">
+      <mat-grid-tile *ngFor="let exp of selectedSoundboard.soundboardExpressions">
       <div class="card" style="width: 18rem">
-        <img (click)="displayExpression(exp)" class="card-img-top" [src]="exp.image.imageUrl"/>
+        <!-- click event needs to be play sound -->
+        <img (click)="displayExpression(exp)" class="card-img-top" [src]="exp.expression.image.imageUrl"/>
         <div class="card-body">
-          <h5 class="card-title">{{exp.name}}</h5>
+          <h5 class="card-title">{{exp.expression.name}}</h5>
           <!-- <p class="card-text">{{exp.phrase }}</p> -->
         </div>
       </div>

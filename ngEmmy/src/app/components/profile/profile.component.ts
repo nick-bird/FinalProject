@@ -4,10 +4,13 @@ import { Expression } from 'src/app/models/expression';
 import { Image } from 'src/app/models/image';
 import { Soundboard } from 'src/app/models/soundboard';
 import { SoundboardExpression } from 'src/app/models/soundboard-expression';
+import { User } from 'src/app/models/user';
 import { CategoryService } from 'src/app/services/category.service';
 import { ExpressionService } from 'src/app/services/expression.service';
 import { ImageService } from 'src/app/services/image.service';
 import { SoundboardService } from 'src/app/services/soundboard.service';
+import { UserService } from 'src/app/services/user.service';
+import { NavigationComponent } from '../navigation/navigation.component';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +22,8 @@ export class ProfileComponent implements OnInit {
     private soundboardService: SoundboardService,
     private expressionService: ExpressionService,
     private catService: CategoryService,
-    private imageService: ImageService
+    private imageService: ImageService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +67,9 @@ export class ProfileComponent implements OnInit {
   createSoundboard: boolean = false;
   createExpression: boolean = false;
   lockedbool: boolean = false;
+
+  checkUser:User = new User();
+  user:User;
 
   reload() {
     this.tabIsActive1 = true;
@@ -396,8 +403,10 @@ export class ProfileComponent implements OnInit {
 
   lock(){
     this.lockedbool = true;
+    // this.navBar.lockedbool = true;
   }
   unlock(){
-
+    this.lockedbool = false;
+    this.selectedSoundboard = null;
   }
 }
