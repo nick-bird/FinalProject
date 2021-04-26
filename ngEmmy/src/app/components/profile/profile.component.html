@@ -1,11 +1,61 @@
+<!-- Locked Mode -->
+<div *ngIf="lockedbool">
+  <br>
+  <div *ngIf="lockedbool">
+    <br>
+    <input type="password" name="unlock" [(ngModel)]='checkUser.password'>
+    <button (click)="unlock()">Unlock</button>
+  </div>
+  <br>
+  <h3>Locked</h3>
 
+        <!-- User SoundBoards !!! Move to vertical Tab!! Pull out of Card? -->
+    <div name="Display Users SoundBoards">
+      <mat-grid-list cols="2" rowHeight="1:1">
+        <mat-grid-tile *ngFor="let sb of userSoundboards">
+          <div class="card" style="width: 18rem">
+            <img (click)="displaySoundboard(sb)"
+              src="https://sourcekids.com.au/wp-content/uploads/2018/04/Screen-Shot-2019-04-02-at-12-600x400.jpg"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ sb.name }}</h5>
+              <p class="card-text">{{ sb.description }}</p>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
 
-    <!-- SoundBoard Grid -->
+    <!-- User Expressions needs to refreshed based on SB Selected -->
+  <div *ngIf="selectedSoundboard">
+    <h1>Expressions</h1>
+    <mat-grid-list cols="2" rowHeight="1:1">
+      <mat-grid-tile *ngFor="let exp of selectedSoundboard.soundboardExpressions">
+      <div class="card" style="width: 18rem">
+        <!-- click event needs to be play sound -->
+        <img (click)="displayExpression(exp)" class="card-img-top" [src]="exp.expression.image.imageUrl"/>
+        <div class="card-body">
+          <h5 class="card-title">{{exp.expression.name}}</h5>
+          <!-- <p class="card-text">{{exp.phrase }}</p> -->
+        </div>
+      </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 
+</div>
 
+<main *ngIf="!lockedbool">
 
-
-<main>
+  <!-- Lock button -->
+  <div *ngIf="!lockedbool">
+      <br>
+      <button (click)="lock()" mat-fab color="blue" aria-label="Lock Icon">
+      <mat-icon>lock</mat-icon>
+    </button> <br><br>
+  </div>
 
 
   <!-- Side Menu -->
