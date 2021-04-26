@@ -22,6 +22,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { GridTestComponent } from './components/grid-test/grid-test.component';
 import { TryComponent } from './components/try/try.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { TryComponent } from './components/try/try.component';
     NavigationComponent,
     LogoutComponent,
     GridTestComponent,
-    TryComponent
+    TryComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

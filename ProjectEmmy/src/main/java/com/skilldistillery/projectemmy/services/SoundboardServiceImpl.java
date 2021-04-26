@@ -31,6 +31,7 @@ public class SoundboardServiceImpl implements SoundboardService {
 		if(user != null) {
 			soundboard.setUser(user);
 			soundboard.setIsDefault(false);
+			System.out.println(soundboard.getSoundboardExpressions());
 			soundRepo.saveAndFlush(soundboard);
 		}
 		return soundboard;
@@ -42,6 +43,7 @@ public class SoundboardServiceImpl implements SoundboardService {
 
 		if (managedSoundboard != null) {
 			
+			System.out.println(soundboard.getSoundboardExpressions());
 			managedSoundboard.setName(soundboard.getName());
 			managedSoundboard.setIsPublic(soundboard.getIsPublic());
 			managedSoundboard.setDescription(soundboard.getDescription());

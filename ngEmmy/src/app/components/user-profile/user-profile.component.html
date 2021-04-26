@@ -1,0 +1,14 @@
+
+
+<div class="container">
+<h1>Account info</h1>
+<p>Hello {{user.firstName}} {{user.lastName}}!</p>
+<p>Username: {{user.username}}</p>
+<p>Email: {{user.email}}</p>
+<p>Role: {{user.role}}</p>
+
+
+
+<input (click)="deactivateUser()"   class="btn btn-outline-danger"  value="Delete Account"  [routerLink]="['/home']">
+<!-- //  routerLink="['/home']" -->
+</div>
