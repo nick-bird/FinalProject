@@ -44,6 +44,9 @@ export class SoundboardService {
   }
 
   create(newSoundboard: Soundboard) {
+    console.log("Service");
+
+     console.log(newSoundboard);
 
     return this.http.post<Soundboard>(this.url, newSoundboard, this.getHttpOptions()).pipe(
       catchError((err: any) => {
