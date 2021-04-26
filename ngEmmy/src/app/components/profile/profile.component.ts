@@ -41,6 +41,7 @@ export class ProfileComponent implements OnInit {
   editSoundboard: Soundboard = null;
   editExpression: Expression = null;
 
+
   categories: Category[] = [];
 
   newImage: Image = new Image();
@@ -312,15 +313,10 @@ export class ProfileComponent implements OnInit {
 
   updateExpressions(exp: Expression) {
     if (this.containsExpression(exp)) {
-      for (
-        let i = 0;
-        i < this.editSoundboard.soundboardExpressions.length;
-        i++
+      for (let i = 0; i < this.editSoundboard.soundboardExpressions.length;i++
       ) {
-        if (
-          this.editSoundboard.soundboardExpressions[i].expression.name ===
-          exp.name
-        ) {
+        if (this.editSoundboard.soundboardExpressions[i].expression.name===
+          exp.name) {
           this.editSoundboard.soundboardExpressions.splice(i, 1);
         }
       }
@@ -329,9 +325,7 @@ export class ProfileComponent implements OnInit {
       this.newSoundboardExpression.expression = exp;
       this.newSoundboardExpression.soundboard = new Soundboard();
       this.newSoundboardExpression.soundboard.id = this.editSoundboard.id;
-      this.editSoundboard.soundboardExpressions.push(
-        this.newSoundboardExpression
-      );
+      this.editSoundboard.soundboardExpressions.push(this.newSoundboardExpression);
       this.newSoundboardExpression = new SoundboardExpression();
     }
   }
@@ -340,7 +334,7 @@ export class ProfileComponent implements OnInit {
     return 'active';
   }
 
-  // add soundboards categories when creating soundboard
+ // add soundboards categories when creating soundboard
 
   containsCategoryToAdd = function (cat: Category) {
     for (let c of this.addCategories) {
@@ -364,7 +358,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // add soundboard expressions when creating soundboard
+ //add soundboard expressions when creating soundboard
 
   containsExpressionToAdd = function (exp: Expression) {
     for (let e of this.addSoundboardExpressions) {
