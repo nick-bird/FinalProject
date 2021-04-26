@@ -73,12 +73,15 @@ export class ProfileComponent implements OnInit {
 
   reload() {
     this.tabIsActive1 = true;
+    this.publicSBBool = false;
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
-        this.loadUserExpressions();
-        this.loadDefaultExpressions();
-        this.loadPublicSoundboards();
+
+        // These Don't need to be loaded from the start
+       // this.loadUserExpressions();
+       // this.loadDefaultExpressions();
+       // this.loadPublicSoundboards();
       },
       (err) => {
         console.log('Error loading soundboards: ' + err);
