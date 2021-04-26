@@ -10,7 +10,7 @@
   <h3>Locked</h3>
 
         <!-- User SoundBoards !!! Move to vertical Tab!! Pull out of Card? -->
-    <div name="Display Users SoundBoards">
+    <div *ngIf="!selectedSoundboard" name="Display Users SoundBoards">
       <mat-grid-list cols="2" rowHeight="1:1">
         <mat-grid-tile *ngFor="let sb of userSoundboards">
           <div class="card" style="width: 18rem">
@@ -31,11 +31,12 @@
     <!-- User Expressions needs to refreshed based on SB Selected -->
   <div *ngIf="selectedSoundboard">
     <h1>Expressions</h1>
+    <button (click)="lock()">SoundBoards</button>
     <mat-grid-list cols="2" rowHeight="1:1">
-      <mat-grid-tile *ngFor="let exp of selectedSoundboard.soundboardExpressions">
+      <mat-grid-tile (click)="playSound(exp.expression)" *ngFor="let exp of selectedSoundboard.soundboardExpressions">
       <div class="card" style="width: 18rem">
         <!-- click event needs to be play sound -->
-        <img (click)="displayExpression(exp)" class="card-img-top" [src]="exp.expression.image.imageUrl"/>
+        <img class="card-img-top" [src]="exp.expression.image.imageUrl"/>
         <div class="card-body">
           <h5 class="card-title">{{exp.expression.name}}</h5>
           <!-- <p class="card-text">{{exp.phrase }}</p> -->
@@ -117,7 +118,7 @@
 
 
         <h3>SoundBoard Grid</h3>
-        <mat-grid-list cols="2" rowHeight="1:1">
+        <mat-grid-list  cdkDropList cols="2" rowHeight="1:1" >
           <mat-grid-tile *ngFor="let sb of userSoundboards">
             <div class="card" style="width: 18rem">
               <img (click)="displaySoundboard(sb)"
@@ -270,6 +271,9 @@ class="container" name="allExpressions"
   <h3>Community SoundBoards</h3>
   <mat-grid-list cols="2" rowHeight="1:1">
     <mat-grid-tile *ngFor="let sb of publicSoundboards">
+      <button (click)="pushSB();" mat-fab color="blue" [(ngModel)]="sb">
+        <mat-icon>add</mat-icon>
+      </button>
       <div class="card" style="width: 18rem">
         <img (click)="displaySoundboard(sb)"
           src="https://sourcekids.com.au/wp-content/uploads/2018/04/Screen-Shot-2019-04-02-at-12-600x400.jpg"
