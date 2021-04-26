@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS `image` ;
 
 CREATE TABLE IF NOT EXISTS `image` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `image_url` TEXT NOT NULL,
+  `image_url` TEXT BINARY NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -173,7 +173,14 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `emmydb`;
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `is_restricted`, `is_active`, `first_name`, `last_name`) VALUES (1, 'admin', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 'testemail@test.test', 'admin', 0, 1, 'admin', 'admin');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `is_restricted`, `is_active`, `first_name`, `last_name`) VALUES (1, 'Default', '$2a$10$4SMKDcs9jT18dbFxqtIqDeLEynC7MUrCEUbv1a/bhO.x9an9WGPvm', 'testemail@test.test', 'admin', 0, 1, 'admin', 'admin');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `is_restricted`, `is_active`, `first_name`, `last_name`) VALUES (2, 'Tylor', '$2a$10$PTFGbNR5TUuTJwqtbfh3luyILyr9GoSx2EI7ZEF8lxVgrI4Yx1sTK', 'tylorshearn95@gmail.com', 'admin', 0, 1, 'Tylor', 'Shearn');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `is_restricted`, `is_active`, `first_name`, `last_name`) VALUES (3, 'Nick', '$2a$10$RlNlZhIO2Zclil2XULGuteclyTG/pCPrNKmgmDIchlqe7PXGwBb9a', 'bird.nick.95@gmail.com', 'admin', 0, 1, 'Nick', 'Bird');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `is_restricted`, `is_active`, `first_name`, `last_name`) VALUES (4, 'Karen', '$2a$10$Vw2IDIjXPdG7QMxhE32awOvvc/BMRE.B66yNUALK6a48KrOPVRfcG', 'solorzanolisseth83@gmail.com', 'admin', 0, 1, 'Karen', 'Mena');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `is_restricted`, `is_active`, `first_name`, `last_name`) VALUES (5, 'Justin', '$2a$10$e9QQt3GFUaAL06wpSqNowOsMUPyoUVlXyzMpOnPwMZEhTzc/QS3Ju', 'justin.adams314@gmail.com', 'admin', 0, 1, 'Justin', 'Adams');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `is_restricted`, `is_active`, `first_name`, `last_name`) VALUES (6, 'John', '$2a$10$ql2Wv72zY0a9Y0MVBP2qNOvWb1X4Lz3RV07eEiZ2BKjZbE3N3Tnnq', 'johnjacobs@email', 'admin', 1, 1, 'John', 'Jacobs');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `is_restricted`, `is_active`, `first_name`, `last_name`) VALUES (7, 'Bob', '$2a$10$MLfvpywwwA4mwBkTF1ptBOgBsgxP65Fit9XPARcge.A9EPl5RAYWS', 'bobevan@email', 'admin', 1, 0, 'Bob', 'Evan');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `role`, `is_restricted`, `is_active`, `first_name`, `last_name`) VALUES (8, 'Webster', '$2a$10$gMyf8YIP5M/1SyRLSIgzGe7DEJtmxaAh.HDRVtYSkOAzgCMea5QMy', 'webmonsterthelab@email', 'admin', 0, 0, 'Webster', 'Shearn');
 
 COMMIT;
 
@@ -191,6 +198,11 @@ INSERT INTO `image` (`id`, `image_url`) VALUES (5, 'https://encrypted-tbn0.gstat
 INSERT INTO `image` (`id`, `image_url`) VALUES (6, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuyEjV1WVqmiAjEOYVJ5eqHWUkVVs9HGFHX0JCxvTS2qftxOjloiAJCCJJiYXO0cAA-1A&usqp=CAU');
 INSERT INTO `image` (`id`, `image_url`) VALUES (7, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8VIvnJfTyuK7Yeho5D6mjiSu6ShMjSWXasPWbc_8DNp4IfgCSbneEv4b9ZOZER_sNIa8&usqp=CAU');
 INSERT INTO `image` (`id`, `image_url`) VALUES (8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4gQo6tfPDjddJ_mwVMeZYagu6XqIkQP1yFxH-XYaU2VGDoYv2hbVVcppORPJlGimSCNo&usqp=CAU');
+INSERT INTO `image` (`id`, `image_url`) VALUES (9, 'https://www.vecteezy.com/vector-art/550668-airplane-flying-vector-icon');
+INSERT INTO `image` (`id`, `image_url`) VALUES (10, 'https://www.vecteezy.com/vector-art/550435-stylized-convertible-sports-car');
+INSERT INTO `image` (`id`, `image_url`) VALUES (11, 'https://www.vecteezy.com/vector-art/363916-motorcycle-bike-vector-design-illustration-template');
+INSERT INTO `image` (`id`, `image_url`) VALUES (12, 'https://www.vecteezy.com/vector-art/169875-trawler-ship-illustration');
+INSERT INTO `image` (`id`, `image_url`) VALUES (13, 'https://www.vecteezy.com/vector-art/245383-kayaking-first-person-view-vector-illustration');
 
 COMMIT;
 
@@ -208,6 +220,11 @@ INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES 
 INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (6, 'Play', 'Play', 6, 1);
 INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (7, 'Water', 'Water', 7, 1);
 INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (8, 'Which', 'Which', 8, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (9, 'Airplane', 'Airplane', 9, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (10, 'Car', 'Car', 10, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (11, 'Motorcycle', 'Motorcycle', 11, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (12, 'Boat', 'Boat', 12, 1);
+INSERT INTO `expression` (`id`, `name`, `phrase`, `image_id`, `user_id`) VALUES (13, 'Kayak', 'Kayak', 13, 1);
 
 COMMIT;
 
@@ -218,7 +235,10 @@ COMMIT;
 START TRANSACTION;
 USE `emmydb`;
 INSERT INTO `soundboard` (`id`, `name`, `user_id`, `is_public`, `description`, `create_date`, `is_default`) VALUES (1, 'ASL Signs', 1, 1, 'American Sign Language', NULL, 1);
-INSERT INTO `soundboard` (`id`, `name`, `user_id`, `is_public`, `description`, `create_date`, `is_default`) VALUES (2, 'Not Public SB', 1, 0, 'Not Public SB', NULL, 1);
+INSERT INTO `soundboard` (`id`, `name`, `user_id`, `is_public`, `description`, `create_date`, `is_default`) VALUES (2, 'Animals', 1, 0, 'Animals', NULL, 1);
+INSERT INTO `soundboard` (`id`, `name`, `user_id`, `is_public`, `description`, `create_date`, `is_default`) VALUES (3, 'Nick\'s Soundboard', 3, 0, 'Nick\'s Soundboard', NULL, 0);
+INSERT INTO `soundboard` (`id`, `name`, `user_id`, `is_public`, `description`, `create_date`, `is_default`) VALUES (4, 'Karen\'s Soundboard', 4, 0, 'Karen\'s Soundboard', NULL, 0);
+INSERT INTO `soundboard` (`id`, `name`, `user_id`, `is_public`, `description`, `create_date`, `is_default`) VALUES (5, 'Justin\'s Soundboard', 5, 0, 'Justin\'s Soundboard', NULL, 0);
 
 COMMIT;
 
@@ -229,6 +249,13 @@ COMMIT;
 START TRANSACTION;
 USE `emmydb`;
 INSERT INTO `soundboard_expression` (`soundboard_id`, `expression_id`, `position_id`) VALUES (1, 1, 1);
+INSERT INTO `soundboard_expression` (`soundboard_id`, `expression_id`, `position_id`) VALUES (1, 2, 1);
+INSERT INTO `soundboard_expression` (`soundboard_id`, `expression_id`, `position_id`) VALUES (1, 3, 1);
+INSERT INTO `soundboard_expression` (`soundboard_id`, `expression_id`, `position_id`) VALUES (1, 4, 1);
+INSERT INTO `soundboard_expression` (`soundboard_id`, `expression_id`, `position_id`) VALUES (1, 5, 1);
+INSERT INTO `soundboard_expression` (`soundboard_id`, `expression_id`, `position_id`) VALUES (1, 6, 1);
+INSERT INTO `soundboard_expression` (`soundboard_id`, `expression_id`, `position_id`) VALUES (1, 7, 1);
+INSERT INTO `soundboard_expression` (`soundboard_id`, `expression_id`, `position_id`) VALUES (1, 8, 1);
 
 COMMIT;
 
@@ -239,6 +266,24 @@ COMMIT;
 START TRANSACTION;
 USE `emmydb`;
 INSERT INTO `category` (`id`, `name`, `description`) VALUES (1, 'ASL', 'American Sign Language');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (2, 'Travel', 'Travel');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (3, 'Commuting', 'Commuting');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (4, 'Food/Drink', 'Food/Drink');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (5, 'Feelings', 'Feelings');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (6, 'Play', 'Play');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (7, 'Emergency', 'Emergencies');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (8, 'Health', 'Health');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (9, 'Beauty', 'Beauty');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (10, 'Clothing', 'Clothing');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (11, 'Shopping', 'Shopping');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (12, 'General Communication', 'General Communication');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (13, 'Amusement', 'Amusement');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (14, 'Nature', 'Nature');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (15, 'Petcare', 'Petcare');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (16, 'Grocery Store', 'Grocery Store');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (17, 'Family Members', 'Family Members');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (18, 'Exercise', 'Exercise');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (19, 'Dinner', 'Dinner');
 
 COMMIT;
 
