@@ -124,8 +124,8 @@ public class Expression {
 
 	@Override
 	public String toString() {
-		return "Expression [id=" + id + ", name=" + name + ", phrase=" + phrase + ", soundboardExpressions="
-				+ soundboardExpressions + ", user=" + user + ", image=" + image + "]";
+		return "Expression [id=" + id + ", name=" + name + ", phrase=" + phrase + ", user=" + user + ", image=" + image
+				+ "]";
 	}
 
 }

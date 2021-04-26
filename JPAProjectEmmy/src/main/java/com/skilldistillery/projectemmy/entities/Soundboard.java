@@ -12,9 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.OneToMany;
-
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -44,7 +42,7 @@ public class Soundboard {
 	private Boolean isDefault;
 	
 	
-	@OneToMany(orphanRemoval=true, mappedBy="soundboard")
+	@OneToMany(orphanRemoval = true, mappedBy="soundboard")
 	private List<SoundboardExpression> soundboardExpressions;
 	
 	@ManyToMany
@@ -171,8 +169,7 @@ public class Soundboard {
 	@Override
 	public String toString() {
 		return "Soundboard [id=" + id + ", name=" + name + ", isPublic=" + isPublic + ", description=" + description
-				+ ", createDate=" + createDate + ", isDefault=" + isDefault + ", soundboardExpressions="
-				+ soundboardExpressions + ", categories=" + categories + ", user=" + user + "]";
+				+ ", createDate=" + createDate + ", isDefault=" + isDefault + ", user=" + user + "]";
 	}
 
 }

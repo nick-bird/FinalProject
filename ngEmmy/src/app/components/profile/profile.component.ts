@@ -181,10 +181,14 @@ export class ProfileComponent implements OnInit {
   addSoundboard(): void {
     this.newSoundboard.categories = this.addCategories;
     this.newSoundboard.soundboardExpressions = this.addSoundboardExpressions;
+    console.log(this.newSoundboard);
+
     this.soundboardService.create(this.newSoundboard).subscribe(
       (data) => {
         this.newSoundboard = data;
         this.displaySoundboard(this.newSoundboard);
+        console.log(this.newSoundboard);
+
         this.reload();
         this.newSoundboard = new Soundboard();
       },
