@@ -50,4 +50,13 @@ return this.http.put<User>(this.baseUrl + 'deactivate/' +  user.id, user).pipe(c
     return httpOptions;
   }
 
+
+updateUser(user: User){
+  console.log(user.id);
+  return this.http.put<User>(this.baseUrl + 'update', this.getHttpOptions).pipe(catchError((err: any) => {
+    console.log(err);
+    return throwError('Error updating users profile');
+  })
+
+  );}
 }
