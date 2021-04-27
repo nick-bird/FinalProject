@@ -107,6 +107,9 @@ export class ProfileComponent implements OnInit {
   }
 
   loadUserExpressions() {
+    this.editSoundboard = null;
+    this.editExpression = null;
+    this.createSoundboard = false;
     this.selectedSoundboard = null;
     this.selectedExpression = null;
     this.selectedPublicSoundboard = null;
@@ -130,6 +133,9 @@ export class ProfileComponent implements OnInit {
   }
 
   loadDefaultExpressions() {
+    this.editExpression = null;
+    this.editSoundboard = null;
+    this.createSoundboard = false;
     this.selectedSoundboard = null;
     this.selectedExpression = null;
     this.selectedPublicSoundboard = null;
@@ -153,6 +159,9 @@ export class ProfileComponent implements OnInit {
   }
 
   loadPublicSoundboards() {
+    this.editExpression = null;
+    this.editSoundboard = null;
+    this.createSoundboard = false;
     this.selectedSoundboard = null;
     this.selectedExpression = null;
     this.selectedPublicSoundboard = null;
@@ -178,6 +187,9 @@ export class ProfileComponent implements OnInit {
   }
 
   loadPublicExpressions() {
+    this.editExpression = null;
+    this.editSoundboard = null;
+    this.createSoundboard = false;
     this.selectedSoundboard = null;
     this.selectedExpression = null;
     this.selectedPublicSoundboard = null;
@@ -323,6 +335,9 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleSoundBoard() {
+    this.editExpression = null;
+    this.createSoundboard = false;
+    this.editSoundboard = null;
     this.selectedSoundboard = null;
     this.selectedExpression = null;
     this.selectedPublicSoundboard = null;

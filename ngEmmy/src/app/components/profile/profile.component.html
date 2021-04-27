@@ -80,7 +80,8 @@
 
  <!-- create Soundboard -->
 
-   <div *ngIf="createSoundboard" >
+   <div style="text-align: center;" *ngIf="createSoundboard" >
+    <br><br>
     <h2>Create new soundboard</h2>
    <input type="text" placeholder="Name" [(ngModel)]="newSoundboard.name"/><br />
    <input type="text" name="description" placeholder="Description" [(ngModel)]="newSoundboard.description"/><br /> <br>
@@ -96,7 +97,7 @@
 <hr>
  <h2>Expressions: </h2>
 
- <div style="border:2px solid #ccc; width:300px; height: 300px; overflow-y: scroll;">
+ <div style="border:2px solid #ccc; width:300px; height: 300px; text-align: center; overflow-y: scroll;">
   <div  *ngFor="let exp of expressions">
     <input  type="checkbox" (change)='addExpressions(exp)'>
     <label>{{exp.name}}</label>
@@ -156,7 +157,7 @@
    <mat-icon>add</mat-icon>
  </button> <br><br>
 
-  <div *ngIf="createExpression" >
+  <div *ngIf="createExpression" style="text-align: center;" >
     <h2>Create new expression</h2>
     <input type="text" placeholder="Name" [(ngModel)]="newExpression.name"/><br /><br>
     <input type="text" name="phrase" placeholder="Phrase" [(ngModel)]="newExpression.phrase"/><br /><br>
@@ -193,6 +194,7 @@
 
   <!-- SoundBoard Details -->
   <div *ngIf="selectedSoundboard && !editSoundboard">
+    <br><br>
     <h2>{{ selectedSoundboard.name }}</h2>
     <blockquote>{{ selectedSoundboard.description }}</blockquote>
     <h4>Categories:</h4>
@@ -200,7 +202,7 @@
       <li *ngFor="let cat of selectedSoundboard.categories">{{ cat.name }}</li>
     </ul>
     <h4>Expressions:</h4>
-    <mat-grid-list cols="5" rowHeight="1:1">
+    <mat-grid-list cols="5" rowHeight="1:1" >
       <mat-grid-tile (click)="playSoundInside(exp.expression)" *ngFor="let exp of selectedSoundboard.soundboardExpressions">
         <img height="150 !important" width="150 !important" [src]="exp.expression.image.imageUrl" />
       </mat-grid-tile>
@@ -222,6 +224,7 @@
 
   <!-- Expression Information -->
   <div *ngIf="selectedExpression && !editExpression">
+    <br><br>
     <h2>{{ selectedExpression.name }}</h2>
     <blockquote>{{ selectedExpression.phrase }}</blockquote>
     <h4>Image:</h4>
@@ -275,6 +278,7 @@
       <label>{{cat.name}}</label>
     </div>
     </div>
+<br> <br>
 
   <h2>Expressions: </h2>
 
@@ -318,6 +322,7 @@ class="container" name="allExpressions"
 
  <!-- Public SoundBoard Details -->
  <div *ngIf="selectedPublicSoundboard && !editSoundboard">
+   <br><br>
   <h2>{{ selectedPublicSoundboard.name }}</h2>
   <blockquote>{{ selectedPublicSoundboard.description }}</blockquote>
   <h4>Categories:</h4>
