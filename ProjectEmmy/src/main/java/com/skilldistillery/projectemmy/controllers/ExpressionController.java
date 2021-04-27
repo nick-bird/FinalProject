@@ -28,7 +28,7 @@ public class ExpressionController {
 	@Autowired
 	private ExpressionService expSvc;
 	
-	private String username = "admin";
+	private String username = "default";
 	
 	
 	@GetMapping("expressions")

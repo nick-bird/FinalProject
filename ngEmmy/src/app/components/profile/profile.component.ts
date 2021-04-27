@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
   expressions: Expression[] = [];
   selectedSoundboard: Soundboard = null;
   selectedExpression: Expression = null;
+  selectedPublicSoundboard : Soundboard = null;
 
   userExpressions: Expression[] = [];
   userSoundboards: Soundboard[] = [];
@@ -72,17 +73,21 @@ export class ProfileComponent implements OnInit {
   user:User;
   selectedVoice = "Evie";
 
+  counter(i: number) {
+    return new Array(i);
+}
+
   reload() {
     this.tabIsActive1 = true;
     this.publicSBBool = false;
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
-
+        this.loadPublicExpressions()
         // These Don't need to be loaded from the start
-       // this.loadUserExpressions();
-       // this.loadDefaultExpressions();
-       // this.loadPublicSoundboards();
+      //  this.loadUserExpressions();
+      //  this.loadDefaultExpressions();
+      //  this.loadPublicSoundboards();
       },
       (err) => {
         console.log('Error loading soundboards: ' + err);
@@ -142,15 +147,27 @@ export class ProfileComponent implements OnInit {
     this.tabIsActive2 = false;
     this.tabIsActive3 = false;
     this.userExpressionbool = false;
-    console.log(this.publicSoundboards);
+
 
     this.soundboardService.indexPublic().subscribe(
       (data) => {
         this.publicSoundboards = data;
-        console.log(this.publicSoundboards);
+
       },
       (err) => {
         console.log('Error loading public soundboards: ' + err);
+      }
+    );
+  }
+
+  loadPublicExpressions() {
+
+    this.expressionService.indexPublic().subscribe(
+      (data) => {
+        this.expressions = data;
+      },
+      (err) => {
+        console.log('Error loading public expressions: ' + err);
       }
     );
   }
@@ -159,6 +176,7 @@ export class ProfileComponent implements OnInit {
     this.imageService.create(this.newImage).subscribe(
       (data) => {
         this.createdImage = data;
+        this.addExpression();
       },
       (err) => {
         console.log('Error creating image: ' + err);
@@ -168,6 +186,10 @@ export class ProfileComponent implements OnInit {
 
   displaySoundboard(soundboard: Soundboard): void {
     this.selectedSoundboard = soundboard;
+  }
+
+  displayPublicSoundboard(soundboard: Soundboard): void {
+    this.selectedPublicSoundboard = soundboard;
   }
 
   displayExpression(expression: Expression): void {
@@ -188,8 +210,6 @@ export class ProfileComponent implements OnInit {
       (data) => {
         this.newSoundboard = data;
         this.displaySoundboard(this.newSoundboard);
-        console.log(this.newSoundboard);
-
         this.reload();
         this.newSoundboard = new Soundboard();
       },
@@ -200,10 +220,7 @@ export class ProfileComponent implements OnInit {
   }
 
   addExpression(): void {
-    console.log(this.newExpression);
-
     this.newExpression.image = this.createdImage;
-
     this.expressionService.create(this.newExpression).subscribe(
       (data) => {
         this.newExpression = data;
