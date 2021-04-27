@@ -2,7 +2,6 @@ package com.skilldistillery.projectemmy.services;
 
 import java.util.List;
 
-import org.springframework.aop.interceptor.SimpleAsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
