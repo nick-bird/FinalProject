@@ -3,8 +3,8 @@
   <br>
   <div *ngIf="lockedbool">
     <br>
-    <input type="password" name="unlock" [(ngModel)]='checkUser.password'>
-    <button (click)="unlock()">Unlock</button>
+    <input type="password" name="unlock" [(ngModel)]='checkUser'>
+    <button (click)="getUser()">Unlock</button>
   </div>
   <br>
   <h3>Locked</h3>
@@ -78,44 +78,48 @@
 
    <!-- SoundBoard Grid -->
 
+ <!-- create Soundboard -->
+
+   <div *ngIf="createSoundboard" >
+    <h2>Create new soundboard</h2>
+   <input type="text" placeholder="Name" [(ngModel)]="newSoundboard.name"/><br />
+   <input type="text" name="description" placeholder="Description" [(ngModel)]="newSoundboard.description"/><br /> <br>
+   Let others see this soundboard : <input type="checkbox"  name="isPublic" [(ngModel)]="newSoundboard.isPublic"/> <br> <br>
+   <h2>Categories: </h2>
+<br>
+<div style="border:2px solid #ccc; width:300px; height: 300px; overflow-y: scroll;">
+   <div  *ngFor="let cat of categories">
+     <input  type="checkbox" (change)='addCategoriesToSoundboard(cat)' >
+     <label>{{cat.name}}</label>
+   </div>
+  </div>
+<hr>
+ <h2>Expressions: </h2>
+
+ <div style="border:2px solid #ccc; width:300px; height: 300px; overflow-y: scroll;">
+  <div  *ngFor="let exp of expressions">
+    <input  type="checkbox" (change)='addExpressions(exp)'>
+    <label>{{exp.name}}</label>
+  </div>
+ </div>
+
+   <br><br>
+   <input class="btn btn-primary" type="submit" value="Add SoundBoard" (click)="addSoundboard(newSoundboard); createSoundboard = false"/>
+   <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="createSoundboard = false"/>
+   <br>
+   <br>
+ </div>
+
+
       <div
         class="container"
         name="expressionGrid"
-        *ngIf="!selectedSoundboard && !selectedExpression && soundboardBool">
+        *ngIf="!selectedSoundboard && !selectedExpression && soundboardBool && !createSoundboard">
 
-
-
-         <!-- create Soundboard -->
           <br>
          <button (click)="createSoundboard = true;" mat-fab color="blue" aria-label="Example icon button with a delete icon">
           <mat-icon>add</mat-icon>
         </button> <br><br>
-
-   <div *ngIf="createSoundboard" >
-     <h2>Create new soundboard</h2>
-    <input type="text" placeholder="Name" [(ngModel)]="newSoundboard.name"/><br />
-    <input type="text" name="description" placeholder="Description" [(ngModel)]="newSoundboard.description"/><br /> <br>
-    Let others see this soundboard : <input type="checkbox"  name="isPublic" [(ngModel)]="newSoundboard.isPublic"/> <br> <br>
-    <h2>Categories: </h2>
-    <div *ngFor="let cat of categories">
-      <input  type="checkbox" (change)='addCategoriesToSoundboard(cat)' >
-      <label>{{cat.name}}</label>
-    </div>
-
-  <h2>Expressions: </h2>
-
-    <div *ngFor="let exp of userExpressions">
-      <input  type="checkbox" (change)='addExpressions(exp)'>
-      <label>{{exp.name}}</label>
-    </div>
-
-    <br><br>
-    <input class="btn btn-primary" type="submit" value="Add SoundBoard" (click)="addSoundboard(newSoundboard); createSoundboard = false"/>
-    <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="createSoundboard = false"/>
-    <br>
-    <br>
-  </div>
-
 
         <h3>SoundBoard Grid</h3>
         <mat-grid-list  cdkDropList cols="2" rowHeight="1:1" >
@@ -151,21 +155,22 @@
 
   <div *ngIf="createExpression" >
     <h2>Create new expression</h2>
-    <input type="text" placeholder="Name" [(ngModel)]="newExpression.name"/><br />
-    <input type="text" name="phrase" placeholder="Phrase" [(ngModel)]="newExpression.phrase"/><br />
-    <input type="text" name="imageUrl" (change)='createImage()' placeholder="Image Url" [(ngModel)]="newImage.imageUrl"/><br />
+    <input type="text" placeholder="Name" [(ngModel)]="newExpression.name"/><br /><br>
+    <input type="text" name="phrase" placeholder="Phrase" [(ngModel)]="newExpression.phrase"/><br /><br>
+    <input type="text" name="imageUrl" placeholder="Image Url" [(ngModel)]="newImage.imageUrl"/><br /><br>
 
-    <input class="btn btn-primary" type="submit" value="Add Expression" (click)="addExpression(newExpression); createExpression = false"/>
+    <input class="btn btn-primary" type="submit" value="Add Expression" (click)=" createImage(); createExpression = false"/>
     <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="createExpression = false"/>
     <br>
     <br>
+    <hr>
   </div>
 
     <h1>Expressions</h1>
     <mat-grid-list cols="2" rowHeight="1:1">
       <mat-grid-tile *ngFor="let exp of userExpressions">
       <div class="card" style="width: 18rem">
-        <img (click)="displayExpression(exp)" class="card-img-top" [src]="exp.image.imageUrl"/>
+        <img height="200" width="250" class="card-img-top" (click)="displayExpression(exp)" class="card-img-top" [src]="exp.image.imageUrl"/>
         <div class="card-body">
           <h5 class="card-title">{{exp.name}}</h5>
           <!-- <p class="card-text">{{exp.phrase }}</p> -->
@@ -187,9 +192,12 @@
       <li *ngFor="let cat of selectedSoundboard.categories">{{ cat.name }}</li>
     </ul>
     <h4>Expressions:</h4>
-    <div *ngFor="let exp of selectedSoundboard.soundboardExpressions">
-      <img [src]="exp.expression.image.imageUrl" />
-    </div>
+    <mat-grid-list cols="5" rowHeight="1:1">
+      <mat-grid-tile *ngFor="let exp of selectedSoundboard.soundboardExpressions">
+        <img height="150 !important" width="150 !important" [src]="exp.expression.image.imageUrl" />
+      </mat-grid-tile>
+    </mat-grid-list>
+
     <br />
     <button class="btn btn-success" (click)="setEditSoundboard()">Edit</button>
     <button class="btn btn-danger" (click)="displaySoundboard()">Back</button>
@@ -202,7 +210,7 @@
     <h2>{{ selectedExpression.name }}</h2>
     <blockquote>{{ selectedExpression.phrase }}</blockquote>
     <h4>Image:</h4>
-    <img [src]="selectedExpression.image.imageUrl" />
+    <img height="200" width="250" [src]="selectedExpression.image.imageUrl" />
     <br />
     <button class="btn btn-success" (click)="setEditExpression()">Edit</button>
     <button class="btn btn-danger" (click)="displayExpression()">Back</button>
@@ -215,7 +223,7 @@
   Name : <input type="text" name="name" placeholder="{{selectedExpression.name}}" [(ngModel)]="editExpression.name"> <br> <br>
   Phrase : <input type="text" name="phrase" placeholder="{{selectedExpression.phrase}}" [(ngModel)]="editExpression.phrase"> <br> <br>
   Image: <input type="text" name="amount" placeholder="{{selectedExpression.image.imageUrl}}" [(ngModel)]="editExpression.image.imageUrl"/><br /> <br>
-  <img [src]="selectedExpression.image.imageUrl"/>
+  <img height="200" width="250" [src]="selectedExpression.image.imageUrl"/>
   <br> <br>
   <input class="btn btn-outline-success" type="submit" value="Save" (click)="updateExpression(editExpression)"/>
   <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="editExpression = null"/>
@@ -231,17 +239,22 @@
     Description : <input type="text" name="phrase" placeholder="{{selectedSoundboard.description}}" [(ngModel)]="editSoundboard.description"> <br> <br>
     Let others see this soundboard : <input type="checkbox"  name="isPublic" [(ngModel)]="editSoundboard.isPublic"/> <br> <br>
     <h2>Categories: </h2>
+
+    <div style="border:2px solid #ccc; width:300px; height: 300px; overflow-y: scroll;">
     <div *ngFor="let cat of categories">
       <input  type="checkbox" (change)='updateCategories(cat)' [checked]="containsCategory(cat)" >
       <label>{{cat.name}}</label>
     </div>
+    </div>
 
   <h2>Expressions: </h2>
 
-    <div *ngFor="let exp of userExpressions">
+  <div style="border:2px solid #ccc; width:300px; height: 300px; overflow-y: scroll;">
+    <div *ngFor="let exp of expressions">
       <input  type="checkbox" (change)='updateExpressions(exp)' [checked]="containsExpression(exp)">
       <label>{{exp.name}}</label>
     </div>
+  </div>
 
     <br> <br>
     <input class="btn btn-outline-success" type="submit" value="Save" (click)="updateSoundboard(editSoundboard)"/>
@@ -254,9 +267,9 @@ class="container" name="allExpressions"
 *ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool && allExpressionsbool">
 <h1> All Expressions</h1>
 <mat-grid-list cols="2" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let exp of userExpressions">
+  <mat-grid-tile *ngFor="let exp of defaultExpressions">
   <div class="card" style="width: 18rem">
-    <img class="card-img-top" [src]="exp.image.imageUrl"/>
+    <img height="200" width="250" class="card-img-top" [src]="exp.image.imageUrl"/>
     <div class="card-body">
       <h5 class="card-title">{{exp.name}}</h5>
       <!-- <p class="card-text">{{exp.phrase }}</p> -->
@@ -267,15 +280,33 @@ class="container" name="allExpressions"
 </div>
 
 <!-- Community SoundBoard Tab -->
-  <div *ngIf="publicSBBool">
+
+ <!-- Public SoundBoard Details -->
+ <div *ngIf="selectedPublicSoundboard && !editSoundboard">
+  <h2>{{ selectedPublicSoundboard.name }}</h2>
+  <blockquote>{{ selectedPublicSoundboard.description }}</blockquote>
+  <h4>Categories:</h4>
+  <ul>
+    <li *ngFor="let cat of selectedPublicSoundboard.categories">{{ cat.name }}</li>
+  </ul>
+  <h4>Expressions:</h4>
+
+    <mat-grid-list cols="5" rowHeight="1:1">
+      <mat-grid-tile *ngFor="let exp of selectedPublicSoundboard.soundboardExpressions">
+        <img height="150 !important" width="150 !important" [src]="exp.expression.image.imageUrl" />
+      </mat-grid-tile>
+    </mat-grid-list>
+
+  <br />
+  <button class="btn btn-danger" (click)="loadPublicSoundboards(); tabIsActive4 = !tabIsActive4; selectedPublicSoundboard = null">Back</button>
+</div>
+
+  <div *ngIf="publicSBBool && !selectedPublicSoundboard">
   <h3>Community SoundBoards</h3>
   <mat-grid-list cols="2" rowHeight="1:1">
     <mat-grid-tile *ngFor="let sb of publicSoundboards">
-      <button (click)="pushSB(sb);" mat-fab color="blue">
-        <mat-icon>add</mat-icon>
-      </button>
       <div class="card" style="width: 18rem">
-        <img (click)="displaySoundboard(sb)"
+        <img (click)="displayPublicSoundboard(sb)"
           src="https://sourcekids.com.au/wp-content/uploads/2018/04/Screen-Shot-2019-04-02-at-12-600x400.jpg"
           class="card-img-top"
           alt="..."
@@ -288,6 +319,7 @@ class="container" name="allExpressions"
     </mat-grid-tile>
   </mat-grid-list>
   </div>
+
 
 </main>
 
