@@ -305,9 +305,6 @@ class="container" name="allExpressions"
   <h3>Community SoundBoards</h3>
   <mat-grid-list cols="2" rowHeight="1:1">
     <mat-grid-tile *ngFor="let sb of publicSoundboards">
-      <button (click)="pushSB();" mat-fab color="blue" [(ngModel)]="sb">
-        <mat-icon>add</mat-icon>
-      </button>
       <div class="card" style="width: 18rem">
         <img (click)="displayPublicSoundboard(sb)"
           src="https://sourcekids.com.au/wp-content/uploads/2018/04/Screen-Shot-2019-04-02-at-12-600x400.jpg"
