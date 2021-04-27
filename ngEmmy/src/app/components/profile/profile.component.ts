@@ -23,7 +23,8 @@ export class ProfileComponent implements OnInit {
     private expressionService: ExpressionService,
     private catService: CategoryService,
     private imageService: ImageService,
-    private userService: UserService
+    private userServ: UserService
+
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
   expressions: Expression[] = [];
   selectedSoundboard: Soundboard = null;
   selectedExpression: Expression = null;
+  selectedPublicSoundboard : Soundboard = null;
 
   userExpressions: Expression[] = [];
   userSoundboards: Soundboard[] = [];
@@ -70,6 +72,11 @@ export class ProfileComponent implements OnInit {
 
   checkUser:User = new User();
   user:User;
+  selectedVoice = "Evie";
+
+  counter(i: number) {
+    return new Array(i);
+}
 
   reload() {
     this.tabIsActive1 = true;
@@ -77,11 +84,11 @@ export class ProfileComponent implements OnInit {
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
-
+        this.loadPublicExpressions()
         // These Don't need to be loaded from the start
-       // this.loadUserExpressions();
-       // this.loadDefaultExpressions();
-       // this.loadPublicSoundboards();
+      //  this.loadUserExpressions();
+      //  this.loadDefaultExpressions();
+      //  this.loadPublicSoundboards();
       },
       (err) => {
         console.log('Error loading soundboards: ' + err);
@@ -141,15 +148,27 @@ export class ProfileComponent implements OnInit {
     this.tabIsActive2 = false;
     this.tabIsActive3 = false;
     this.userExpressionbool = false;
-    console.log(this.publicSoundboards);
+
 
     this.soundboardService.indexPublic().subscribe(
       (data) => {
         this.publicSoundboards = data;
-        console.log(this.publicSoundboards);
+
       },
       (err) => {
         console.log('Error loading public soundboards: ' + err);
+      }
+    );
+  }
+
+  loadPublicExpressions() {
+
+    this.expressionService.indexPublic().subscribe(
+      (data) => {
+        this.expressions = data;
+      },
+      (err) => {
+        console.log('Error loading public expressions: ' + err);
       }
     );
   }
@@ -158,6 +177,7 @@ export class ProfileComponent implements OnInit {
     this.imageService.create(this.newImage).subscribe(
       (data) => {
         this.createdImage = data;
+        this.addExpression();
       },
       (err) => {
         console.log('Error creating image: ' + err);
@@ -167,6 +187,10 @@ export class ProfileComponent implements OnInit {
 
   displaySoundboard(soundboard: Soundboard): void {
     this.selectedSoundboard = soundboard;
+  }
+
+  displayPublicSoundboard(soundboard: Soundboard): void {
+    this.selectedPublicSoundboard = soundboard;
   }
 
   displayExpression(expression: Expression): void {
@@ -181,6 +205,8 @@ export class ProfileComponent implements OnInit {
   addSoundboard(): void {
     this.newSoundboard.categories = this.addCategories;
     this.newSoundboard.soundboardExpressions = this.addSoundboardExpressions;
+    console.log(this.newSoundboard);
+
     this.soundboardService.create(this.newSoundboard).subscribe(
       (data) => {
         this.newSoundboard = data;
@@ -195,10 +221,7 @@ export class ProfileComponent implements OnInit {
   }
 
   addExpression(): void {
-    console.log(this.newExpression);
-
     this.newExpression.image = this.createdImage;
-
     this.expressionService.create(this.newExpression).subscribe(
       (data) => {
         this.newExpression = data;
@@ -406,10 +429,35 @@ export class ProfileComponent implements OnInit {
 
   lock(){
     this.lockedbool = true;
-    // this.navBar.lockedbool = true;
+    this.selectedSoundboard = null;
   }
   unlock(){
     this.lockedbool = false;
     this.selectedSoundboard = null;
   }
+
+  playSound(expression: Expression){
+    this.selectedExpression = expression;
+    this.expressionService.textToSpeech(this.selectedVoice, this.selectedExpression.phrase).subscribe;
+    this.expressionService.playAudio(this.selectedVoice, this.selectedExpression.phrase);
+  }
+
+  pushSB(sb:Soundboard){
+    this.getUser();
+    this.user.soundboards.push(sb);
+    this.userServ.updateUser(this.user);
+  }
+
+  getUser(){
+    return this.userServ.getUser().subscribe(
+      (data) =>{
+        this.user = data
+      },
+      (err) =>{
+        console.log(err + "getting user");
+
+      }
+    )
+  }
+
 }

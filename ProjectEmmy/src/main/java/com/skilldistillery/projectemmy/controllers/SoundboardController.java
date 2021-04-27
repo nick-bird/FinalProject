@@ -69,7 +69,8 @@ public class SoundboardController {
 
 	
 	@PutMapping("soundboards/{sid}")
-	public Soundboard update(HttpServletRequest req, HttpServletResponse res, @PathVariable int sid,@RequestBody Soundboard soundboard, Principal principal) {
+	public Soundboard update(HttpServletRequest req, HttpServletResponse res,
+			@PathVariable int sid,@RequestBody Soundboard soundboard, Principal principal) {
 		
 		try {
 			soundboard = soundSvc.update(principal.getName(),sid,soundboard);

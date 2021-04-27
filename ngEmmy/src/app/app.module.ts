@@ -23,6 +23,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { GridTestComponent } from './components/grid-test/grid-test.component';
 import { TryComponent } from './components/try/try.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -47,6 +49,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     MatGridListModule,
     MatButtonModule,
     MatIconModule,
+    MatSidenavModule,
+    DragDropModule
+
 
   ],
   providers: [
