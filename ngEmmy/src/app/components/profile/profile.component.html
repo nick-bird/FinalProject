@@ -36,7 +36,7 @@
       <mat-grid-tile (click)="playSound(exp.expression)" *ngFor="let exp of selectedSoundboard.soundboardExpressions">
       <div class="card" style="width: 18rem">
         <!-- click event needs to be play sound -->
-        <img class="card-img-top" [src]="exp.expression.image.imageUrl"/>
+        <img height="200" width="250" class="card-img-top" [src]="exp.expression.image.imageUrl"/>
         <div class="card-body">
           <h5 class="card-title">{{exp.expression.name}}</h5>
           <!-- <p class="card-text">{{exp.phrase }}</p> -->
@@ -45,7 +45,6 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-
 </div>
 
 <main *ngIf="!lockedbool">
@@ -96,7 +95,7 @@
 <hr>
  <h3>Expressions: </h3>
 
- <div style="border:2px solid #ccc; width:300px; height: 300px; overflow-y: scroll;">
+ <div style="border:2px solid #ccc; width:300px; height: 300px; text-align: center; overflow-y: scroll;">
   <div  *ngFor="let exp of expressions">
     <input  type="checkbox" (change)='addExpressions(exp)'>
     <label>{{exp.name}}</label>
@@ -156,8 +155,10 @@
    <mat-icon>add</mat-icon>
  </button> <br><br>
 
+
   <div *ngIf="createExpression" >
     <h3>Create new expression</h3>
+
     <input type="text" placeholder="Name" [(ngModel)]="newExpression.name"/><br /><br>
     <input type="text" name="phrase" placeholder="Phrase" [(ngModel)]="newExpression.phrase"/><br /><br>
     <input type="text" name="imageUrl" placeholder="Image Url" [(ngModel)]="newImage.imageUrl"/><br /><br>
@@ -193,6 +194,7 @@
 
   <!-- SoundBoard Details -->
   <div *ngIf="selectedSoundboard && !editSoundboard">
+    <br><br>
     <h2>{{ selectedSoundboard.name }}</h2>
     <blockquote>{{ selectedSoundboard.description }}</blockquote>
     <h4>Categories:</h4>
@@ -200,7 +202,7 @@
       <li *ngFor="let cat of selectedSoundboard.categories">{{ cat.name }}</li>
     </ul>
     <h4>Expressions:</h4>
-    <mat-grid-list cols="5" rowHeight="1:1">
+    <mat-grid-list cols="5" rowHeight="1:1" >
       <mat-grid-tile (click)="playSoundInside(exp.expression)" *ngFor="let exp of selectedSoundboard.soundboardExpressions">
         <img height="150 !important" width="150 !important" [src]="exp.expression.image.imageUrl" />
       </mat-grid-tile>
@@ -222,6 +224,7 @@
 
   <!-- Expression Information -->
   <div *ngIf="selectedExpression && !editExpression">
+    <br><br>
     <h2>{{ selectedExpression.name }}</h2>
     <blockquote>{{ selectedExpression.phrase }}</blockquote>
     <h4>Image:</h4>
@@ -275,6 +278,7 @@
       <label>{{cat.name}}</label>
     </div>
     </div>
+<br> <br>
 
   <h2>Expressions: </h2>
 
@@ -318,6 +322,7 @@ class="container-fluid" name="allExpressions"
 
  <!-- Public SoundBoard Details -->
  <div *ngIf="selectedPublicSoundboard && !editSoundboard">
+   <br><br>
   <h2>{{ selectedPublicSoundboard.name }}</h2>
   <blockquote>{{ selectedPublicSoundboard.description }}</blockquote>
   <h4>Categories:</h4>
