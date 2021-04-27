@@ -10,6 +10,7 @@ import { ExpressionService } from 'src/app/services/expression.service';
 import { ImageService } from 'src/app/services/image.service';
 import { SoundboardService } from 'src/app/services/soundboard.service';
 import { UserService } from 'src/app/services/user.service';
+import { HomePageComponent } from '../home-page/home-page.component';
 import { NavigationComponent } from '../navigation/navigation.component';
 
 @Component({
@@ -23,7 +24,7 @@ export class ProfileComponent implements OnInit {
     private expressionService: ExpressionService,
     private catService: CategoryService,
     private imageService: ImageService,
-    private userServ: UserService
+    private userServ: UserService,
 
   ) {}
 
@@ -70,7 +71,7 @@ export class ProfileComponent implements OnInit {
   createExpression: boolean = false;
   lockedbool: boolean = false;
 
-  checkUser:User = new User();
+  checkUser = "";
   user:User;
   selectedVoice = "Evie";
 
@@ -432,8 +433,12 @@ export class ProfileComponent implements OnInit {
     this.selectedSoundboard = null;
   }
   unlock(){
-    this.lockedbool = false;
-    this.selectedSoundboard = null;
+
+    if(this.user.username === this.checkUser){
+      this.lockedbool = false;
+      this.selectedSoundboard = null;
+    }
+
   }
 
   playSound(expression: Expression){
@@ -448,16 +453,17 @@ export class ProfileComponent implements OnInit {
   //   this.userServ.updateUser(this.user);
   // }
 
-  // getUser(){
-  //   return this.userServ.getUser().subscribe(
-  //     (data) =>{
-  //       this.user = data
-  //     },
-  //     (err) =>{
-  //       console.log(err + "getting user");
+  getUser(){
+    return this.userServ.getUser().subscribe(
+      (data) =>{
+        this.user = data
+        this.unlock();
+      },
+      (err) =>{
+        console.log(err + "getting user");
 
-  //     }
-  //   )
-  // }
+      }
+    )
+  }
 
 }
