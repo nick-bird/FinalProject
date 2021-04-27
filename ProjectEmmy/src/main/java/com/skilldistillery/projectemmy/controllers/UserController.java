@@ -32,8 +32,8 @@ public class UserController {
 		return authService.getUser(principal.getName());
 	}
 	
-	@PutMapping("userprofile/update")
-	public User userCollections(Principal principal, @RequestBody User user) {
+	@PutMapping("update/userprofile")
+	public User userCollections( @RequestBody User user, Principal principal) {
 		
 	 User managedUser = authService.getUser(principal.getName());
 	managedUser.getExpressions().addAll(user.getExpressions());

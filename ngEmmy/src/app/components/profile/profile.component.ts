@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
 
   soundboards: Soundboard[] = [];
   expressions: Expression[] = [];
+  myExpressions: Expression[] = [];
   selectedSoundboard: Soundboard = null;
   selectedExpression: Expression = null;
 
@@ -45,7 +46,7 @@ export class ProfileComponent implements OnInit {
   newExpression: Expression = new Expression();
   editSoundboard: Soundboard = null;
   editExpression: Expression = null;
-
+  mySoundboards: Soundboard[] = [];
 
   categories: Category[] = [];
 
@@ -71,7 +72,7 @@ export class ProfileComponent implements OnInit {
   lockedbool: boolean = false;
 
   checkUser:User = new User();
-  user:User;
+  user : User = null;
   selectedVoice = "Evie";
 
   reload() {
@@ -80,6 +81,7 @@ export class ProfileComponent implements OnInit {
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
+        this.getUser();
 
         // These Don't need to be loaded from the start
        // this.loadUserExpressions();
@@ -420,15 +422,17 @@ export class ProfileComponent implements OnInit {
   }
 
   pushSB(sb:Soundboard){
-    this.getUser();
-    this.user.soundboards.push(sb);
+    this.mySoundboards.push(sb);
+    this.user.soundboards = this.mySoundboards;
     this.userServ.updateUser(this.user);
+
   }
 
   getUser(){
     return this.userServ.getUser().subscribe(
       (data) =>{
-        this.user = data
+        this.user = data;
+
       },
       (err) =>{
         console.log(err + "getting user");

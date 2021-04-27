@@ -37,6 +37,14 @@ return this.http.put<User>(this.baseUrl + 'deactivate/' +  user.id, user).pipe(c
 );
 }
 
+updateUser(user: User) {
+  console.log(user.id);
+  return this.http.put<User>(this.baseUrl + 'api/update/userprofile/' , user , this.getHttpOptions()).pipe(catchError((err: any) => {
+    console.log(err);
+    return throwError('Error updating users profile');
+  })
+
+  );}
 
  private getHttpOptions(): object {
     const credentials = this.auth.getCredentials();
@@ -51,12 +59,4 @@ return this.http.put<User>(this.baseUrl + 'deactivate/' +  user.id, user).pipe(c
   }
 
 
-updateUser(user: User){
-  console.log(user.id);
-  return this.http.put<User>(this.baseUrl + 'update', this.getHttpOptions).pipe(catchError((err: any) => {
-    console.log(err);
-    return throwError('Error updating users profile');
-  })
-
-  );}
 }

@@ -271,7 +271,7 @@ class="container" name="allExpressions"
   <h3>Community SoundBoards</h3>
   <mat-grid-list cols="2" rowHeight="1:1">
     <mat-grid-tile *ngFor="let sb of publicSoundboards">
-      <button (click)="pushSB();" mat-fab color="blue" [(ngModel)]="sb">
+      <button (click)="pushSB(sb);" mat-fab color="blue">
         <mat-icon>add</mat-icon>
       </button>
       <div class="card" style="width: 18rem">
