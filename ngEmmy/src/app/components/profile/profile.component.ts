@@ -10,6 +10,7 @@ import { ExpressionService } from 'src/app/services/expression.service';
 import { ImageService } from 'src/app/services/image.service';
 import { SoundboardService } from 'src/app/services/soundboard.service';
 import { UserService } from 'src/app/services/user.service';
+import { HomePageComponent } from '../home-page/home-page.component';
 import { NavigationComponent } from '../navigation/navigation.component';
 
 @Component({
@@ -23,7 +24,7 @@ export class ProfileComponent implements OnInit {
     private expressionService: ExpressionService,
     private catService: CategoryService,
     private imageService: ImageService,
-    private userServ: UserService
+    private userServ: UserService,
 
   ) {}
 
@@ -70,7 +71,7 @@ export class ProfileComponent implements OnInit {
   createExpression: boolean = false;
   lockedbool: boolean = false;
 
-  checkUser:User = new User();
+  checkUser = "";
   user:User;
   selectedVoice = "Evie";
 
@@ -112,6 +113,8 @@ export class ProfileComponent implements OnInit {
     this.allExpressionsbool = false;
     this.userExpressionbool = true;
     this.publicSBBool = false;
+    this.selectedSoundboard = null;
+    this.selectedExpression = null;
     this.expressionService.index().subscribe(
       (data) => {
         this.userExpressions = data;
@@ -130,6 +133,8 @@ export class ProfileComponent implements OnInit {
     this.tabIsActive4 = false;
     this.userExpressionbool = false;
     this.publicSBBool = false;
+    this.selectedExpression = null;
+    this.selectedSoundboard = null;
     this.expressionService.indexDefaultExpressions().subscribe(
       (data) => {
         this.defaultExpressions = data;
@@ -148,7 +153,8 @@ export class ProfileComponent implements OnInit {
     this.tabIsActive2 = false;
     this.tabIsActive3 = false;
     this.userExpressionbool = false;
-
+    this.selectedExpression = null;
+    this.selectedSoundboard = null;
 
     this.soundboardService.indexPublic().subscribe(
       (data) => {
@@ -308,6 +314,8 @@ export class ProfileComponent implements OnInit {
     this.tabIsActive4 = false;
     this.userExpressionbool = false;
     this.publicSBBool = false;
+    this.selectedSoundboard = null;
+    this.selectedExpression = null;
     if (!this.soundboardBool) {
       return (this.soundboardBool = true);
     }
@@ -432,8 +440,12 @@ export class ProfileComponent implements OnInit {
     this.selectedSoundboard = null;
   }
   unlock(){
-    this.lockedbool = false;
-    this.selectedSoundboard = null;
+
+    if(this.user.username === this.checkUser){
+      this.lockedbool = false;
+      this.selectedSoundboard = null;
+    }
+
   }
 
   playSound(expression: Expression){
@@ -442,16 +454,17 @@ export class ProfileComponent implements OnInit {
     this.expressionService.playAudio(this.selectedVoice, this.selectedExpression.phrase);
   }
 
-  pushSB(sb:Soundboard){
-    this.getUser();
-    this.user.soundboards.push(sb);
-    this.userServ.updateUser(this.user);
-  }
+  // pushSB(sb:Soundboard){
+  //   this.getUser();
+  //   this.user.soundboards.push(sb);
+  //   this.userServ.updateUser(this.user);
+  // }
 
   getUser(){
     return this.userServ.getUser().subscribe(
       (data) =>{
         this.user = data
+        this.unlock();
       },
       (err) =>{
         console.log(err + "getting user");
