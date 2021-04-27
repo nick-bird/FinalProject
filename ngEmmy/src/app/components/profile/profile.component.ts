@@ -442,22 +442,22 @@ export class ProfileComponent implements OnInit {
     this.expressionService.playAudio(this.selectedVoice, this.selectedExpression.phrase);
   }
 
-  pushSB(sb:Soundboard){
-    this.getUser();
-    this.user.soundboards.push(sb);
-    this.userServ.updateUser(this.user);
-  }
+  // pushSB(sb:Soundboard){
+  //   this.getUser();
+  //   this.user.soundboards.push(sb);
+  //   this.userServ.updateUser(this.user);
+  // }
 
-  getUser(){
-    return this.userServ.getUser().subscribe(
-      (data) =>{
-        this.user = data
-      },
-      (err) =>{
-        console.log(err + "getting user");
+  // getUser(){
+  //   return this.userServ.getUser().subscribe(
+  //     (data) =>{
+  //       this.user = data
+  //     },
+  //     (err) =>{
+  //       console.log(err + "getting user");
 
-      }
-    )
-  }
+  //     }
+  //   )
+  // }
 
 }
