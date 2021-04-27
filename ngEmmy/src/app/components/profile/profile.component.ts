@@ -113,6 +113,8 @@ export class ProfileComponent implements OnInit {
     this.allExpressionsbool = false;
     this.userExpressionbool = true;
     this.publicSBBool = false;
+    this.selectedSoundboard = null;
+    this.selectedExpression = null;
     this.expressionService.index().subscribe(
       (data) => {
         this.userExpressions = data;
@@ -131,6 +133,8 @@ export class ProfileComponent implements OnInit {
     this.tabIsActive4 = false;
     this.userExpressionbool = false;
     this.publicSBBool = false;
+    this.selectedExpression = null;
+    this.selectedSoundboard = null;
     this.expressionService.indexDefaultExpressions().subscribe(
       (data) => {
         this.defaultExpressions = data;
@@ -149,7 +153,8 @@ export class ProfileComponent implements OnInit {
     this.tabIsActive2 = false;
     this.tabIsActive3 = false;
     this.userExpressionbool = false;
-
+    this.selectedExpression = null;
+    this.selectedSoundboard = null;
 
     this.soundboardService.indexPublic().subscribe(
       (data) => {
@@ -309,6 +314,8 @@ export class ProfileComponent implements OnInit {
     this.tabIsActive4 = false;
     this.userExpressionbool = false;
     this.publicSBBool = false;
+    this.selectedSoundboard = null;
+    this.selectedExpression = null;
     if (!this.soundboardBool) {
       return (this.soundboardBool = true);
     }
