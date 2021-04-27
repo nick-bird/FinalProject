@@ -84,11 +84,11 @@ export class ProfileComponent implements OnInit {
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
-
+        this.loadUserExpressions();
         this.loadPublicExpressions()
 
         // These Don't need to be loaded from the start
-      //  this.loadUserExpressions();
+
       //  this.loadDefaultExpressions();
       //  this.loadPublicSoundboards();
       },
