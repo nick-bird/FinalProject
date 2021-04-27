@@ -3,8 +3,8 @@
   <br>
   <div *ngIf="lockedbool">
     <br>
-    <input type="password" name="unlock" [(ngModel)]='checkUser.password'>
-    <button (click)="unlock()">Unlock</button>
+    <input type="password" name="unlock" [(ngModel)]='checkUser'>
+    <button (click)="getUser()">Unlock</button>
   </div>
   <br>
   <h3>Locked</h3>
