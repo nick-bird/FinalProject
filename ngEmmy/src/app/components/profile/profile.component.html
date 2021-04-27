@@ -328,7 +328,7 @@ class="container" name="allExpressions"
 
     <mat-grid-list cols="5" rowHeight="1:1">
       <mat-grid-tile *ngFor="let exp of selectedPublicSoundboard.soundboardExpressions">
-        <img height="150 !important" width="150 !important" [src]="exp.expression.image.imageUrl" />
+        <img (click)="playSoundInside(exp.expression)" height="150 !important" width="150 !important" [src]="exp.expression.image.imageUrl" />
       </mat-grid-tile>
     </mat-grid-list>
 
