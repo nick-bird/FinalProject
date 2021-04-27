@@ -2,7 +2,8 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="false">
 
   <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#">Project Emmy</a></mdb-navbar-brand>
+  <mdb-navbar-brand><a class="navbar-brand" *ngIf = 'loggedIn()' [routerLink]="['/profile']">Project Emmy</a></mdb-navbar-brand>
+  <mdb-navbar-brand><a class="navbar-brand" *ngIf = '!loggedIn()'>Project Emmy</a></mdb-navbar-brand>
 
   <!-- Collapsible content -->
   <links>
@@ -12,20 +13,14 @@
       <li class="nav-item active" *ngIf = '!loggedIn()'>
         <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">Home<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item" *ngIf = 'loggedIn()'>
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/userprofile']">My profile</a>
+      <li class="nav-item active" *ngIf = 'loggedIn()'>
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/userprofile']">My Profile<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">About us</a>
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">About Us</a>
       </li>
       <li class="nav-item" *ngIf = '!loggedIn()'>
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/try']">Try it out!</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">FAQ</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">Contact us</a>
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/try']">Try It Out!</a>
       </li>
       <li class="nav-item" *ngIf = 'loggedIn()'>
         <a class="nav-link waves-light" mdbWavesEffect><app-logout></app-logout></a>
@@ -53,34 +48,3 @@
   <!-- Collapsible content -->
 
 </mdb-navbar>
-<!--/.Navbar-->
-<!-- <div class="container-fluid" id="navDiv">
-  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <div class="col">
-          <li class="nav-item" *ngIf = '!loggedIn()'>
-            <a class="nav-link" [routerLink]="['/home']">Home</a>
-          </li>
-        </div>
-          <li class="nav-item" *ngIf = 'loggedIn()'>
-            <a class="nav-link" [routerLink]="['/profile']">My Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/home']">About Us</a>
-          </li>
-          <li class="nav-item" *ngIf = '!loggedIn()'>
-            <a class="nav-link" [routerLink]="['/try']">Try it Out!</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/home']">FAQ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/home']">Contact Us</a>
-          </li>
-        <li *ngIf = 'loggedIn()'><app-logout></app-logout></li>
-        </ul>
-      </div>
-  </nav>
-</div>
- -->
