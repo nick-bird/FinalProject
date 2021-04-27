@@ -25,6 +25,7 @@ import { TryComponent } from './components/try/try.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     LogoutComponent,
     GridTestComponent,
     TryComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

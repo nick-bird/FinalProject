@@ -1,5 +1,7 @@
 package com.skilldistillery.projectemmy.services;
 
-public interface UserService {
+import com.skilldistillery.projectemmy.entities.User;
 
+public interface UserService {
+	public User updateUserCollections(User user);
 }

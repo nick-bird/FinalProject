@@ -46,6 +46,7 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Expression> expressions;
 
+
 	public User() {
 		super();
 	}
