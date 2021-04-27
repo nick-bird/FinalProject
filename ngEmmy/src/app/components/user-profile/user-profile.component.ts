@@ -13,7 +13,10 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService
   ) { }
 
+
+
 user: User = new User();
+
 
 
 

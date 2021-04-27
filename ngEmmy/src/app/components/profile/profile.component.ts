@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
 
   soundboards: Soundboard[] = [];
   expressions: Expression[] = [];
+  myExpressions: Expression[] = [];
   selectedSoundboard: Soundboard = null;
   selectedExpression: Expression = null;
   selectedPublicSoundboard : Soundboard = null;
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit {
   newExpression: Expression = new Expression();
   editSoundboard: Soundboard = null;
   editExpression: Expression = null;
+  mySoundboards: Soundboard[] = [];
 
   categories: Category[] = [];
 
@@ -70,8 +72,10 @@ export class ProfileComponent implements OnInit {
   createExpression: boolean = false;
   lockedbool: boolean = false;
 
+
   checkUser = "";
   user:User;
+
   selectedVoice = "Evie";
 
   reload() {
@@ -80,7 +84,9 @@ export class ProfileComponent implements OnInit {
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
+
         this.loadPublicExpressions()
+
         // These Don't need to be loaded from the start
       //  this.loadUserExpressions();
       //  this.loadDefaultExpressions();
@@ -366,15 +372,10 @@ export class ProfileComponent implements OnInit {
 
   updateExpressions(exp: Expression) {
     if (this.containsExpression(exp)) {
-      for (
-        let i = 0;
-        i < this.editSoundboard.soundboardExpressions.length;
-        i++
+      for (let i = 0; i < this.editSoundboard.soundboardExpressions.length;i++
       ) {
-        if (
-          this.editSoundboard.soundboardExpressions[i].expression.name ===
-          exp.name
-        ) {
+        if (this.editSoundboard.soundboardExpressions[i].expression.name===
+          exp.name) {
           this.editSoundboard.soundboardExpressions.splice(i, 1);
         }
       }
@@ -383,9 +384,7 @@ export class ProfileComponent implements OnInit {
       this.newSoundboardExpression.expression = exp;
       this.newSoundboardExpression.soundboard = new Soundboard();
       this.newSoundboardExpression.soundboard.id = this.editSoundboard.id;
-      this.editSoundboard.soundboardExpressions.push(
-        this.newSoundboardExpression
-      );
+      this.editSoundboard.soundboardExpressions.push(this.newSoundboardExpression);
       this.newSoundboardExpression = new SoundboardExpression();
     }
   }
@@ -394,7 +393,7 @@ export class ProfileComponent implements OnInit {
     return 'active';
   }
 
-  // add soundboards categories when creating soundboard
+ // add soundboards categories when creating soundboard
 
   containsCategoryToAdd = function (cat: Category) {
     for (let c of this.addCategories) {
@@ -418,7 +417,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // add soundboard expressions when creating soundboard
+ //add soundboard expressions when creating soundboard
 
   containsExpressionToAdd = function (exp: Expression) {
     for (let e of this.addSoundboardExpressions) {
@@ -470,15 +469,18 @@ export class ProfileComponent implements OnInit {
     this.expressionService.playAudio(this.selectedVoice, expression.phrase);
   }
 
+
   // pushSB(sb:Soundboard){
   //   this.getUser();
   //   this.user.soundboards.push(sb);
   //   this.userServ.updateUser(this.user);
   // }
 
+
   getUser(){
     return this.userServ.getUser().subscribe(
       (data) =>{
+
         this.user = data
         this.unlock();
       },
