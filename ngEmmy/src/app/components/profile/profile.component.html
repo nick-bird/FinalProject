@@ -36,7 +36,7 @@
       <mat-grid-tile (click)="playSound(exp.expression)" *ngFor="let exp of selectedSoundboard.soundboardExpressions">
       <div class="card" style="width: 18rem">
         <!-- click event needs to be play sound -->
-        <img class="card-img-top" [src]="exp.expression.image.imageUrl"/>
+        <img height="200" width="250" class="card-img-top" [src]="exp.expression.image.imageUrl"/>
         <div class="card-body">
           <h5 class="card-title">{{exp.expression.name}}</h5>
           <!-- <p class="card-text">{{exp.phrase }}</p> -->
