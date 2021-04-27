@@ -10,7 +10,6 @@ import { ExpressionService } from 'src/app/services/expression.service';
 import { ImageService } from 'src/app/services/image.service';
 import { SoundboardService } from 'src/app/services/soundboard.service';
 import { UserService } from 'src/app/services/user.service';
-import { HomePageComponent } from '../home-page/home-page.component';
 import { NavigationComponent } from '../navigation/navigation.component';
 
 @Component({
@@ -452,6 +451,11 @@ export class ProfileComponent implements OnInit {
     this.selectedExpression = expression;
     this.expressionService.textToSpeech(this.selectedVoice, this.selectedExpression.phrase).subscribe;
     this.expressionService.playAudio(this.selectedVoice, this.selectedExpression.phrase);
+  }
+
+  playSoundInside(expression: Expression){
+    this.expressionService.textToSpeech(this.selectedVoice, expression.phrase).subscribe;
+    this.expressionService.playAudio(this.selectedVoice, expression.phrase);
   }
 
   // pushSB(sb:Soundboard){

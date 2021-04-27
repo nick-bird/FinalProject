@@ -133,8 +133,11 @@
               <div class="card-body">
                 <h5 class="card-title">{{ sb.name }}</h5>
                 <p class="card-text">{{ sb.description }}</p>
-                <button class="btn btn-danger" (click)="deleteSoundboard(sb.id)" > X
-                </button>
+                <div class="example-button-container">
+                  <button mat-mini-fab color="danger" aria-label="Example icon button with a plus one icon" (click)="deleteExpression(sb.id)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
               </div>
             </div>
           </mat-grid-tile>
@@ -170,13 +173,18 @@
     <mat-grid-list cols="2" rowHeight="1:1">
       <mat-grid-tile *ngFor="let exp of userExpressions">
       <div class="card" style="width: 18rem">
-        <img height="200" width="250" class="card-img-top" (click)="displayExpression(exp)" class="card-img-top" [src]="exp.image.imageUrl"/>
+        <img (click)="playSoundInside(exp)" height="200" width="250" class="card-img-top" class="card-img-top" [src]="exp.image.imageUrl"/>
         <div class="card-body">
           <h5 class="card-title">{{exp.name}}</h5>
           <!-- <p class="card-text">{{exp.phrase }}</p> -->
-          <button class="btn btn-danger" (click)="deleteExpression(exp.id)">
-            X
-          </button>
+          <div class="example-button-container">
+            <button mat-mini-fab color="danger" aria-label="Example icon button with a plus one icon" (click)="deleteExpression(exp.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-mini-fab color="success" aria-label="Example icon button with a plus one icon" (click)="displayExpression(exp)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
       </mat-grid-tile>
@@ -193,14 +201,21 @@
     </ul>
     <h4>Expressions:</h4>
     <mat-grid-list cols="5" rowHeight="1:1">
-      <mat-grid-tile *ngFor="let exp of selectedSoundboard.soundboardExpressions">
+      <mat-grid-tile (click)="playSoundInside(exp.expression)" *ngFor="let exp of selectedSoundboard.soundboardExpressions">
         <img height="150 !important" width="150 !important" [src]="exp.expression.image.imageUrl" />
       </mat-grid-tile>
     </mat-grid-list>
 
     <br />
-    <button class="btn btn-success" (click)="setEditSoundboard()">Edit</button>
-    <button class="btn btn-danger" (click)="displaySoundboard()">Back</button>
+    <div class="example-button-container">
+      <button mat-fab color="danger" aria-label="Example icon button with a plus one icon" (click)="displaySoundboard()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button mat-fab color="success" aria-label="Example icon button with a plus one icon" (click)="setEditSoundboard()">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+    </div>
   </div>
 
 
@@ -210,10 +225,18 @@
     <h2>{{ selectedExpression.name }}</h2>
     <blockquote>{{ selectedExpression.phrase }}</blockquote>
     <h4>Image:</h4>
-    <img height="200" width="250" [src]="selectedExpression.image.imageUrl" />
+    <br>
+    <img (click)="playSoundInside(selectedExpression)" height="200" width="250" [src]="selectedExpression.image.imageUrl" />
     <br />
-    <button class="btn btn-success" (click)="setEditExpression()">Edit</button>
-    <button class="btn btn-danger" (click)="displayExpression()">Back</button>
+    <br>
+    <div class="example-button-container">
+      <button mat-fab color="danger" aria-label="Example icon button with a plus one icon" (click)="displayExpression()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button mat-fab color="success" aria-label="Example icon button with a plus one icon" (click)="setEditExpression()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
   </div>
 
 <!-- Expression update -->
@@ -223,10 +246,16 @@
   Name : <input type="text" name="name" placeholder="{{selectedExpression.name}}" [(ngModel)]="editExpression.name"> <br> <br>
   Phrase : <input type="text" name="phrase" placeholder="{{selectedExpression.phrase}}" [(ngModel)]="editExpression.phrase"> <br> <br>
   Image: <input type="text" name="amount" placeholder="{{selectedExpression.image.imageUrl}}" [(ngModel)]="editExpression.image.imageUrl"/><br /> <br>
-  <img height="200" width="250" [src]="selectedExpression.image.imageUrl"/>
+  <img (click)="playSoundInside(selectedExpression)" height="200" width="250" [src]="selectedExpression.image.imageUrl"/>
   <br> <br>
-  <input class="btn btn-outline-success" type="submit" value="Save" (click)="updateExpression(editExpression)"/>
-  <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="editExpression = null"/>
+  <div class="example-button-container">
+    <button mat-fab color="danger" aria-label="Example icon button with a plus one icon" (click)="editExpression = null">
+      <mat-icon>cancel</mat-icon>
+    </button>
+    <button mat-fab color="success" aria-label="Example icon button with a plus one icon" (click)="updateExpression(editExpression)">
+      <mat-icon>save</mat-icon>
+    </button>
+  </div>
 </div>
 
 
@@ -257,8 +286,14 @@
   </div>
 
     <br> <br>
-    <input class="btn btn-outline-success" type="submit" value="Save" (click)="updateSoundboard(editSoundboard)"/>
-    <input class="btn btn-outline-danger" type="submit" value="Cancel" (click)="editSoundboard = null"/>
+    <div class="example-button-container">
+      <button mat-fab color="danger" aria-label="Example icon button with a plus one icon" (click)="editSoundboard = null">
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <button mat-fab color="success" aria-label="Example icon button with a plus one icon" (click)="updateSoundboard(editSoundboard)">
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
   </div>
 
 <!-- All expressions tab -->
@@ -269,7 +304,7 @@ class="container" name="allExpressions"
 <mat-grid-list cols="2" rowHeight="1:1">
   <mat-grid-tile *ngFor="let exp of defaultExpressions">
   <div class="card" style="width: 18rem">
-    <img height="200" width="250" class="card-img-top" [src]="exp.image.imageUrl"/>
+    <img (click)="playSoundInside(exp)" height="200" width="250" class="card-img-top" [src]="exp.image.imageUrl"/>
     <div class="card-body">
       <h5 class="card-title">{{exp.name}}</h5>
       <!-- <p class="card-text">{{exp.phrase }}</p> -->
@@ -298,7 +333,11 @@ class="container" name="allExpressions"
     </mat-grid-list>
 
   <br />
-  <button class="btn btn-danger" (click)="loadPublicSoundboards(); tabIsActive4 = !tabIsActive4; selectedPublicSoundboard = null">Back</button>
+  <div class="example-button-container">
+    <button mat-fab color="danger" aria-label="Example icon button with a plus one icon" (click)="loadPublicSoundboards(); tabIsActive4 = !tabIsActive4; selectedPublicSoundboard = null">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
 </div>
 
   <div *ngIf="publicSBBool && !selectedPublicSoundboard">
