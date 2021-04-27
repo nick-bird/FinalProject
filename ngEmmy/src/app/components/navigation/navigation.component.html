@@ -2,7 +2,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="false">
 
   <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#">Project Emmy</a></mdb-navbar-brand>
+  <mdb-navbar-brand><a class="navbar-brand" [routerLink]="['/profile']">Project Emmy</a></mdb-navbar-brand>
 
   <!-- Collapsible content -->
   <links>
@@ -20,12 +20,6 @@
       </li>
       <li class="nav-item" *ngIf = '!loggedIn()'>
         <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/try']">Try it out!</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">FAQ</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/home']">Contact us</a>
       </li>
       <li class="nav-item" *ngIf = 'loggedIn()'>
         <a class="nav-link waves-light" mdbWavesEffect><app-logout></app-logout></a>
