@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'try', component: TryComponent },
   { path: 'userprofile', component: UserProfileComponent},
+  { path: 'aboutus', component: AboutUsComponent},
   { path: '**', component: NotFoundComponent }
 
 ];

@@ -73,13 +73,10 @@ export class ProfileComponent implements OnInit {
   createExpression: boolean = false;
   lockedbool: boolean = false;
 
-<<<<<<< HEAD
-  checkUser:User = new User();
-  user : User = null;
-=======
+
   checkUser = "";
   user:User;
->>>>>>> 0af3deeff28a7ce487381fe55fe4601c3c6cb366
+
   selectedVoice = "Evie";
 
   counter(i: number) {
@@ -92,12 +89,9 @@ export class ProfileComponent implements OnInit {
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
-<<<<<<< HEAD
-        this.getUser();
 
-=======
         this.loadPublicExpressions()
->>>>>>> 0af3deeff28a7ce487381fe55fe4601c3c6cb366
+
         // These Don't need to be loaded from the start
       //  this.loadUserExpressions();
       //  this.loadDefaultExpressions();
