@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
     private expressionService: ExpressionService,
     private catService: CategoryService,
     private imageService: ImageService,
+    private userServ: UserService
 
   ) {}
 
@@ -440,4 +441,23 @@ export class ProfileComponent implements OnInit {
     this.expressionService.textToSpeech(this.selectedVoice, this.selectedExpression.phrase).subscribe;
     this.expressionService.playAudio(this.selectedVoice, this.selectedExpression.phrase);
   }
+
+  pushSB(sb:Soundboard){
+    this.getUser();
+    this.user.soundboards.push(sb);
+    this.userServ.updateUser(this.user);
+  }
+
+  getUser(){
+    return this.userServ.getUser().subscribe(
+      (data) =>{
+        this.user = data
+      },
+      (err) =>{
+        console.log(err + "getting user");
+
+      }
+    )
+  }
+
 }
