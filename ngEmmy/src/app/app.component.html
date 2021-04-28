@@ -1,4 +1,4 @@
 <app-navigation></app-navigation>
-<main class="container-fluid">
-<router-outlet></router-outlet>
+<main class="container-fluid" [ngClass]="currentComponent=='HomePageComponent'?'home-page-background':'cyanBackground'">
+<router-outlet (activate)="onRouteActivate($event)"></router-outlet>
 </main>
