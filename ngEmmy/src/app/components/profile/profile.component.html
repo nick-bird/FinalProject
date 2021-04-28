@@ -94,13 +94,14 @@
   </div>
 <hr>
  <h3>Expressions: </h3>
-
- <div style="border:2px solid #ccc; width:300px; height: 300px; text-align: center; overflow-y: scroll;">
+<div >
+ <div style="border:2px solid #ccc; width:300px; height: 300px; overflow-y: scroll;">
   <div  *ngFor="let exp of expressions">
     <input  type="checkbox" (change)='addExpressions(exp)'>
     <label>{{exp.name}}</label>
   </div>
  </div>
+</div>
 
    <br><br>
    <input class="btn btn-primary" type="submit" value="Add SoundBoard" (click)="addSoundboard(newSoundboard); createSoundboard = false"/>
@@ -120,7 +121,7 @@
           <mat-icon>add</mat-icon>
         </button> <br><br>
 
-        <h3>My SoundBoard's</h3>
+        <h3 style="text-align: center;">My SoundBoard's</h3>
         <mat-grid-list  cdkDropList cols="4" rowHeight="1:1" >
           <mat-grid-tile *ngFor="let sb of userSoundboards">
             <div class="card" style="width: 18rem">
@@ -156,7 +157,7 @@
  </button> <br><br>
 
 
-  <div *ngIf="createExpression" >
+  <div style="text-align: center;" *ngIf="createExpression" >
     <h3>Create new expression</h3>
 
     <input type="text" placeholder="Name" [(ngModel)]="newExpression.name"/><br /><br>
@@ -170,7 +171,7 @@
     <hr>
   </div>
 
-    <h3> My Expressions</h3>
+    <h3 style="text-align: center;"> My Expressions</h3>
     <mat-grid-list cols="4" rowHeight="1:1">
       <mat-grid-tile *ngFor="let exp of userExpressions">
       <div class="card" style="width: 18rem">
@@ -193,7 +194,7 @@
   </div>
 
   <!-- SoundBoard Details -->
-  <div *ngIf="selectedSoundboard && !editSoundboard">
+  <div style="text-align: center;" *ngIf="selectedSoundboard && !editSoundboard">
     <br><br>
     <h2>{{ selectedSoundboard.name }}</h2>
     <blockquote>{{ selectedSoundboard.description }}</blockquote>
@@ -312,7 +313,8 @@
 <div
 class="container-fluid" name="allExpressions"
 *ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool && allExpressionsbool">
-<h3> All Expressions</h3>
+<br><br>
+<h3 style="text-align: center;"> All Expressions</h3>
 <mat-grid-list cols="4" rowHeight="1:1">
   <mat-grid-tile *ngFor="let exp of defaultExpressions">
   <div class="card" style="width: 18rem">
@@ -329,7 +331,7 @@ class="container-fluid" name="allExpressions"
 <!-- Community SoundBoard Tab -->
 
  <!-- Public SoundBoard Details -->
- <div *ngIf="selectedPublicSoundboard && !editSoundboard">
+ <div style="text-align: center;" *ngIf="selectedPublicSoundboard && !editSoundboard">
    <br><br>
   <h2>{{ selectedPublicSoundboard.name }}</h2>
   <blockquote>{{ selectedPublicSoundboard.description }}</blockquote>
@@ -361,7 +363,8 @@ class="container-fluid" name="allExpressions"
 </div>
 
   <div *ngIf="publicSBBool && !selectedPublicSoundboard">
-  <h3>Community SoundBoards</h3>
+    <br><br>
+  <h3 style="text-align: center;">Community SoundBoards</h3>
   <mat-grid-list cols="4" rowHeight="1:1">
     <mat-grid-tile *ngFor="let sb of publicSoundboards">
       <div class="card" style="width: 18rem">
