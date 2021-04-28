@@ -84,7 +84,7 @@ export class ProfileComponent implements OnInit {
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
-        this.loadUserExpressions();
+
         this.loadPublicExpressions()
 
         // These Don't need to be loaded from the start
@@ -241,6 +241,7 @@ export class ProfileComponent implements OnInit {
       (data) => {
         this.newSoundboard = data;
         this.reload();
+        this.displaySoundboards();
         // this.displaySoundboard(this.newSoundboard);
         this.newSoundboard = new Soundboard();
       },
@@ -280,6 +281,7 @@ export class ProfileComponent implements OnInit {
     this.soundboardService.update(editedSoundboard).subscribe(
       (data) => {
         this.reload();
+        this.displaySoundboards();
         if (displaySoundboard) {
           this.selectedSoundboard = editedSoundboard;
         }
@@ -296,6 +298,7 @@ export class ProfileComponent implements OnInit {
   ): void {
     this.expressionService.update(editedExpression).subscribe(
       (data) => {
+        this.loadUserExpressions();
         this.reload();
         if (displayExpression) {
           this.selectedExpression = editedExpression;
@@ -313,6 +316,7 @@ export class ProfileComponent implements OnInit {
     // }
     this.soundboardService.destroy(id).subscribe(
       (data) => {
+        this.displaySoundboards();
         this.reload();
       },
       (err) => {
@@ -325,8 +329,9 @@ export class ProfileComponent implements OnInit {
     // }
     this.expressionService.destroy(id).subscribe(
       (data) => {
-        this.reload();
         this.loadUserExpressions();
+        this.reload();
+
       },
       (err) => {
         console.log('Error deleting expression: ' + err);
