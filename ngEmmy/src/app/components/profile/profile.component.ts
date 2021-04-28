@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
 
   soundboards: Soundboard[] = [];
   expressions: Expression[] = [];
+  myExpressions: Expression[] = [];
   selectedSoundboard: Soundboard = null;
   selectedExpression: Expression = null;
   selectedPublicSoundboard : Soundboard = null;
@@ -46,6 +47,7 @@ export class ProfileComponent implements OnInit {
   newExpression: Expression = new Expression();
   editSoundboard: Soundboard = null;
   editExpression: Expression = null;
+  mySoundboards: Soundboard[] = [];
 
   categories: Category[] = [];
 
@@ -70,8 +72,10 @@ export class ProfileComponent implements OnInit {
   createExpression: boolean = false;
   lockedbool: boolean = false;
 
+
   checkUser = "";
   user:User;
+
   selectedVoice = "Evie";
 
   reload() {
@@ -80,9 +84,11 @@ export class ProfileComponent implements OnInit {
     this.soundboardService.index().subscribe(
       (data) => {
         this.userSoundboards = data;
+
         this.loadPublicExpressions()
+
         // These Don't need to be loaded from the start
-      //  this.loadUserExpressions();
+
       //  this.loadDefaultExpressions();
       //  this.loadPublicSoundboards();
       },
@@ -101,6 +107,9 @@ export class ProfileComponent implements OnInit {
   }
 
   loadUserExpressions() {
+    this.editSoundboard = null;
+    this.editExpression = null;
+    this.createSoundboard = false;
     this.selectedSoundboard = null;
     this.selectedExpression = null;
     this.selectedPublicSoundboard = null;
@@ -124,6 +133,9 @@ export class ProfileComponent implements OnInit {
   }
 
   loadDefaultExpressions() {
+    this.editExpression = null;
+    this.editSoundboard = null;
+    this.createSoundboard = false;
     this.selectedSoundboard = null;
     this.selectedExpression = null;
     this.selectedPublicSoundboard = null;
@@ -147,6 +159,9 @@ export class ProfileComponent implements OnInit {
   }
 
   loadPublicSoundboards() {
+    this.editExpression = null;
+    this.editSoundboard = null;
+    this.createSoundboard = false;
     this.selectedSoundboard = null;
     this.selectedExpression = null;
     this.selectedPublicSoundboard = null;
@@ -172,6 +187,9 @@ export class ProfileComponent implements OnInit {
   }
 
   loadPublicExpressions() {
+    this.editExpression = null;
+    this.editSoundboard = null;
+    this.createSoundboard = false;
     this.selectedSoundboard = null;
     this.selectedExpression = null;
     this.selectedPublicSoundboard = null;
@@ -223,6 +241,7 @@ export class ProfileComponent implements OnInit {
       (data) => {
         this.newSoundboard = data;
         this.reload();
+        this.displaySoundboards();
         // this.displaySoundboard(this.newSoundboard);
         this.newSoundboard = new Soundboard();
       },
@@ -262,6 +281,7 @@ export class ProfileComponent implements OnInit {
     this.soundboardService.update(editedSoundboard).subscribe(
       (data) => {
         this.reload();
+        this.displaySoundboards();
         if (displaySoundboard) {
           this.selectedSoundboard = editedSoundboard;
         }
@@ -278,6 +298,7 @@ export class ProfileComponent implements OnInit {
   ): void {
     this.expressionService.update(editedExpression).subscribe(
       (data) => {
+        this.loadUserExpressions();
         this.reload();
         if (displayExpression) {
           this.selectedExpression = editedExpression;
@@ -295,6 +316,7 @@ export class ProfileComponent implements OnInit {
     // }
     this.soundboardService.destroy(id).subscribe(
       (data) => {
+        this.displaySoundboards();
         this.reload();
       },
       (err) => {
@@ -307,8 +329,9 @@ export class ProfileComponent implements OnInit {
     // }
     this.expressionService.destroy(id).subscribe(
       (data) => {
-        this.reload();
         this.loadUserExpressions();
+        this.reload();
+
       },
       (err) => {
         console.log('Error deleting expression: ' + err);
@@ -317,6 +340,9 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleSoundBoard() {
+    this.editExpression = null;
+    this.createSoundboard = false;
+    this.editSoundboard = null;
     this.selectedSoundboard = null;
     this.selectedExpression = null;
     this.selectedPublicSoundboard = null;
@@ -366,15 +392,10 @@ export class ProfileComponent implements OnInit {
 
   updateExpressions(exp: Expression) {
     if (this.containsExpression(exp)) {
-      for (
-        let i = 0;
-        i < this.editSoundboard.soundboardExpressions.length;
-        i++
+      for (let i = 0; i < this.editSoundboard.soundboardExpressions.length;i++
       ) {
-        if (
-          this.editSoundboard.soundboardExpressions[i].expression.name ===
-          exp.name
-        ) {
+        if (this.editSoundboard.soundboardExpressions[i].expression.name===
+          exp.name) {
           this.editSoundboard.soundboardExpressions.splice(i, 1);
         }
       }
@@ -383,9 +404,7 @@ export class ProfileComponent implements OnInit {
       this.newSoundboardExpression.expression = exp;
       this.newSoundboardExpression.soundboard = new Soundboard();
       this.newSoundboardExpression.soundboard.id = this.editSoundboard.id;
-      this.editSoundboard.soundboardExpressions.push(
-        this.newSoundboardExpression
-      );
+      this.editSoundboard.soundboardExpressions.push(this.newSoundboardExpression);
       this.newSoundboardExpression = new SoundboardExpression();
     }
   }
@@ -394,7 +413,7 @@ export class ProfileComponent implements OnInit {
     return 'active';
   }
 
-  // add soundboards categories when creating soundboard
+ // add soundboards categories when creating soundboard
 
   containsCategoryToAdd = function (cat: Category) {
     for (let c of this.addCategories) {
@@ -418,7 +437,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // add soundboard expressions when creating soundboard
+ //add soundboard expressions when creating soundboard
 
   containsExpressionToAdd = function (exp: Expression) {
     for (let e of this.addSoundboardExpressions) {
@@ -470,15 +489,18 @@ export class ProfileComponent implements OnInit {
     this.expressionService.playAudio(this.selectedVoice, expression.phrase);
   }
 
+
   // pushSB(sb:Soundboard){
   //   this.getUser();
   //   this.user.soundboards.push(sb);
   //   this.userServ.updateUser(this.user);
   // }
 
+
   getUser(){
     return this.userServ.getUser().subscribe(
       (data) =>{
+
         this.user = data
         this.unlock();
       },

@@ -7,11 +7,11 @@
     <button (click)="getUser()">Unlock</button>
   </div>
   <br>
-  <h3>Locked</h3>
+  <h3>Welcome!</h3>
 
         <!-- User SoundBoards !!! Move to vertical Tab!! Pull out of Card? -->
-    <div *ngIf="!selectedSoundboard" name="Display Users SoundBoards">
-      <mat-grid-list cols="2" rowHeight="1:1">
+    <div class="container-fluid" *ngIf="!selectedSoundboard" name="Display Users SoundBoards">
+      <mat-grid-list cols="4" rowHeight="1:1">
         <mat-grid-tile *ngFor="let sb of userSoundboards">
           <div class="card" style="width: 18rem">
             <img (click)="displaySoundboard(sb)"
@@ -30,13 +30,13 @@
 
     <!-- User Expressions needs to refreshed based on SB Selected -->
   <div *ngIf="selectedSoundboard">
-    <h1>Expressions</h1>
+    <h3> My Expressions</h3>
     <button (click)="lock()">SoundBoards</button>
-    <mat-grid-list cols="2" rowHeight="1:1">
+    <mat-grid-list cols="4" rowHeight="1:1">
       <mat-grid-tile (click)="playSound(exp.expression)" *ngFor="let exp of selectedSoundboard.soundboardExpressions">
       <div class="card" style="width: 18rem">
         <!-- click event needs to be play sound -->
-        <img class="card-img-top" [src]="exp.expression.image.imageUrl"/>
+        <img height="200" width="250" class="card-img-top" [src]="exp.expression.image.imageUrl"/>
         <div class="card-body">
           <h5 class="card-title">{{exp.expression.name}}</h5>
           <!-- <p class="card-text">{{exp.phrase }}</p> -->
@@ -45,7 +45,6 @@
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-
 </div>
 
 <main *ngIf="!lockedbool">
@@ -65,7 +64,7 @@
       <a (click)="toggleSoundBoard(); tabIsActive1 = !tabIsActive1" [ngClass]="tabIsActive1 ? 'nav-link active' : 'nav-link'" aria-current="page">My Soundboards</a>
     </li>
     <li class="nav-item">
-      <a (click)="loadUserExpressions(); tabIsActive2 = !tabIsActive2" [ngClass]="tabIsActive2 ? 'nav-link active' : 'nav-link'">My Expressions</a>
+      <a (click)="loadUserExpressions();tabIsActive2 = !tabIsActive2" [ngClass]="tabIsActive2 ? 'nav-link active' : 'nav-link'">My Expressions</a>
     </li>
     <li class="nav-item">
       <a (click)="loadDefaultExpressions(); tabIsActive3 = !tabIsActive3" [ngClass]="tabIsActive3 ? 'nav-link active' : 'nav-link'">All Expressions</a>
@@ -81,11 +80,11 @@
  <!-- create Soundboard -->
 
    <div *ngIf="createSoundboard" >
-    <h2>Create new soundboard</h2>
+    <h3>Create new soundboard</h3>
    <input type="text" placeholder="Name" [(ngModel)]="newSoundboard.name"/><br />
    <input type="text" name="description" placeholder="Description" [(ngModel)]="newSoundboard.description"/><br /> <br>
    Let others see this soundboard : <input type="checkbox"  name="isPublic" [(ngModel)]="newSoundboard.isPublic"/> <br> <br>
-   <h2>Categories: </h2>
+   <h3>Categories: </h3>
 <br>
 <div style="border:2px solid #ccc; width:300px; height: 300px; overflow-y: scroll;">
    <div  *ngFor="let cat of categories">
@@ -94,14 +93,15 @@
    </div>
   </div>
 <hr>
- <h2>Expressions: </h2>
-
+ <h3>Expressions: </h3>
+<div >
  <div style="border:2px solid #ccc; width:300px; height: 300px; overflow-y: scroll;">
   <div  *ngFor="let exp of expressions">
     <input  type="checkbox" (change)='addExpressions(exp)'>
     <label>{{exp.name}}</label>
   </div>
  </div>
+</div>
 
    <br><br>
    <input class="btn btn-primary" type="submit" value="Add SoundBoard" (click)="addSoundboard(newSoundboard); createSoundboard = false"/>
@@ -112,7 +112,7 @@
 
 
       <div
-        class="container"
+        class="container-fluid"
         name="expressionGrid"
         *ngIf="!selectedSoundboard && !selectedExpression && soundboardBool && !createSoundboard">
 
@@ -121,8 +121,8 @@
           <mat-icon>add</mat-icon>
         </button> <br><br>
 
-        <h3>SoundBoard Grid</h3>
-        <mat-grid-list  cdkDropList cols="2" rowHeight="1:1" >
+        <h3 style="text-align: center;">My SoundBoard's</h3>
+        <mat-grid-list  cdkDropList cols="4" rowHeight="1:1" >
           <mat-grid-tile *ngFor="let sb of userSoundboards">
             <div class="card" style="width: 18rem">
               <img (click)="displaySoundboard(sb)"
@@ -147,7 +147,7 @@
           <!-- Expression Grid -->
 
     <div
-    class="container" name="userExpressions"
+    class="container-fluid" name="userExpressions"
     *ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool && userExpressionbool">
 
   <!-- create Expression -->
@@ -156,8 +156,10 @@
    <mat-icon>add</mat-icon>
  </button> <br><br>
 
-  <div *ngIf="createExpression" >
-    <h2>Create new expression</h2>
+
+  <div style="text-align: center;" *ngIf="createExpression" >
+    <h3>Create new expression</h3>
+
     <input type="text" placeholder="Name" [(ngModel)]="newExpression.name"/><br /><br>
     <input type="text" name="phrase" placeholder="Phrase" [(ngModel)]="newExpression.phrase"/><br /><br>
     <input type="text" name="imageUrl" placeholder="Image Url" [(ngModel)]="newImage.imageUrl"/><br /><br>
@@ -169,8 +171,8 @@
     <hr>
   </div>
 
-    <h1>Expressions</h1>
-    <mat-grid-list cols="2" rowHeight="1:1">
+    <h3 style="text-align: center;"> My Expressions</h3>
+    <mat-grid-list cols="4" rowHeight="1:1">
       <mat-grid-tile *ngFor="let exp of userExpressions">
       <div class="card" style="width: 18rem">
         <img (click)="playSoundInside(exp)" height="200" width="250" class="card-img-top" class="card-img-top" [src]="exp.image.imageUrl"/>
@@ -192,7 +194,8 @@
   </div>
 
   <!-- SoundBoard Details -->
-  <div *ngIf="selectedSoundboard && !editSoundboard">
+  <div style="text-align: center;" *ngIf="selectedSoundboard && !editSoundboard">
+    <br><br>
     <h2>{{ selectedSoundboard.name }}</h2>
     <blockquote>{{ selectedSoundboard.description }}</blockquote>
     <h4>Categories:</h4>
@@ -200,9 +203,17 @@
       <li *ngFor="let cat of selectedSoundboard.categories">{{ cat.name }}</li>
     </ul>
     <h4>Expressions:</h4>
-    <mat-grid-list cols="5" rowHeight="1:1">
+    <mat-grid-list cols="5" rowHeight="1:1" >
       <mat-grid-tile (click)="playSoundInside(exp.expression)" *ngFor="let exp of selectedSoundboard.soundboardExpressions">
-        <img height="150 !important" width="150 !important" [src]="exp.expression.image.imageUrl" />
+
+          <div class="card" style="width: 15rem">
+            <img height="200" width="250" [src]="exp.expression.image.imageUrl" class="card-img-top"/>
+            <div class="card-body">
+              <h5 class="card-title">{{exp.expression.phrase}}</h5>
+            </div>
+          </div>
+
+
       </mat-grid-tile>
     </mat-grid-list>
 
@@ -222,6 +233,7 @@
 
   <!-- Expression Information -->
   <div *ngIf="selectedExpression && !editExpression">
+    <br><br>
     <h2>{{ selectedExpression.name }}</h2>
     <blockquote>{{ selectedExpression.phrase }}</blockquote>
     <h4>Image:</h4>
@@ -275,6 +287,7 @@
       <label>{{cat.name}}</label>
     </div>
     </div>
+<br> <br>
 
   <h2>Expressions: </h2>
 
@@ -298,10 +311,11 @@
 
 <!-- All expressions tab -->
 <div
-class="container" name="allExpressions"
+class="container-fluid" name="allExpressions"
 *ngIf="!selectedExpression && !selectedSoundboard && !soundboardBool && allExpressionsbool">
-<h1> All Expressions</h1>
-<mat-grid-list cols="2" rowHeight="1:1">
+<br><br>
+<h3 style="text-align: center;"> All Expressions</h3>
+<mat-grid-list cols="4" rowHeight="1:1">
   <mat-grid-tile *ngFor="let exp of defaultExpressions">
   <div class="card" style="width: 18rem">
     <img (click)="playSoundInside(exp)" height="200" width="250" class="card-img-top" [src]="exp.image.imageUrl"/>
@@ -317,7 +331,8 @@ class="container" name="allExpressions"
 <!-- Community SoundBoard Tab -->
 
  <!-- Public SoundBoard Details -->
- <div *ngIf="selectedPublicSoundboard && !editSoundboard">
+ <div style="text-align: center;" *ngIf="selectedPublicSoundboard && !editSoundboard">
+   <br><br>
   <h2>{{ selectedPublicSoundboard.name }}</h2>
   <blockquote>{{ selectedPublicSoundboard.description }}</blockquote>
   <h4>Categories:</h4>
@@ -328,9 +343,16 @@ class="container" name="allExpressions"
 
     <mat-grid-list cols="5" rowHeight="1:1">
       <mat-grid-tile *ngFor="let exp of selectedPublicSoundboard.soundboardExpressions">
-        <img (click)="playSoundInside(exp.expression)" height="150 !important" width="150 !important" [src]="exp.expression.image.imageUrl" />
+        <div class="card" style="width: 15rem">
+          <img (click)="playSoundInside(exp.expression)" height="200" width="250" [src]="exp.expression.image.imageUrl" class="card-img-top"/>
+          <div class="card-body">
+            <h5 class="card-title">{{exp.expression.phrase}}</h5>
+          </div>
+        </div>
       </mat-grid-tile>
     </mat-grid-list>
+
+
 
   <br />
   <div class="example-button-container">
@@ -341,8 +363,9 @@ class="container" name="allExpressions"
 </div>
 
   <div *ngIf="publicSBBool && !selectedPublicSoundboard">
-  <h3>Community SoundBoards</h3>
-  <mat-grid-list cols="2" rowHeight="1:1">
+    <br><br>
+  <h3 style="text-align: center;">Community SoundBoards</h3>
+  <mat-grid-list cols="4" rowHeight="1:1">
     <mat-grid-tile *ngFor="let sb of publicSoundboards">
       <div class="card" style="width: 18rem">
         <img (click)="displayPublicSoundboard(sb)"

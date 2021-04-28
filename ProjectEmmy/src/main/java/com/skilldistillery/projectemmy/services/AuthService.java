@@ -13,4 +13,6 @@ public interface AuthService {
 	public User getUser(String username);
 	
 	public User findById(int id);
+	
+	
 }

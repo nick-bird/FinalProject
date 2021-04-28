@@ -37,6 +37,8 @@ public class AuthServiceImpl implements AuthService {
 		userRepo.saveAndFlush(user);
 		return user;
 	}
+	
+
 
 	@Override
 	public User reactivate(User user) {
