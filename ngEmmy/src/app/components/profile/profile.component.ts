@@ -474,6 +474,7 @@ export class ProfileComponent implements OnInit {
     if(this.user.username === this.checkUser){
       this.lockedbool = false;
       this.selectedSoundboard = null;
+      this.checkUser = null;
     }
 
   }
