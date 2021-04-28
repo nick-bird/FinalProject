@@ -1,5 +1,6 @@
 <div class="container" name="userExpressions">
-<h1>Expressions</h1>
+  <br><br>
+<h1 style="text-align: center; color: #007BFF;">Expressions</h1>
 <mat-grid-list cols="2" rowHeight="1:1">
   <mat-grid-tile (click)="textToSpeechExpression(exp)"*ngFor="let exp of expressions; let i=index">
   <div class="card" style="width: 18rem" *ngIf="i<8">
