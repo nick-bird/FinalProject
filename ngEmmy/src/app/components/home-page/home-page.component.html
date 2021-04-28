@@ -1,39 +1,44 @@
 <br>
-  <!-- row 2. Login and Registration forms -->
-<div class="container-fluid" name= "row2" class="row" >
+<div id="intro">Your families open source aid in non verbal communication</div>
+<!-- row 2. Login and Registration forms -->
+<div class="container-fluid" name= "row2" class="row">
 
 <!-- Row 1 Carousel -->
 <br>
 <div class="col col-md-9" id= "carouselDiv" >
-  <mdb-carousel [animation]="'slide'" id="carousel">
+  <mdb-carousel [animation]="'slide'"id="carousel">
     <mdb-carousel-item>
-      <img class="d-block w-100" src="https://hhp-blog.s3.amazonaws.com/2019/12/heart-and-puzzle-pieces-autism.jpg" alt="First slide">
+      <img class="d-block w-100" src="https://hhp-blog.s3.amazonaws.com/2019/12/heart-and-puzzle-pieces-autism.jpg" style="height: 800px;" alt="First slide">
     </mdb-carousel-item>
     <mdb-carousel-item>
-      <img class="d-block w-100" src="https://spectrumnews-web-assets.s3.amazonaws.com/wp-content/uploads/2020/12/07101625/AMiKlin1120-1120x550.jpg" alt="Second slide">
+      <img class="d-block w-100" src="https://spectrumnews-web-assets.s3.amazonaws.com/wp-content/uploads/2020/12/07101625/AMiKlin1120-1120x550.jpg" style="height: 800px;" alt="Second slide">
     </mdb-carousel-item>
     <mdb-carousel-item>
-      <img class="d-block w-100" src="https://store-images.s-microsoft.com/image/apps.17599.14222458110220046.63cf67f1-c306-44d3-8890-1cc6b204e75a.c80ed14f-26ee-41fa-bd94-fa317b47228c?mode=scale&q=90&h=1080&w=1920" alt="Third slide">
+      <img class="d-block w-100" src="https://store-images.s-microsoft.com/image/apps.17599.14222458110220046.63cf67f1-c306-44d3-8890-1cc6b204e75a.c80ed14f-26ee-41fa-bd94-fa317b47228c?mode=scale&q=90&h=1080&w=1920" style="height: 800px;" alt="Third slide">
     </mdb-carousel-item>
   </mdb-carousel>
-
 </div>
 
   <!-- Login Form -->
-  <div class="col col-md-auto" name="loginForm" *ngIf="!registerBool">
+  <div class="col col-md-center" name="loginForm" *ngIf="!registerBool">
       <div class="card">
         <div class="card-header text-center" style="margin: center;">
             <h4>Login</h4>
         </div>
         <div class="card-body">
-          <input type="text" name ="username" placeholder="Username" [(ngModel)] ="user.username"><br>
-          <input type="password" name="password" placeholder="password"[(ngModel)] = "user.password"><br>
-          <button (click)="login()" type="button" class="btn btn-primary">Login</button> <br>
+          <div class="floating-label">
+            <form>
+            <input placeholder="Username" type="text" name="username" autocomplete="off" [(ngModel)] ="user.username">
+            <input placeholder="Password" type="password" name="password" autocomplete="off" [(ngModel)] ="user.password"><br>
+            </form>
+            <br><p>Don't have an accout?<a class="link-primary" (click)="openRegisterForm()">Sign up</a></p>
+          <button (click)="login()" type="button" class="btn btn-primary">Log in</button> <br>
           <br>
-          <p>Don't have an accout?<a class="link-primary" (click)="openRegisterForm()">  Sign up</a></p>
         </div>
       </div>
   </div>
+  </div>
+
     <!-- Register Form -->
     <div class="col col-md-auto" name="registerForm" *ngIf="registerBool">
       <div class="card">
@@ -41,7 +46,7 @@
           <h4>Register</h4>
         </div>
         <div class="card-body">
-          <label for="firstName"><strong>Fist Name</strong> </label><br>
+          <label for="firstName"><strong>First Name</strong> </label><br>
           <input type="text" name="firstName" placeholder="Jane" [(ngModel)] = "newUser.firstName"><br>
 
           <label for="lastName"><strong>Last Name</strong></label><br>
@@ -58,13 +63,7 @@
           <br>
           <button (click)="openRegisterForm()" type="button" class="btn btn-danger">Cancel</button>
           <button (click)="register()" type="button" class="btn btn-primary float-right">Submit</button>
-        </div>
-    </div>
-  </div>
-
-  <!-- About the Project -->
-  <div class="col">
-    <p> Project Emmy is a platform for non-verbal individuals to have a free and easy way to comunicate. With this application you can create your own soundboards with any phase you need. Simply click on the image you decide on for each expression and you'll be saying anything you need.</p>
-  </div>
-
+          </div>
+</div>
+</div>
 </div>
