@@ -204,7 +204,15 @@
     <h4>Expressions:</h4>
     <mat-grid-list cols="5" rowHeight="1:1" >
       <mat-grid-tile (click)="playSoundInside(exp.expression)" *ngFor="let exp of selectedSoundboard.soundboardExpressions">
-        <img height="150 !important" width="150 !important" [src]="exp.expression.image.imageUrl" />
+
+          <div class="card" style="width: 15rem">
+            <img height="200" width="250" [src]="exp.expression.image.imageUrl" class="card-img-top"/>
+            <div class="card-body">
+              <h5 class="card-title">{{exp.expression.phrase}}</h5>
+            </div>
+          </div>
+
+
       </mat-grid-tile>
     </mat-grid-list>
 
@@ -333,9 +341,16 @@ class="container-fluid" name="allExpressions"
 
     <mat-grid-list cols="5" rowHeight="1:1">
       <mat-grid-tile *ngFor="let exp of selectedPublicSoundboard.soundboardExpressions">
-        <img (click)="playSoundInside(exp.expression)" height="150 !important" width="150 !important" [src]="exp.expression.image.imageUrl" />
+        <div class="card" style="width: 15rem">
+          <img (click)="playSoundInside(exp.expression)" height="200" width="250" [src]="exp.expression.image.imageUrl" class="card-img-top"/>
+          <div class="card-body">
+            <h5 class="card-title">{{exp.expression.phrase}}</h5>
+          </div>
+        </div>
       </mat-grid-tile>
     </mat-grid-list>
+
+
 
   <br />
   <div class="example-button-container">
