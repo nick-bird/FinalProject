@@ -1,10 +1,11 @@
 <div class="container" name="userExpressions">
   <br>
-<h1>The cards you see below are what we call expressions. If you choose to create an account, you will be able to create your own expressions, which you can attach your own image and phrase to. When you click on the expression, the expression's phrase will be converted from text to speech. You will also be able to add your expressions to what we call a soundboard, which is a group of selected expressions of your choosing. At that point you will be able to categorize your soundboards, if you wish. </h1>
+  <h1 style="text-align: center; color: #007BFF;">Expressions</h1>
+  <br><h1>The cards you see below are what we call expressions. If you choose to create an account, you will be able to create your own expressions, which you can attach your own image and phrase to. When you click on the expression, the expression's phrase will be converted from text to speech. You will also be able to add your expressions to what we call a soundboard, which is a group of selected expressions of your choosing. At that point you will be able to categorize your soundboards, if you wish. </h1>
 <br><h1>Select an expression below and see what happens!</h1>
 <mat-grid-list cols="2" rowHeight="1:1">
   <mat-grid-tile (click)="textToSpeechExpression(exp)"*ngFor="let exp of expressions; let i=index">
-  <div class="card" style="width: 18rem" *ngIf="i<8">
+  <div class="card" style="width: 18rem" *ngIf="i<23">
     <img class="card-img-top" [src]="exp.image.imageUrl"/>
     <div class="card-body">
       <!-- <p class="card-text">{{exp.phrase }}</p> -->
